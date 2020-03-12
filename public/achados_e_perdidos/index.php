@@ -149,8 +149,13 @@ indexLocal();
                                                                         <?php endforeach; ?>
                                                                     <?php endif; ?>
                                                                 </h5>
-
                                                             </div>
+                                                            <div class="clearfix">
+                                                                <h5 style="margin-top: 0">Código:
+                                                                    <strong><?php echo($item['id']); ?>
+                                                                </h5>
+                                                            </div>
+
                                                         </div>
                                                     </div>
                                                 </a>
