@@ -69,6 +69,8 @@
                             <dd>Item perdido</dd>
                         <?php else : ?>
                             <dd>Item devolvido</dd>
+                            <dt>Recebeu o item:</dt>
+                            <dd><?php echo $item['nome_pessoa_entregou']; ?> - Telefone: <?php echo $item['telefone']; ?></dd>
                         <?php endif; ?>
                             
                         <dt>Setor onde o item foi encontrado:</dt>

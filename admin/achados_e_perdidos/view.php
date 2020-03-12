@@ -1,20 +1,20 @@
 <?php require_once '../../config.php'; ?>
 <?php require_once DBAPI; ?>
 <?php
-    require_once LOGIN2;
-    verificaLoginAdmin();
+require_once LOGIN2;
+verificaLoginAdmin();
 ?>
 <?php
-    require_once ACHADOS_E_PERDIDOS;
-    viewAchados_e_Perdidos($_GET['id']);
+require_once ACHADOS_E_PERDIDOS;
+viewAchados_e_Perdidos($_GET['id']);
 ?>
 <?php
-    require_once SETOR;
-    indexSetor();
+require_once SETOR;
+indexSetor();
 ?>
 <?php
-    require_once LOCAL;
-    indexLocal();
+require_once LOCAL;
+indexLocal();
 ?>
 <?php include(HEADER_TEMPLATE); ?>
 
@@ -43,7 +43,7 @@
             <div class="box">
                 <!-- /.box-header -->
                 <div class="box-body">
-                    <h3 class="text-center">Informações do <?php echo status($item['status'])?></h3>
+                    <h3 class="text-center">Informações do <?php echo status($item['status']) ?></h3>
                     <hr/>
                     <div class="form-group">
                         <!--Verifica se a imagem está cadastrada-->
@@ -69,14 +69,18 @@
                             <dd>Item perdido</dd>
                         <?php else : ?>
                             <dd>Item devolvido</dd>
+                            <dt>Recebeu o item:</dt>
+                            <dd><?php echo $item['nome_pessoa_entregou']; ?> -
+                                Telefone: <?php echo $item['telefone']; ?></dd>
                         <?php endif; ?>
-                            
+
                         <dt>Setor onde o item foi encontrado:</dt>
                         <!-- Mostra o setor onde o item foi encontrado -->
                         <?php if ($setores) : ?>
                             <?php foreach ($setores as $setor) : ?>
                                 <?php if ($setor['id'] == $item['id_setor']) : ?>
-                                    <dd><?php echo $setor['nome']; ?> - <?php echo $nome_setor = (nome_setor_local($setor['local_id'])); ?></dd>
+                                    <dd><?php echo $setor['nome']; ?>
+                                        - <?php echo $nome_setor = (nome_setor_local($setor['local_id'])); ?></dd>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php else : ?>
