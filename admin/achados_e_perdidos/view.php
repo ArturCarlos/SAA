@@ -57,6 +57,8 @@
                         <?php } ?>
                     </div>
                     <dl class="dl-horizontal">
+                        <dt>Código:</dt>
+                        <dd><?php echo $item['id']; ?></dd>
                         <dt>Nome:</dt>
                         <dd><?php echo $item['nome']; ?></dd>
                         <dt>Descrição:</dt>
