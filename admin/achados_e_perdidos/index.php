@@ -46,6 +46,17 @@
     <!-- Mostra o setor responsável do patrimônio -->
     <div class="row">
         <div class="col-xs-12">
+
+            <div class="alert alert-danger" role="alert">
+                Os “Achados” estarão
+                disponíveis para resgate, no prazo de <strong>06 meses</strong>, a contar da data de
+                entrega na Assistência de Alunos. Após o prazo vencido os itens serão
+                descartados/doados.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
             <div class="box">
                 <div class="box-header text-center">
                     <h3>Preencha os campos para Filtrar</h3>
