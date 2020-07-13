@@ -13,7 +13,11 @@
     * > $data_pedido -> data que foi ralizado o pedido                                         *
     * > $chamado_id -> É o id da tabela chamado, pega o timestamp do servidor atual.           *
     * > $_FILE['img'] -> É a imagem que o usuario deseje colocar se desejado, que pode ser     *
-    *                    dos tipo: JPG,JPEG,PNG.                                               *
+    *                    dos tipo: JPG,JPEG,PNG.
+    * > $status -> é divido em três categorias
+            0 - novos
+            1 - em aberto
+            2 - concluidos 
     ********************************************************************************************
 */
     if(isset($_POST['cadastrar_chamado']) ){
@@ -29,8 +33,8 @@
             $date = new DateTime();
             $chamado_id = $date->getTimestamp();
             $data_pedido = date("Y-m-d H:i:s");
-            $image_nome = add_Imagem_chamado();
-   
+            $image_nome = add_Imagem_chamado();            
+            
             add_chamado($chamado_id,$user_id, $setor_id_user, $mensagem_chamado, $setor_id_pedido, $data_pedido, $image_nome);
        
             header('location: index.php');

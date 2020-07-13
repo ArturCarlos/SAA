@@ -77,17 +77,23 @@
                             <div class=col-md-12>
                                 <?php 
                                 if(isset($item_chamando_novos)):                                    
-                                    foreach ($item_chamando_novos as $chamado):     ?>
+                                    foreach ($item_chamando_novos as $chamado): ?>
                                         <div class="col-md-3">
                                             <div class="chamado-box box-body">
                                                 <a href="chamado_detalhe.php?ch=<?php echo $chamado["chamado_id"]; ?>">
                                                     <div class="chamado-box-head-neutro">
                                                         <p class="chamado-box-user"> <?php echo $chamado["user_id"]; ?> </p>
-                                                        <p class="chamado-box-setor"> <?php echo $chamado["setor_id"]; ?> </p>
+                                                        <p class="chamado-box-setor"> <?php echo $chamado["setor_nome"] ." - ". $chamado['local_nome']; ?> </p>
                                                     </div>
                                                     <div class="chamado-box-body">
                                                         <p> <strong>Detalhes do chamado:</strong> <br />
-                                                            <?php echo $chamado["mensagem"]; ?>
+                                                            <?php 
+                                                            if(strlen($chamado['mensagem']) < 120){ 
+                                                                echo $chamado["mensagem"];
+                                                            }else{
+                                                                echo substr($chamado["mensagem"],0,120) . "...";
+                                                            }                                                            
+                                                            ?>
                                                         </p>
                                                     </div>
                                                 </a>
@@ -110,26 +116,28 @@
                                         <div class="chamado-box box-body">
                                             <a href="chamado_detalhe.php?ch=<?php echo $chamado["chamado_id"];?>">
                                                 <?php if($chamado["prioridade_chamado"] == 1): ?>
-                                                    <div class="chamado-box-head-red">
+                                                <div class="chamado-box-head-red">
                                                 <?php endif; ?>
                                                 <?php if ( $chamado["prioridade_chamado"] == 2): ?>
-                                                    <div class="chamado-box-head-yellow">
+                                                <div class="chamado-box-head-yellow">
                                                 <?php endif; ?>
                                                 <?php if($chamado["prioridade_chamado"] == 3): ?>
-                                                    <div class="chamado-box-head-blue">
-                                                <?php endif; ?>
-                                                <p class="chamado-box-user">
-                                                    <?php echo $chamado["user_id"];?>
-                                                </p>
-                                                <p class="chamado-box-setor">
-                                                    <?php echo $chamado["setor_id"] ?>
-                                                </p>
-                                                    </div>
-                                                    <div class="chamado-box-body">
-                                                        <p> <strong>Detalhes do chamado:</strong> <br />
-                                                            <?php echo $chamado["mensagem"]; ?>
-                                                        </p>
-                                                    </div>                                                  
+                                                <div class="chamado-box-head-blue">
+                                                <?php endif; ?>                                                   
+                                                    <p class="chamado-box-user"> <?php echo $chamado["user_id"]; ?> </p>
+                                                    <p class="chamado-box-setor"> <?php echo $chamado["setor_nome"] ." - ". $chamado['local_nome']; ?> </p>                                        
+                                                </div>
+                                                <div class="chamado-box-body">
+                                                    <p> <strong>Detalhes do chamado:</strong> <br />
+                                                        <?php 
+                                                            if(strlen($chamado['mensagem']) < 120){ 
+                                                                echo $chamado["mensagem"];
+                                                            }else{
+                                                                echo substr($chamado["mensagem"],0,120) . "...";
+                                                            }                                                           
+                                                        ?>
+                                                    </p>
+                                                </div>                                                  
                                                 
                                             </a>
                                         </div>
@@ -141,7 +149,7 @@
                                             *    '<br>Data - - - - - - - - - - - - - - ' . $chamado["data_pedido_chamado"] . 
                                             *    '<br>Prioridade chamado -  ' . $chamado["prioridade_chamado"]  . 
                                             *    '<br>Mensagem - - - - - - - - - ' . $chamado["mensagem"];
-                                                */
+                                            */
                                     endforeach; ?>
                             </div>
                         </div>
