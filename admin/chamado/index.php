@@ -155,111 +155,39 @@
                         </div>
                     </div>
 
-
-
                     <div class="chart tab-pane" id="chamado_concluido"
                         style="padding-top:25px; position: relative; padding-bottom: 25px; ">
                         <div class="row">
 
                             <div class=col-md-12>
+                                <?php 
+                                //$itens_chamando = chamados_concluidos();
+                                //foreach ($itens_chamando as $chamado): ?>
                                 <div class="col-md-3">
                                     <div class="chamado-box box-body">
+                                        <a href="chamado_detalhe.php?ch=<?php echo $chamado["chamado_id"];?>">
+                                            <div class="chamado-box-head-green">
+                                                <p class="chamado-box-user"> <?php //echo $chamado["user_id"]; ?> </p>
+                                                <p class="chamado-box-setor"> <?php //echo $chamado["setor_nome"] ." - ". $chamado['local_nome']; ?> </p>
+                                            </div>
 
-                                        <div class="chamado-box-head-green">
-                                            <p class="chamado-box-user">Usuario Solicitante</p>
-                                            <p class="chamado-box-setor">Setor solicitante</p>
-                                        </div>
-
-                                        <div class="chamado-box-body">
-                                            <p> Detalhes do chamado: <br />
-                                                sdfasdfasdf
-                                                asdfasdfasdfasdfas ewrwe rwe rfjsdkfjasd fjasdj adasd
-                                                fasdf
-                                                asdfasdfasdfasdfas
-                                                dfasdfasdfasdf asdf asd ftp_allocdf addslashesfsad ftp_allocasdf
-                                                asdfa spl_autoload_functionsasdfasdf
-                                                asdfasdfasdfasdfasasd
-                                                asdfasdfasdfasdfas
-
-                                            </p>
-                                        </div>
+                                            <div class="chamado-box-body">                                               
+                                                <p> <strong>Detalhes do chamado:</strong> <br />
+                                                    <?php 
+                                                    /*
+                                                        if(strlen($chamado['mensagem']) < 120){ 
+                                                            echo $chamado["mensagem"];
+                                                        }else{
+                                                            echo substr($chamado["mensagem"],0,120) . "...";
+                                                        }   
+                                                    */                                                        
+                                                    ?>
+                                                </p>                                      
+                                            </div>
+                                        </a>
                                     </div>
                                 </div>
-
-                                <div class="col-md-3">
-
-                                    <div class="chamado-box">
-
-                                        <div class="chamado-box-head-green">
-                                            <p class="chamado-box-user">Nadia Carmichael</p>
-                                            <p class="chamado-box-setor">Nadia Carmichael</p>
-
-                                        </div>
-                                        <div class="chamado-box-body">
-                                            <p>
-                                                sdfasdfasdf
-                                                asdfasdfasdfasdfas ewrwe rwe rfjsdkfjasd fjasdj adasd
-                                                fasdf
-                                                asdfasdfasdfasdfas
-                                                dfasdfasdfasdf asdf asd ftp_allocdf addslashesfsad ftp_allocasdf
-                                                asdfa spl_autoload_functionsasdfasdf
-                                                asdfasdfasdfasdfasasd
-                                                asdfasdfasdfasdfas
-
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-3">
-
-                                    <div class="chamado-box box-body">
-
-                                        <div class="chamado-box-head-green">
-                                            <p class="chamado-box-user">Nadia Carmichael</p>
-                                            <p class="chamado-box-setor">Nadia Carmichael</p>
-
-                                        </div>
-                                        <div class="chamado-box-body">
-                                            <p>
-                                                sdfasdfasdf
-                                                asdfasdfasdfasdfas ewrwe rwe rfjsdkfjasd fjasdj adasd
-                                                fasdf
-                                                asdfasdfasdfasdfas
-                                                dfasdfasdfasdf asdf asd ftp_allocdf addslashesfsad ftp_allocasdf
-                                                asdfa spl_autoload_functionsasdfasdf
-                                                asdfasdfasdfasdfasasd
-                                                asdfasdfasdfasdfas
-
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-
-                                    <div class="chamado-box">
-
-                                        <div class="chamado-box-head-green">
-                                            <p class="chamado-box-user">Nadia Carmichael</p>
-                                            <p class="chamado-box-setor">Nadia Carmichael</p>
-
-                                        </div>
-                                        <div class="chamado-box-body">
-                                            <p>
-                                                sdfasdfasdf
-                                                asdfasdfasdfasdfas ewrwe rwe rfjsdkfjasd fjasdj adasd
-                                                fasdf
-                                                asdfasdfasdfasdfas
-                                                dfasdfasdfasdf asdf asd ftp_allocdf addslashesfsad ftp_allocasdf
-                                                asdfa spl_autoload_functionsasdfasdf
-                                                asdfasdfasdfasdfasasd
-                                                asdfasdfasdfasdfas
-
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
+                                <?php //endforeach; ?>                              
                             </div>
                         </div>
                     </div>
@@ -267,93 +195,33 @@
                     <div class="chart tab-pane" id="chamado_pedido"
                         style="padding-top:25px; position: relative; padding-bottom: 25px;">
                         <div class="row">
-
+                        
                             <div class=col-md-12>
-
-                                <div class="col-md-3">
-
-                                    <div class="chamado-box">
-
-                                        <div class="chamado-box-head-neutro">
-                                            <p class="chamado-box-user">Usuario Solicitante</p>
-                                            <p class="chamado-box-setor">Setor solicitante</p>
-                                        </div>
-
-                                        <div class="chamado-box-body">
-                                            <p> Detalhes do chamado: <br />
-                                                sdfasdfasdf
-                                                asdfasdfasdfasdfas ewrwe rwe rfjsdkfjasd fjasdj adasd
-                                                fasdf
-                                                asdfasdfasdfasdfas
-                                                dfasdfasdfasdf asdf asd ftp_allocdf addslashesfsad ftp_allocasdf
-                                                asdfa spl_autoload_functionsasdfasdf
-                                                asdfasdfasdfasdfasasd
-                                                asdfasdfasdfasdfas
-
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-
-                                    <div class="chamado-box">
-
-                                        <div class="chamado-box-head-neutro">
-                                            <p class="chamado-box-user">Nadia Carmichael</p>
-                                            <p class="chamado-box-setor">Nadia Carmichael</p>
-
-                                        </div>
-                                        <div class="chamado-box-body">
-                                            <p>
-                                                sdfasdfasdf
-                                                asdfasdfasdfasdfas ewrwe rwe rfjsdkfjasd fjasdj adasd
-                                                fasdf
-                                                asdfasdfasdfasdfas
-                                                dfasdfasdfasdf asdf asd ftp_allocdf addslashesfsad ftp_allocasdf
-                                                asdfa spl_autoload_functionsasdfasdf
-                                                asdfasdfasdfasdfasasd
-                                                asdfasdfasdfasdfas
-
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                </div>
-
+                                <?php 
+                                //$itens_chamando = chamados_enviados();
+                                //foreach ($itens_chamando as $chamado): ?>
                                 <div class="col-md-3">
                                     <div class="chamado-box">
                                         <div class="chamado-box-head-neutro">
-                                            <p class="chamado-box-user">Nadia Carmichael</p>
-                                            <p class="chamado-box-setor">Nadia Carmichael</p>
+                                            <p class="chamado-box-user"> <?php //echo $chamado["user_id"]; ?> </p>
+                                            <p class="chamado-box-setor"> <?php //echo $chamado["setor_nome"] ." - ". $chamado['local_nome']; ?> </p>
                                         </div>
-                                        <div class="chamado-box-body">
-                                            <p>
 
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="chamado-box">
-                                        <div class="chamado-box-head-neutro">
-                                            <p class="chamado-box-user">Nadia Carmichael</p>
-                                            <p class="chamado-box-setor">Nadia Carmichael</p>
-                                        </div>
                                         <div class="chamado-box-body">
-                                            <p>
-                                                sdfasdfasdf
-                                                asdfasdfasdfasdfas ewrwe rwe rfjsdkfjasd fjasdj adasd
-                                                fasdf
-                                                asdfasdfasdfasdfas
-                                                dfasdfasdfasdf asdf asd ftp_allocdf addslashesfsad ftp_allocasdf
-                                                asdfa spl_autoload_functionsasdfasdf
-                                                asdfasdfasdfasdfasasd
-                                                asdfasdfasdfasdfas
+                                            <p> <strong>Detalhes do chamado:</strong> <br />
+                                                <?php 
+                                                /*
+                                                    if(strlen($chamado['mensagem']) < 120){ 
+                                                        echo $chamado["mensagem"];
+                                                    }else{
+                                                        echo substr($chamado["mensagem"],0,120) . "...";
+                                                    }   
+                                                */                                                        
+                                                ?>
                                             </p>
                                         </div>
                                     </div>
-                                </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>

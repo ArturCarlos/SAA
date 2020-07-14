@@ -107,4 +107,12 @@
         return $itens_chamado_aberto;
     }
 
+
+
+    function chamados_concluidos(){
+
+    }
+
+    
+
 ?>
