@@ -104,8 +104,8 @@ indexPatrimonio();
                             <?php endif; ?>
                             <div class="form-group">
                                 <label for="patrimonio_id">Patrimonio </label>
-                                <select class="form-control" id="patrimonio_id"
-                                        name="patrimonio_id" required="">
+                                <select class="form-control select2" id="patrimonio_id"
+                                        name="patrimonio['patrimonio_id'][]" multiple="multiple" required="">
                                     <option value=""></option>
                                     <?php if ($patrimonios) : ?>
                                         <?php foreach ($patrimonios as $patrimonio) : ?>
@@ -161,3 +161,13 @@ indexPatrimonio();
     }
 </script>
 
+
+<script src="<?php echo BASEURL; ?>bower_components/select2/dist/js/select2.full.min.js"></script>
+
+
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+    })
+</script>

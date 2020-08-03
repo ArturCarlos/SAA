@@ -23,24 +23,31 @@ function index_emprestimos()
 
 function add_emprestimos()
 {
-    if (!empty($_POST['user_solicitou']) && !empty($_POST['patrimonio_id']) && !empty($_POST['data_prazo_devolucao']) && !empty($_POST['nome'])
+    if (!empty($_POST['user_solicitou']) && !empty($_POST['patrimonio']) && !empty($_POST['data_prazo_devolucao']) && !empty($_POST['nome'])
         && !empty($_POST['destinatario']) && !empty($_POST['matricula'])) {
+        $id_emprestimo = null;
+        $patrimonio = $_POST['patrimonio'];
 
-        $user_solicitou = @$_POST['user_solicitou'];
-        $patrimonio_id = @$_POST['patrimonio_id'];
-        $data_prazo_devolucao = @$_POST['data_prazo_devolucao'];
-        $nome = @$_POST['nome'];
-        $destinatario = @$_POST['destinatario'];
-        $matricula = @$_POST['matricula'];
+        foreach ($patrimonio as $id_patrimonio):
+            foreach ($id_patrimonio as $id_patri):
+                $user_solicitou = @$_POST['user_solicitou'];
+                $patrimonio_id = $id_patri;
+                $data_prazo_devolucao = @$_POST['data_prazo_devolucao'];
+                $nome = @$_POST['nome'];
+                $destinatario = @$_POST['destinatario'];
+                $matricula = @$_POST['matricula'];
 
-        /* Adicionar emprestimo no banco de dados */
-        if (save_emp($user_solicitou, $patrimonio_id, 'emprestado', $data_prazo_devolucao)) {
-            /* Se adicionou, edita o status do patrimônio */
-            update_status('patrimonio', $patrimonio_id, 'indisponivel');
-        }
+                /* Adicionar emprestimo no banco de dados */
+                if (save_emp($user_solicitou, $patrimonio_id, 'emprestado', $data_prazo_devolucao)) {
+                    /* Se adicionou, edita o status do patrimônio */
+                    update_status('patrimonio', $patrimonio_id, 'indisponivel');
+                }
+                $id_emprestimo = $id_emprestimo . "_" . id_empretimo($id_patri);
+            endforeach;
+        endforeach;
 
-        $id_emprestimo = id_empretimo();
-        header('location: '.EMPRESTIMOS_PDF.'?id='.$id_emprestimo);
+
+        header('location: ' . EMPRESTIMOS_PDF . '?id=' . $id_emprestimo);
 
         exit();
     }
@@ -68,10 +75,14 @@ function pdf_emprestimos($nome_patri, $tombo_patri, $data_emprestimo, $data_praz
 
     $pdf->SetXY(25, 78);
     $pdf->SetMargins(15, 15, 25);
-    $pdf->MultiCell(0, 8, utf8_decode("     Eu, $user_solicitou, matrícula n° $user_matricula, $user_categoria" .
-        " Vinculado(a) a esta Universidade, na Escola Multicampi de Ciências Médicas, solicito empréstimo " .
-        "de $nome_patri - $tombo_patri. Tenho ciência da responsabilidade em manter a integridade do(s) objeto(s) retirado(s) " .
-        "nesta data, me comprometendo a o entregar nas mesmas condições de retirada. "), 'C');
+    $pdf->MultiCell(0, 9, utf8_decode("      Eu, $user_solicitou, matrícula n° $user_matricula, $user_categoria(a)" .
+        " vinculado(a) a esta Universidade, na Escola Multicampi de Ciências Médicas, solicito empréstimo " .
+        "de $nome_patri$tombo_patri. Tenho ciência da responsabilidade em manter a integridade do(s) objeto(s) retirado(s) " .
+        "nesta data, me comprometendo a o entregar nas mesmas condições de retirada e no prazo máximo de 3 dias " .
+        "contados a partir da data de emissão deste termo.         
+Obs.: O não cumprimento da devolução do equipamento emprestado poderá " .
+        "acarretar em suspensão temporária da solicitação de empréstimos futuros."), 'C');
+
 
     $pdf->Cell(0, 20, utf8_decode("Caicó, $data_emprestimo"), 0, 2, 'R');
     $pdf->Cell(180, 20, utf8_decode("Saída: ___________________________    Entrega: _________________________"), 0, 2, 'C');
@@ -204,9 +215,9 @@ function filtro()
 
 }
 
-/** *  Pega o id do emprestimo através do id do patrimonio	 */
-function id_empretimo(){
-    $patrimonio_id = $_POST['patrimonio_id'];
+/** *  Pega o id do emprestimo através do id do patrimonio     */
+function id_empretimo($patrimonio_id)
+{
     return find_id_empretimo('emprestimos', $patrimonio_id);
 }
 

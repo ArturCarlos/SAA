@@ -38,4 +38,3 @@ nbproject/*
 .vscode
 # Sass preprocessor
 .sass-cache/
-/bower_components/

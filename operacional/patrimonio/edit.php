@@ -1,20 +1,20 @@
 <?php require_once '../../config.php'; ?>
 <?php require_once DBAPI; ?>
 <?php
-    require_once LOGIN2;
-    verificaLoginOperador();
+require_once LOGIN2;
+verificaLoginOperador();
 ?>
 <?php
-    require_once PATRIMONIO;
-    editPatrimonio();
-    verifica_editPatrimonio($patrimonio['id']);
+require_once PATRIMONIO;
+editPatrimonio();
+verifica_editPatrimonio();
+ ;?>
+<?php
+require_once SETOR;
+indexSetor_operacional();
 ?>
 <?php
-    require_once SETOR;
-    indexSetor_operacional();
-?>
-<?php
-    require_once LOCAL;
+require_once LOCAL;
 ?>
 <?php include(HEADER_TEMPLATE_OPERACIONAL); ?>
 
@@ -72,12 +72,13 @@
                                 name="patrimonio['setor_id']" required="">
                             <?php if ($setores) : ?>
                                 <?php foreach ($setores as $setor) : ?>
-                                    <?php if ($setor['id'] == $patrimonio['setor_id']) { ?>
-                                        <option value="<?php echo $setor['id']; ?>"><?php echo $setor['nome']; ?> - <?php echo $nome_setor = (nome_setor_local($setor['local_id'])); ?></option>
-                                    <?php } endforeach; ?>
-                                <?php foreach ($setores as $setor) : ?>
-                                    <?php if ($setor['id'] != $patrimonio['setor_id']) { ?>
-                                        <option value="<?php echo $setor['id']; ?>"><?php echo $setor['nome']; ?> - <?php echo $nome_setor = (nome_setor_local($setor['local_id'])); ?></option>
+                                    <?php if ($setor['setor_id'] == $patrimonio['setor_id']) { ?>
+                                        <option value="<?php echo $setor['setor_id']; ?>"><?php echo nome_setor($setor['setor_id']); ?>
+                                            - <?php echo nome_setor_local(local_id_setor($setor['setor_id'])); ?></option>
+
+                                    <?php } else { ?>
+                                        <option value="<?php echo $setor['setor_id']; ?>"><?php echo nome_setor($setor['setor_id']); ?>
+                                            - <?php echo nome_setor_local(local_id_setor($setor['setor_id'])); ?></option>
                                     <?php } endforeach; ?>
                             <?php endif; ?>
                         </select>

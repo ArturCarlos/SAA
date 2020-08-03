@@ -41,6 +41,7 @@
 
 
 <section class="content">
+
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
@@ -62,11 +63,12 @@
                                    placeholder="Número do setor"
                                    name="setor['numero']" required="">	    
                         </div>
+
+
                         <div class="form-group">
                             <label for="usuario_id">Usuário responsável </label>
-                            <select class="form-control" id="usuario_id" 
-                                    name="setor['usuario_id']" required="">
-                                <option value="" ></option>
+                            <select class="form-control select2" id="usuario_id"
+                                    name="user_setor['usuario_id'][]" multiple="multiple" required="">
 
                                 <!--Verificar se o usuario é nivel 1 ou 2-->
                                 <?php if ($usuarios) : ?>
@@ -119,4 +121,15 @@
     <!-- /.row -->
 </section>
 
+
 <?php include(FOOTER_TEMPLATE); ?>
+
+<script src="<?php echo BASEURL; ?>bower_components/select2/dist/js/select2.full.min.js"></script>
+
+
+<script>
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
+    })
+</script>

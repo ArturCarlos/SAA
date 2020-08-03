@@ -68,12 +68,16 @@
                                 <select class="form-control" id="setor_id"
                                         name="patrimonio['setor_id']" required="">
                                     <option value=""></option>
+
+
                                     <?php if ($setores) : ?>
                                         <?php foreach ($setores as $setor) : ?>
-                                            <option value="<?php echo $setor['id']; ?>"><?php echo $setor['nome']; ?> - <?php echo $nome_setor = (nome_setor_local($setor['local_id'])); ?></option>
+                                            <option value="<?php echo $setor['user_id']; ?>"> <?php echo nome_setor($setor['setor_id']); ?> - <?php echo nome_setor_local(local_id_setor($setor['setor_id'])); ?></option>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
+
                                 </select>
+
                             </div>
                             <div class="form-group">
                                 <label for="permissao">Emprestável</label></br>

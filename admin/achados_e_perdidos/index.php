@@ -1,20 +1,20 @@
 <?php require_once '../../config.php'; ?>
 <?php require_once DBAPI; ?>
 <?php
-require_once LOGIN2;
-verificaLoginAdmin();
+    require_once LOGIN2;
+    verificaLoginAdmin();
 ?>
 <?php
-require_once ACHADOS_E_PERDIDOS;
-indexAchados_e_Perdidos();
+    require_once ACHADOS_E_PERDIDOS;
+    indexAchados_e_Perdidos();
 ?>
 <?php
-require_once SETOR;
-indexSetor();
+    require_once SETOR;
+    indexSetor();
 ?>
 <?php
-require_once LOCAL;
-indexLocal();
+    require_once LOCAL;
+    indexLocal();
 ?>
 
 
@@ -64,47 +64,47 @@ indexLocal();
                 </div>
 
 
-                <form method="get" class="form-horizontal">
+                    <form method="get" class="form-horizontal">
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="nome"> Nome</label>
-                        <div class="col-sm-9">
-                            <input class="form-control" name="nome" type="text"/>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="nome"> Nome</label>
+                            <div class="col-sm-9">
+                                <input class="form-control" name="nome" type="text"/>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <!--Ordenar valor do select-->
-                        <?php $filtro = 1;
-                        if (isset($_GET['filtro'])) {
-                            $filtro = $_GET['filtro'];
-                        } ?>
-                        <label class="col-sm-2 control-label">Filtro</label>
-                        <div class="col-sm-9">
+                        <div class="form-group">
+                            <!--Ordenar valor do select-->
+                            <?php $filtro = 1;
+                            if (isset($_GET['filtro'])) {
+                                $filtro = $_GET['filtro'];
+                            } ?>
+                            <label class="col-sm-2 control-label">Filtro</label>
+                            <div class="col-sm-9">
 
-                            <select name="filtro" class="form-control"
-                                    title="selecionar ordenação de itens" id="valor">
-                                <?php if ($filtro == null) { ?>
-                                    <option value="">Todos os itens</option>
-                                    <option value="1">Itens perdidos</option>
-                                    <option value="0">Itens devolvidos</option>
-                                <?php } elseif ($filtro == 1) { ?>
-                                    <option value="1">Itens perdidos</option>
-                                    <option value="0">Itens devolvidos</option>
-                                    <option value="">Todos os itens</option>
+                                <select name="filtro" class="form-control"
+                                        title="selecionar ordenação de itens" id="valor">
+                                    <?php if ($filtro == null) { ?>
+                                        <option value="">Todos os itens</option>
+                                        <option value="1">Itens perdidos</option>
+                                        <option value="0">Itens devolvidos</option>
+                                    <?php } elseif ($filtro == 1) { ?>
+                                        <option value="1">Itens perdidos</option>
+                                        <option value="0">Itens devolvidos</option>
+                                        <option value="">Todos os itens</option>
 
-                                <?php } elseif ($filtro == '0') { ?>
-                                    <option value="0">Itens devolvidos</option>
-                                    <option value="1">Itens perdidos</option>
-                                    <option value="">Todos os itens</option>
+                                    <?php } elseif ($filtro == '0') { ?>
+                                        <option value="0">Itens devolvidos</option>
+                                        <option value="1">Itens perdidos</option>
+                                        <option value="">Todos os itens</option>
 
-                                <?php } ?>
-                            </select>
+                                    <?php } ?>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group text-center">
+                        <div class="form-group text-center">
 
-                        <button type="submit" class="btn btn-primary">Pesquisar</button>
+                            <button type="submit" class="btn btn-primary">Pesquisar</button>
 
                         <a title="Limpar busca" class="btn btn-warning" href="index.php"><i
                                     class="fa fa-close"></i> Limpar</a>

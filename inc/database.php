@@ -33,20 +33,19 @@ function find($table = null, $id = null)
     $found = null;
     try {
         if ($id) {
-            if($table == 'emprestimos'){
+            if ($table == 'emprestimos') {
                 $sql = "SELECT * FROM " . $table . " WHERE id = " . $id;
-            }else{
-                $sql = "SELECT * FROM " . $table . " WHERE id = " . $id. " ORDER BY nome ASC";
+            } else {
+                $sql = "SELECT * FROM " . $table . " WHERE id = " . $id . " ORDER BY nome ASC";
             }
             $result = $database->query($sql);
             if ($result->num_rows > 0) {
                 $found = $result->fetch_assoc();
             }
         } else {
-            if($table == 'emprestimos'){
+            if ($table == 'emprestimos') {
                 $sql = "SELECT * FROM " . $table;
-            }
-            else{
+            } else {
                 $sql = "SELECT * FROM " . $table . " ORDER BY nome ASC";
             }
             $result = $database->query($sql);
@@ -100,6 +99,25 @@ function find_nome($table, $id)
     return $found;
 }
 
+/* Retonar o id_local do setor*/
+function setor_local_id($table, $id)
+{
+    $database = open_database();
+    $found = null;
+    try {
+        if ($id) {
+
+            $result = mysqli_fetch_array($database->query("SELECT local_id FROM " . $table . " WHERE id = " . $id));
+            $found = $result[0];
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+}
+
 function find_patrimonio_emprestimo($table, $id)
 {
     $database = open_database();
@@ -124,7 +142,7 @@ function find_operacional($table1 = null, $table2 = null, $id)
     $found = FALSE;
     try {
         if ($_SESSION['id'] != NULL) {
-            $sql = "SELECT id FROM " . $table1 . " WHERE setor_id = " . $id . " AND setor_id IN (SELECT id FROM " . $table2 . " WHERE usuario_id = " . $_SESSION['id'] . ")";
+            $sql = "SELECT id FROM " . $table1 . " WHERE setor_id = " . $id . " AND setor_id IN (SELECT setor_id FROM " . $table2 . " WHERE user_id = " . $_SESSION['id'] . ")";
             //SELECT * FROM `patrimonio` WHERE setor_id IN (SELECT id FROM setor WHERE usuario_id = 1);
             $result = $database->query($sql);
             if ($result->num_rows > 0) {
@@ -146,7 +164,7 @@ function find_edit_operacional($table1 = null, $table2 = null, $id)
     $found = FALSE;
     try {
         if ($_SESSION['id'] != NULL) {
-            $sql = "SELECT id,setor_id FROM " . $table1 . " WHERE id = " . $id . " AND setor_id IN (SELECT id FROM " . $table2 . " WHERE usuario_id = " . $_SESSION['id'] . ")";
+            $sql = "SELECT id,setor_id FROM " . $table1 . " WHERE id = " . $id . " AND setor_id IN (SELECT setor_id FROM " . $table2 . " WHERE user_id = " . $_SESSION['id'] . ")";
             //SELECT * FROM `patrimonio` WHERE setor_id IN (SELECT id FROM setor WHERE usuario_id = 1);
             $result = $database->query($sql);
             if ($result->num_rows > 0) {
@@ -168,7 +186,7 @@ function find_setor_operacional($table1 = null)
     $found = null;
     try {
         if ($_SESSION['id'] != NULL) {
-            $sql = "SELECT * FROM " . $table1 . " WHERE usuario_id = " . $_SESSION['id'] . " ORDER BY nome ASC";;
+            $sql = "SELECT * FROM " . $table1 . " WHERE user_id = " . $_SESSION['id'] ;
             //SELECT * FROM `patrimonio` WHERE setor_id IN (SELECT id FROM setor WHERE usuario_id = 1);
             $result = $database->query($sql);
             if ($result->num_rows > 0) {
@@ -190,7 +208,7 @@ function find_exist_setor_usuario($table = null)
     $found = FALSE;
     try {
         if ($_SESSION['id'] != NULL) {
-            $sql = "SELECT id FROM " . $table . " WHERE usuario_id = " . $_SESSION['id'];
+            $sql = "SELECT user_id FROM " . $table . " WHERE user_id = " . $_SESSION['id'];
             $result = $database->query($sql);
             if ($result->num_rows > 0) {
                 $found = TRUE;
@@ -220,7 +238,6 @@ function save($table = null, $data = null)
 
     $columns = null;
     $values = null;
-    //print_r($data);		  
     foreach ($data as $key => $value) {
         $columns .= trim($key, "'") . ",";
         $values .= "'$value',";
@@ -378,7 +395,7 @@ function update_status($table = null, $id = null, $status = null)
     try {
         $database->query($sql);
         if (($database->affected_rows) > 0) {
-        } 
+        }
     } catch (Exception $e) {
         $_SESSION['message'] = 'Nao foi possivel realizar a operacao.';
         $_SESSION['type'] = 'danger';
@@ -683,6 +700,34 @@ function find_emprestimos($table = null, $status = null)
     return $found;
 }
 
+function itens_emptrestimo($table = null, $id = null)
+{
+    $database = open_database();
+    $found = null;
+    try {
+        if ($id != null) {
+            $sql = "SELECT nome, tombo FROM " . $table . " WHERE id IN (SELECT patrimonio_id FROM emprestimos WHERE id =".$id." )";
+
+            $result = $database->query($sql);
+            if ($result->num_rows > 0) {
+                $found = $result->fetch_all(MYSQLI_ASSOC);
+            }
+        } else {
+            $sql = "SELECT * FROM " . $table;
+            $result = $database->query($sql);
+            if ($result->num_rows > 0) {
+                $found = $result->fetch_all(MYSQLI_ASSOC);
+            }
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+
+    return $found;
+}
+
 function find_user_matricula($table = null, $matricula = null)
 {
     $database = open_database();
@@ -695,11 +740,11 @@ function find_user_matricula($table = null, $matricula = null)
                 $found = $matricula;
                 $_SESSION['message'] = 'Usuário informado encontrado!';
                 $_SESSION['type'] = 'success';
-            }else{
+            } else {
                 $_SESSION['message'] = 'Usuário informado não existe!';
                 $_SESSION['type'] = 'warning';
             }
-        } 
+        }
     } catch (Exception $e) {
         $_SESSION['message'] = $e->GetMessage();
         $_SESSION['type'] = 'danger';
@@ -717,9 +762,128 @@ function find_id_empretimo($table, $patrimonio_id)
         if ($patrimonio_id) {
             //$sql = "SELECT nome FROM " . $table . " WHERE id = " . $local_id;
             //$result = $database->query($sql);
-            $result = mysqli_fetch_array($database->query("SELECT id FROM " . $table . " WHERE patrimonio_id = " . $patrimonio_id." and status = 'emprestado'"));
+            $result = mysqli_fetch_array($database->query("SELECT id FROM " . $table . " WHERE patrimonio_id = " . $patrimonio_id . " and status = 'emprestado'"));
             $found = $result[0];
         }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+}
+
+/*Retorna o ultimo id inserido na tabela*/
+function id_table($table)
+{
+
+    $database = open_database();
+    try {
+        if ($table != NULL) {
+            $sql = "SELECT id FROM (
+            SELECT id FROM " . $table . " ORDER BY id DESC LIMIT 1) AS 
+                " . $table . " ORDER BY id LIMIT 1";
+            $result = $database->query($sql);
+            if ($result->num_rows > 0) {
+                $found = $result->fetch_assoc();
+                $_SESSION['message'] = 'true';
+                $_SESSION['type'] = 'success';
+            }
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+
+    return $found;
+
+
+}
+
+/* Pesquisa Todos os Registros de uma Tabela */
+function find_all_user_setor($table)
+{
+    return find_user_setor($table);
+}
+
+/** *  Atualiza um registro no BD   */
+function deleta_user_setor($table = null, $id = null)
+{
+    $database = open_database();
+
+    try {
+        if ($id) {
+
+            $sql1 = "SELECT setor_id FROM patrimonio WHERE setor_id = ".$id;
+
+            $result1 = $database->query($sql1);
+            if ($result1->num_rows == 0) {
+
+                $sql = "DELETE FROM " . $table . " WHERE setor_id = " . $id;
+                $result = $database->query($sql);
+                if ($result = $database->query($sql)) {
+
+                    $_SESSION['message'] = "Registro Removido com Sucesso";
+                    $_SESSION['type'] = 'success';
+                } else {
+
+                    $_SESSION['message'] = "Viiixe! Não foi possivel realizar a operação. Verifique se esse registro está sendo referenciado em outro local";
+                    $_SESSION['type'] = 'danger';
+                }
+            }
+        }
+
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+
+}
+
+
+/** *  Remove usuario do setor id     */
+function remove_user_setor($table = null, $id = null)
+{
+    $database = open_database();
+
+
+    try {
+        if ($id) {
+            $sql = "DELETE FROM " . $table . " WHERE setor_id = " . $id;
+            $result = $database->query($sql);
+            if ($result = $database->query($sql)) {
+
+                $_SESSION['message'] = "Registro Removido com Sucesso";
+                $_SESSION['type'] = 'success';
+            } else {
+
+                $_SESSION['message'] = "Viiixe! Não foi possivel realizar a operação. Verifique se esse registro está sendo referenciado em outro local";
+                $_SESSION['type'] = 'danger';
+            }
+        }
+
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+}
+
+/*Retorna valores de setor*/
+function find_user_setor($table = null)
+{
+    $database = open_database();
+    $found = null;
+    try {
+        $sql = "SELECT * FROM " . $table;
+
+        $result = $database->query($sql);
+        if ($result->num_rows > 0) {
+            $found = $result->fetch_all(MYSQLI_ASSOC);
+        }
+
     } catch (Exception $e) {
         $_SESSION['message'] = $e->GetMessage();
         $_SESSION['type'] = 'danger';

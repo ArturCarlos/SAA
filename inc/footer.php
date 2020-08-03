@@ -4,7 +4,7 @@
     <div class="pull-right hidden-xs">
         <b>Version</b> 1.0.0
     </div>
-    <strong>Copyright &copy; 2018 <a href="http://emcm.ufrn.br" target="_blank">Escola Multicampi de Ciências
+    <strong>Copyright &copy; 2020 <a href="http://emcm.ufrn.br" target="_blank">Escola Multicampi de Ciências
             Médicas</a>.</strong> Todos os direitos reservados
 </footer>
 
@@ -22,18 +22,13 @@
 </script>
 <!-- Bootstrap 3.3.7 -->
 <script src="<?php echo BASEURL; ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Morris.js charts -->
-<script src="<?php echo BASEURL; ?>bower_components/raphael/raphael.min.js"></script>
-<script src="<?php echo BASEURL; ?>bower_components/morris.js/morris.min.js"></script>
-<!-- Sparkline -->
-<script src="<?php echo BASEURL; ?>bower_components/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+
 <!-- jvectormap -->
 <script src="<?php echo BASEURL; ?>plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
 <script src="<?php echo BASEURL; ?>plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- jQuery Knob Chart -->
 <script src="<?php echo BASEURL; ?>bower_components/jquery-knob/dist/jquery.knob.min.js"></script>
 <!-- daterangepicker -->
-<script src="<?php echo BASEURL; ?>bower_components/moment/min/moment.min.js"></script>
 <script src="<?php echo BASEURL; ?>bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
 <!-- datepicker -->
 <script src="<?php echo BASEURL; ?>bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
@@ -44,12 +39,10 @@
 <script src="<?php echo BASEURL; ?>bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- Slimscroll -->
 <script src="<?php echo BASEURL; ?>bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="<?php echo BASEURL; ?>bower_components/fastclick/lib/fastclick.js"></script>
+
 <!-- AdminLTE App -->
 <script src="<?php echo BASEURL; ?>dist/js/adminlte.min.js"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo BASEURL; ?>dist/js/pages/dashboard.js"></script>
+
 <!-- AdminLTE for demo purposes -->
 <script src="<?php echo BASEURL; ?>dist/js/demo.js"></script>
 
@@ -172,7 +165,7 @@
     }
 </script>
 
-<!-- 
+<!--
     1° código: executa a partir do clique
     2° código: executa somente na primeira vez
 -->
@@ -186,7 +179,7 @@
         $('.mesmo_usuario').show();
     }
     });
-    
+
     if ($('input[name="FlgPontua"]:checked').val() === "Sim") {
         $('.mesmo_usuario').hide();
         $('.outro_usuario').show();

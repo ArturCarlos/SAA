@@ -7,6 +7,7 @@ verificaLoginAdmin();
 <?php
 require_once SETOR;
 viewSetor($_GET['id']);
+index_user_setor();
 ?>
 
 <?php
@@ -64,16 +65,24 @@ index();
                         <dt>Número:</dt>
                         <dd><?php echo $setor['numero']; ?></dd>
                         <dt>usuário responsável:</dt>
+
                         <!-- Mostra o usuário responsável do setor -->
-                        <?php if ($usuarios) : ?>
-                            <?php foreach ($usuarios as $usuario) : ?>
-                                <?php if ($usuario['id'] == $setor['usuario_id']) : ?>
-                                    <dd><?php echo $usuario['nome']; ?></dd>
+                        <?php if ($user_setor) : ?>
+                            <?php foreach ($user_setor as $usuario) : ?>
+                                <?php if ($usuario['setor_id'] == $setor['id']) : ?>
+
+                                    <dd>
+                                        <a href="<?php echo BASEURL; ?>admin/usuario/view.php?id=<?php echo $usuario['user_id']; ?>"> <?php echo nome_usuario_setor($usuario['user_id']) . " ,"; ?></a>
+                                    </dd>
+
+
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php else : ?>
-                            <dd>Usuário não encontrado</dd>
+                            <td>Usuário não encontrado</td>
                         <?php endif; ?>
+
+
                         <dt>Localização:</dt>
                         <!-- Mostra o local do setor -->
                         <?php if ($locais) : ?>

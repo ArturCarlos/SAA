@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SAA-EMCM</title>
     <!-- �?cone da aba do navegador -->
-    <link rel="icon" href="<?php echo BASEURL; ?>dist/img/icon.png" />
+    <link rel="icon" href="<?php echo BASEURL; ?>dist/img/icon.png"/>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -19,23 +19,26 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="<?php echo BASEURL; ?>dist/css/AdminLTE.min.css">
     <!-- DataTables -->
-    <link rel="stylesheet" href="<?php echo BASEURL; ?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet"
+          href="<?php echo BASEURL; ?>bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?php echo BASEURL; ?>dist/css/skins/_all-skins.min.css">
-    <!-- Morris chart -->
-    <link rel="stylesheet" href="<?php echo BASEURL; ?>bower_components/morris.js/morris.css">
     <!-- jvectormap -->
     <link rel="stylesheet" href="<?php echo BASEURL; ?>bower_components/jvectormap/jquery-jvectormap.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo BASEURL; ?>bower_components/select2/dist/css/select2.min.css">
     <!-- Date Picker -->
-    <link rel="stylesheet" href="<?php echo BASEURL; ?>bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet"
+          href="<?php echo BASEURL; ?>bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
     <!-- Daterange picker -->
     <link rel="stylesheet" href="<?php echo BASEURL; ?>bower_components/bootstrap-daterangepicker/daterangepicker.css">
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="<?php echo BASEURL; ?>plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
     <!-- Google Font -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -64,14 +67,15 @@
                     </li>
                     <li>
                         <div style="margin-top:20px">
-                            <h6 class="label-primary"><b><span title="tempo de sessão" id="cronometro" onload="startCountdown();"> </span></b></h6>
+                            <h6 class="label-primary"><b><span title="tempo de sessão" id="cronometro"
+                                                               onload="startCountdown();"> </span></b></h6>
                         </div>
                     </li>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
                             <!--Recupera imagem do usuário-->
-                            <?php require_once IMAGENS?>
+                            <?php require_once IMAGENS ?>
 
                             <?php $imagem = nome_foto_usuario($_SESSION['id']) ?>
 
@@ -80,30 +84,32 @@
                                 <img src="<?php echo BASEURL; ?>imagens/usuario/<?php echo $imagem ?>"
                                      class="user-image" alt="User Image">
                             <?php } else { ?>
-                                <img src="<?php echo BASEURL; ?>dist/img/iconousuario.jpg" class="user-image" alt="User Image">
+                                <img src="<?php echo BASEURL; ?>dist/img/iconousuario.jpg" class="user-image"
+                                     alt="User Image">
 
                             <?php } ?>
 
                             <span class="hidden-xs">
                                 <?php
-                                    /*Recupera nome do usuario*/
-                                    $user = nome_usuario($_SESSION['id']);
-                                    /*Mostra o primeiro nome*/
-                                    $nome = explode(" ", $user);
-                                    echo $nome[0] ?>
+                                /*Recupera nome do usuario*/
+                                $user = nome_usuario($_SESSION['id']);
+                                /*Mostra o primeiro nome*/
+                                $nome = explode(" ", $user);
+                                echo $nome[0] ?>
                             </span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
                                 <!--Recupera imagem do usuário-->
-                                <?php $imagem = nome_foto_usuario( $_SESSION['id']) ?>
+                                <?php $imagem = nome_foto_usuario($_SESSION['id']) ?>
                                 <!--Verifica se a imagem está disponivel-->
                                 <?php if ($imagem != null) { ?>
                                     <img src="<?php echo BASEURL; ?>imagens/usuario/<?php echo $imagem ?>"
                                          class="img-circle" alt="User Image">
                                 <?php } else { ?>
-                                    <img src="<?php echo BASEURL; ?>dist/img/iconousuario.jpg" class="img-circle" alt="User Image">
+                                    <img src="<?php echo BASEURL; ?>dist/img/iconousuario.jpg" class="img-circle"
+                                         alt="User Image">
 
                                 <?php } ?>
                                 <p>
@@ -116,10 +122,12 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="<?php echo BASEURL; ?>admin/usuario/view.php?id=<?php echo $_SESSION['id']; ?>" class="btn btn-default btn-flat">Perfil</a>
+                                    <a href="<?php echo BASEURL; ?>admin/usuario/view.php?id=<?php echo $_SESSION['id']; ?>"
+                                       class="btn btn-default btn-flat">Perfil</a>
                                 </div>
                                 <div class="pull-right">
-                                    <a href="<?php echo BASEURL;?>model/logout/funcoes.php?id=sair" class="btn btn-default btn-flat">Sair</a>
+                                    <a href="<?php echo BASEURL; ?>model/logout/funcoes.php?id=sair"
+                                       class="btn btn-default btn-flat">Sair</a>
                                 </div>
                             </li>
                         </ul>
@@ -156,11 +164,12 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo BASEURL; ?>admin/emprestimos/consulta.php"><i class="fa fa-circle-o"></i> Consultar itens emprestáveis</a></li>
-                        <li><a href="<?php echo BASEURL; ?>admin/emprestimos/index.php"><i class="fa fa-circle-o"></i> Gerenciar Empréstimos</a></li>
+                        <li><a href="<?php echo BASEURL; ?>admin/emprestimos/consulta.php"><i
+                                        class="fa fa-circle-o"></i> Consultar itens emprestáveis</a></li>
+                        <li><a href="<?php echo BASEURL; ?>admin/emprestimos/index.php"><i class="fa fa-circle-o"></i>
+                                Gerenciar Empréstimos</a></li>
                     </ul>
                 </li>
-
                 <!-- FORMUL�?RIOS-->
                 <li class="treeview">
                     <a href="#">
@@ -170,8 +179,10 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo BASEURL; ?>admin/formGraduacao/index.php"><i class="fa fa-circle-o"></i> Alunos Graduação</a></li>
-                        <li><a href="<?php echo BASEURL; ?>admin/formResidencia/index.php"><i class="fa fa-circle-o"></i> Alunos Residência</a></li>
+                        <li><a href="<?php echo BASEURL; ?>admin/formGraduacao/index.php"><i class="fa fa-circle-o"></i>
+                                Alunos Graduação</a></li>
+                        <li><a href="<?php echo BASEURL; ?>admin/formResidencia/index.php"><i
+                                        class="fa fa-circle-o"></i> Alunos Residência</a></li>
                     </ul>
                 </li>
 
