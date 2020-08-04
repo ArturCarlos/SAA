@@ -99,89 +99,84 @@ require_once USUARIO;
                                         <div class="box box-solid box-default">
                                             <div class="box-body">
                                                 <div class="media">
-                                                    <?php if ($patrimonios) : ?>
-                                                        <?php foreach ($patrimonios as $patrimonio) : ?>
-                                                            <?php if ($patrimonio['id'] == $item_emprestimos['patrimonio_id']) : ?>
-                                                                <div class="media-left">
-                                                                    <a href="#" class="ad-click-event">
-                                                                        <?php if ($patrimonio['img'] != null) { ?>
-                                                                            <img src="<?php echo BASEURL; ?>imagens/patrimonio/<?php echo $patrimonio['img']; ?>"
-                                                                                 alt="Now UI Kit"
-                                                                                 class="media-object view_img_achados_e_perdidos"/>
-                                                                        <?php } else { ?>
-                                                                            <img src="<?php echo BASEURL; ?>dist/img/semFoto.png?>"
-                                                                                 alt="Now UI Kit"
-                                                                                 class="media-object view_img_achados_e_perdidos"/>
-                                                                        <?php } ?>
-                                                                    </a>
-                                                                </div>
-                                                                <div class="media-body">
-                                                                    <div class="clearfix">
-                                                                        <p class="pull-right">
-                                                                            <a href="view.php?id=<?php echo $item_emprestimos['id']; ?>"
-                                                                               class="btn btn-sm btn-success"
-                                                                               title="Visualizar item"><i
-                                                                                        class="fa fa-eye"></i></a>
-                                                                        </p>
-                                                                        <h4 style="margin-top: 0">
-                                                                            <strong><?php echo $patrimonio['nome']; ?>
-                                                                                - <?php echo $patrimonio['tombo']; ?></strong>
-                                                                        </h4>
-                                                                    </div>
+                                                    <div class="media-left">
+                                                        <a href="#" class="ad-click-event">
+                                                            <?php if (img($item_emprestimos['patrimonio_id']) != null) { ?>
+                                                                <img src="<?php echo BASEURL; ?>imagens/patrimonio/<?php echo img($item_emprestimos['patrimonio_id']); ?>"
+                                                                     alt="Now UI Kit"
+                                                                     class="media-object view_img_achados_e_perdidos"/>
+                                                            <?php } else { ?>
+                                                                <img src="<?php echo BASEURL; ?>dist/img/semFoto.png?>"
+                                                                     alt="Now UI Kit"
+                                                                     class="media-object view_img_achados_e_perdidos"/>
+                                                            <?php } ?>
+                                                        </a>
+                                                    </div>
+                                                    <div class="media-body">
+                                                        <div class="clearfix">
+                                                            <p class="pull-right">
+                                                                <a href="view.php?id=<?php echo $item_emprestimos['id']; ?>"
+                                                                   class="btn btn-sm btn-success"
+                                                                   title="Visualizar item"><i
+                                                                            class="fa fa-eye"></i></a>
+                                                            </p>
+                                                            <h4 style="margin-top: 0">
+                                                                <strong><?php echo nome($item_emprestimos['patrimonio_id']); ?>
+                                                                    - <?php echo tombo($item_emprestimos['patrimonio_id']); ?></strong>
+                                                            </h4>
+                                                        </div>
 
-                                                                    <div class="clearfix">
-                                                                        <p class="pull-right">
-                                                                            <?php if ($item_emprestimos['status'] == 'emprestado') { ?>
-                                                                                <a href="devolucao.php?id=<?php echo $item_emprestimos['id']; ?>"
-                                                                                   class="btn btn-sm btn-warning"
-                                                                                   accesskey="" title="Devolver item"><i
-                                                                                            class="fa fa-repeat"></i></a>
-                                                                            <?php } else { ?>
-                                                                                <button disabled=""
-                                                                                        href="devolucao.php?id=<?php echo $item_emprestimos['id']; ?>"
-                                                                                        class="btn btn-sm btn-warning"
-                                                                                        accesskey=""
-                                                                                        title="Devolver item"><i
-                                                                                            class="fa fa-repeat"></i>
-                                                                                </button>
-                                                                            <?php } ?>
-                                                                        </p>
-                                                                        <h4 style="margin-top: 0">Emprestado para
-                                                                            <strong><?php echo index_nome_user($item_emprestimos['user_solicitou']); ?></strong>
-                                                                            no dia:
-                                                                            <strong><?php echo date('d/m/Y', strtotime($item_emprestimos['data_emprestimo'])); ?>
-                                                                        </h4>
-                                                                    </div>
-                                                                    <div class="clearfix">
-                                                                        <p class="pull-right">
-                                                                            <!--#delete-modal-->
-                                                                            <a href=# class="btn btn-sm btn-danger"
-                                                                               data-toggle="modal"
-                                                                               data-target="#delete-modal"
-                                                                               data-customer="<?php echo $item_emprestimos['id']; ?>"
-                                                                               title="Excluir item"><i
-                                                                                        class="fa fa-trash"></i></a>
-                                                                        </p>
-                                                                        <?php if ($item_emprestimos['status'] == 'emprestado') { ?>
-                                                                            <h4 style="margin-top: 0">Prazo de
-                                                                                devolução:
-                                                                                <strong><?php echo date('d/m/Y', strtotime($item_emprestimos['data_prazo_devolucao'])); ?>
-                                                                                    -
-                                                                                    <?php echo verifica_atraso($item_emprestimos['id']); ?>
-                                                                            </h4>
-                                                                        <?php } else { ?>
-                                                                            <h4 style="margin-top: 0">Prazo de
-                                                                                devolução:
-                                                                                <strong><?php echo date('d/m/Y', strtotime($item_emprestimos['data_prazo_devolucao'])); ?>
-                                                                                    - Devolvido em:
-                                                                                    <?php echo date('d/m/Y', strtotime($item_emprestimos['data_devolucao'])); ?>
-                                                                            </h4>
-                                                                        <?php } ?>
-                                                                    </div>
-                                                                </div>
-                                                            <?php endif; ?>
-                                                        <?php endforeach; ?>
-                                                    <?php endif; ?>
+                                                        <div class="clearfix">
+                                                            <p class="pull-right">
+                                                                <?php if ($item_emprestimos['status'] == 'emprestado') { ?>
+                                                                    <a href="devolucao.php?id=<?php echo $item_emprestimos['id']; ?>"
+                                                                       class="btn btn-sm btn-warning"
+                                                                       accesskey="" title="Devolver item"><i
+                                                                                class="fa fa-repeat"></i></a>
+                                                                <?php } else { ?>
+                                                                    <button disabled=""
+                                                                            href="devolucao.php?id=<?php echo $item_emprestimos['id']; ?>"
+                                                                            class="btn btn-sm btn-warning"
+                                                                            accesskey=""
+                                                                            title="Devolver item"><i
+                                                                                class="fa fa-repeat"></i>
+                                                                    </button>
+                                                                <?php } ?>
+                                                            </p>
+                                                            <h4 style="margin-top: 0">Emprestado para
+                                                                <strong><?php echo index_nome_user($item_emprestimos['user_solicitou']); ?></strong>
+                                                                no dia:
+                                                                <strong><?php echo date('d/m/Y', strtotime($item_emprestimos['data_emprestimo'])); ?>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="clearfix">
+                                                            <p class="pull-right">
+                                                                <!--#delete-modal-->
+                                                                <a href=# class="btn btn-sm btn-danger"
+                                                                   data-toggle="modal"
+                                                                   data-target="#delete-modal"
+                                                                   data-customer="<?php echo $item_emprestimos['id']; ?>"
+                                                                   title="Excluir item"><i
+                                                                            class="fa fa-trash"></i></a>
+                                                            </p>
+                                                            <?php if ($item_emprestimos['status'] == 'emprestado') { ?>
+                                                                <h4 style="margin-top: 0">Prazo de
+                                                                    devolução:
+                                                                    <strong><?php echo date('d/m/Y', strtotime($item_emprestimos['data_prazo_devolucao'])); ?>
+                                                                        -
+                                                                        <?php echo verifica_atraso($item_emprestimos['id']); ?>
+                                                                </h4>
+                                                            <?php } else { ?>
+                                                                <h4 style="margin-top: 0">Prazo de
+                                                                    devolução:
+                                                                    <strong><?php echo date('d/m/Y', strtotime($item_emprestimos['data_prazo_devolucao'])); ?>
+                                                                        - Devolvido em:
+                                                                        <?php echo date('d/m/Y', strtotime($item_emprestimos['data_devolucao'])); ?>
+                                                                </h4>
+                                                            <?php } ?>
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>

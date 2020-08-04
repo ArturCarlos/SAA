@@ -568,6 +568,17 @@ function recupera_img($table = null, $id = null)
     return $img;
 
 }
+function valor_id($table = null, $chave =null,  $id = null)
+{
+
+    $database = open_database();
+    //Recupera ao tombo do produto
+    $valor = mysqli_fetch_array($database->query("SELECT ".$chave." FROM " . $table . " WHERE id = " . $id));
+    $valor = $valor[0];
+    close_database($database);
+    return $valor;
+
+}
 
 function recupera_nome($table = null, $id = null)
 {
