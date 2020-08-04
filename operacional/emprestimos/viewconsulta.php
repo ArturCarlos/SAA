@@ -101,7 +101,7 @@ indexLocal();
                     <div id="actions" class="row">
                         <div class="col-md-12">
 
-                            <a href="consulta.php" class="btn btn-default">
+                            <a href="javascript:history.back()" class="btn btn-default">
                                 <i class="glyphicon glyphicon-arrow-left"></i> Voltar</a>
                         </div>
                     </div>
