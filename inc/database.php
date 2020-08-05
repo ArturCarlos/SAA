@@ -690,13 +690,13 @@ function find_emprestimos($table = null, $status = null)
     $found = null;
     try {
         if ($status != null) {
-            $sql = "SELECT * FROM " . $table . " WHERE status ='" . $status . "'";
+            $sql = "SELECT * FROM " . $table . " WHERE status ='" . $status . "'    ORDER BY data_emprestimo DESC";
             $result = $database->query($sql);
             if ($result->num_rows > 0) {
                 $found = $result->fetch_all(MYSQLI_ASSOC);
             }
         } else {
-            $sql = "SELECT * FROM " . $table;
+            $sql = "SELECT * FROM " . $table." ORDER BY data_emprestimo DESC";
             $result = $database->query($sql);
             if ($result->num_rows > 0) {
                 $found = $result->fetch_all(MYSQLI_ASSOC);

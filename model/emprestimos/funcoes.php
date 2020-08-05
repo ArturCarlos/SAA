@@ -181,38 +181,6 @@ function img($id)
     return recupera_img('patrimonio', $id);
 }
 
-function index_filtro()
-{
-    global $itens;
-
-    $like = "%";
-    $filtro = array();
-    //mostra primeiro os itens perdidos
-    $status = 1;
-    $filtro[] = "status='{$status}'";
-
-    if (isset($_GET['nome'])) {
-        $filtro = array();
-        if (($_GET['nome'])) {
-            $nome = $like . "" . $_GET['nome'] . "" . $like;
-            $filtro[] = "nome LIKE '{$nome}'";
-        }
-    }
-
-    if (isset($_GET['filtro'])) {
-
-        if (($_GET['filtro']) == '0') {
-            $status = $_GET['filtro'];
-            $filtro[] = "status='{$status}'";
-        } elseif ($_GET['filtro'] == 1) {
-            $status = $_GET['filtro'];
-            $filtro[] = "status='{$status}'";
-        }
-    }
-
-    $itens = find_all_achados('achados_e_perdidos', $filtro);
-}
-
 function filtro()
 {
     global $itens_emprestimos;

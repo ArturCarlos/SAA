@@ -12,6 +12,7 @@ index_emprestimos();
 require_once PATRIMONIO;
 indexPatrimonio();
 ?>
+
 <?php
 require_once USUARIO;
 ?>

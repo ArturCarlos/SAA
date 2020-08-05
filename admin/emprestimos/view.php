@@ -114,7 +114,7 @@ require_once USUARIO;
 
                                 <button type="submit" class="btn btn-info"><i class="fa fa-file-pdf-o"></i> Termo de empréstimo</button>
 
-                                <a href="javascript:history.back()" class="btn btn-default">
+                                <a href="index.php" class="btn btn-default">
                                     <i class="glyphicon glyphicon-arrow-left"></i> Voltar</a>
                             </form>
                         </div>
