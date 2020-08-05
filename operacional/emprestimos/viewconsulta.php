@@ -69,7 +69,7 @@ indexLocal();
                         <dt>Status:</dt>
 
                         <!-- Mostra se o patrimônio é emprestável -->
-                        <?php if ($patrimonio['especificacao'] == 'indisponivel') : ?>
+                        <?php if ($patrimonio['status'] == 'indisponivel') : ?>
                             <dd>Indisponível para empréstimo</dd>
                         <?php else : ?>
                             <dd>Disponivel para empréstimo</dd>

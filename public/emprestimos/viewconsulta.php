@@ -69,7 +69,7 @@ indexLocal();
                         <dt>Status:</dt>
 
                         <!-- Mostra se o patrimônio é emprestável -->
-                        <?php if ($patrimonio['especificacao'] == 'indisponivel') : ?>
+                        <?php if ($patrimonio['status'] == 'indisponivel') : ?>
                             <dd>Indisponível para empréstimo</dd>
                         <?php else : ?>
                             <dd>Disponivel para empréstimo</dd>
@@ -101,7 +101,7 @@ indexLocal();
                     <div id="actions" class="row">
                         <div class="col-md-12">
 
-                            <a href="consulta.php" class="btn btn-default">
+                            <a href="javascript:history.back()" class="btn btn-default">
                                 <i class="glyphicon glyphicon-arrow-left"></i> Voltar</a>
                         </div>
                     </div>
