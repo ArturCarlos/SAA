@@ -83,7 +83,7 @@ indexLocal();
                     </dl>
                     <div id="actions" class="row">
                         <div class="col-md-12">
-                            <a href="index.php" class="btn btn-default">
+                            <a href="javascript:history.back()" class="btn btn-default">
                                 <i class="glyphicon glyphicon-arrow-left"></i> Voltar</a>
                         </div>
                     </div>

@@ -91,7 +91,7 @@ indexLocal();
                         <div class="col-md-12">
                             <a href="edit.php?id=<?php echo $item['id']; ?>" class="btn btn-primary">
                                 <i class="fa fa-pencil"></i> Editar</a>
-                            <a href="index.php" class="btn btn-default">
+                            <a href="javascript:history.back()" class="btn btn-default">
                                 <i class="glyphicon glyphicon-arrow-left"></i> Voltar</a>
                         </div>
                     </div>
