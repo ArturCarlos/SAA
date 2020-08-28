@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="<?php echo BASEURL; ?>bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!--formatacao imagens-->
     <link rel="stylesheet" href="<?php echo BASEURL; ?>dist/css/imagens/imagens.css">
+    <!--formatacao do chamado-->
+    <link rel="stylesheet" href="<?php echo BASEURL; ?>dist/css/chamado/chamado.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo BASEURL; ?>bower_components/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -154,6 +156,21 @@
                     <a href="<?php echo BASEURL; ?>admin/agenda/agenda.php">
                         <i class="glyphicon glyphicon-calendar"></i><span>Agenda</span>
                     </a>
+                </li>
+                <!-- CHAMADO EMCM -->
+                <li class="treeview">
+                    <a href="#">
+                        <i class="glyphicon glyphicon-bullhorn"></i>
+                        <span>Chamado</span>
+                        <span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?php echo BASEURL; ?>admin/chamado/index.php"><i class="fa fa-circle-o"></i>
+                                Chamados em Aberto</a></li>
+                        <li><a href="#"><i class="fa fa-circle-o"></i> Histórico Chamado</a></li>
+                    </ul>
+
                 </li>
                 <!-- EMPRÉSTIMOS-->
                 <li class="treeview">

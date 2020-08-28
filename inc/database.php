@@ -902,3 +902,251 @@ function find_user_setor($table = null)
     close_database($database);
     return $found;
 }
+
+/* Criar chamado */
+function add_chamado($chamado_id, $user_id, $setor_id_user, $mensagem_chamado, $setor_id_pedido, $data_pedido, $image_nome){
+    $database = open_database();
+    $sql = "INSERT INTO chamado(id, setor_id_user, user_id, data_pedido, mensagem_chamado, status, prioridade, img) 
+    VALUES (". $chamado_id ."," . $setor_id_user . " ," . $user_id . ",'" . $data_pedido . "','" . $mensagem_chamado . "', " . 0 . ", " . 0 . ",'" . $image_nome . "');";
+
+    echo $sql;
+
+    try {
+        $database->query($sql);
+        $verificar_cadastro_validado = $database->affected_rows;
+        if ($verificar_cadastro_validado  > 0) {
+            $_SESSION['message'] = 'Registro cadastrado com sucesso.';
+            $_SESSION['type'] = 'success';
+        } else {
+            $verificar_cadastro_validado = -1;
+            $_SESSION['message'] = 'Registro já cadastrado no sistema';
+            $_SESSION['type'] = 'warning';
+        }
+    } catch (Exception $e) {
+        $verificar_cadastro_validado = -1;
+        $_SESSION['message'] = 'Nao foi possivel realizar a operacao.';
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+
+    if($verificar_cadastro_validado > 0 ){
+        $database = open_database();
+        $sql = "INSERT INTO `chamado_atr_setor`(`chamado_id`, `setor_id`, `permissao_chamado`,status) 
+        VALUES ( " . $chamado_id . "," . $setor_id_pedido . ", 1, 0 );" ;
+        try {
+            $database->query($sql);
+            if (($database->affected_rows) > 0) {
+                $_SESSION['message'] = 'Registro cadastrado com sucesso.';
+                $_SESSION['type'] = 'success';
+            } else {
+                $verificar_cadastro_validado = 0;
+                $_SESSION['message'] = 'O registro foi cadastrado na tabela "chamado", mas não foi possivel cadastrar na tabela "chamado_atr_setor". </br>Entrar em contato com os adminstradores do sistema.';
+                $_SESSION['type'] = 'warning';
+            }
+        } catch (Exception $e) {
+            $verificar_cadastro_validado = 0;
+            $_SESSION['message'] = 'Nao foi possivel realizar a operacao.';
+            $_SESSION['type'] = 'danger';
+        }
+        close_database($database);
+    }
+
+    if($verificar_cadastro_validado == 0 ){
+        remove('chamado', $chamado_id);
+    }
+}
+
+/**
+ * Realiza a seleção dos setores que o usuario possui permissão retornando um arry
+ * organizado da seguinte forma:
+ * $found = array{array{usuario_id => [valor] ,  setor_id => [valor]},
+ *                array{usuario_id => [valor] ,  setor_id => [valor]}
+ *               }
+ */
+function setor_user_select($user_id){
+
+    $database = open_database();
+    $found = array();
+    $pegar_dados = false;
+    try {
+        $sql = "SELECT * FROM user_setor WHERE user_id=".$user_id;
+        $result = $database->query($sql);
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                array_push( $found, array( "usuario_id" => $row["user_id"] , "setor_id" => $row["setor_id"]));
+            }
+            $pegar_dados = true;
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+
+    if($pegar_dados){
+        $found = setor_nome($found);
+        $found = local_nome($found);
+    }
+
+    return $found;
+}
+
+function setor_nome($itens){
+    $database = open_database();
+    $found = array();
+    foreach($itens as $item){
+        try {
+            $sql = "SELECT * FROM setor WHERE id=".$item['setor_id'];
+            $result = $database->query($sql);
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                array_push( $found, array("setor_id" => $item["setor_id"],
+                    "usuario_id" => $item['usuario_id'],
+                    "setor_nome" => $row['nome'],
+                    "local_id" => $row['local_id']));
+            }
+        } catch (Exception $e) {
+            $_SESSION['message'] = $e->GetMessage();
+            $_SESSION['type'] = 'danger';
+        }
+        close_database($database);
+    }
+    return $found;
+}
+
+function local_nome($itens){
+    $database = open_database();
+    $found = array();
+    foreach($itens as $item){
+        try {
+            $sql = "SELECT * FROM locais WHERE id=".$item['local_id'];
+            $result = $database->query($sql);
+            if ($result->num_rows > 0) {
+                $row = $result->fetch_assoc();
+                array_push( $found, array("setor_id" => $item["setor_id"],
+                    "usuario_id" => $item['usuario_id'],
+                    "setor_nome" => $item['setor_nome'],
+                    "local_nome" => $row['nome']));
+            }
+        } catch (Exception $e) {
+            $_SESSION['message'] = $e->GetMessage();
+            $_SESSION['type'] = 'danger';
+        }
+        close_database($database);
+    }
+    return $found;
+}
+
+function chamados_abertos_atr_setor_aberto ($itens){
+
+    $found = array();
+    foreach($itens as $item){
+        $database = open_database();
+        try {
+            $sql = "SELECT DISTINCT(chamado_id) FROM chamado_atr_setor WHERE setor_id=" . $item['setor_id'] . " AND status=1";
+            $result = $database->query($sql);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    array_push( $found, array(  "chamado_id" => $row["chamado_id"],
+                        "setor_id" => $item['setor_id'],
+                        "setor_nome" => $item['setor_nome'],
+                        "local_nome" => $item['local_nome']));
+                }
+            }
+        } catch (Exception $e) {
+            $_SESSION['message'] = $e->GetMessage();
+            $_SESSION['type'] = 'danger';
+        }
+        close_database($database);
+    }
+    return $found;
+}
+
+function chamados_abertos_atr_setor_novo ($itens){
+
+    $found = array();
+    foreach($itens as $item){
+        $database = open_database();
+        try {
+            $sql = "SELECT DISTINCT(chamado_id) FROM chamado_atr_setor WHERE setor_id=" . $item['setor_id'] . " AND status=0";
+            $result = $database->query($sql);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    array_push( $found, array(  "chamado_id" => $row["chamado_id"],
+                        "setor_id" => $item['setor_id'],
+                        "setor_nome" => $item['setor_nome'],
+                        "local_nome" => $item['local_nome']));
+                }
+            }
+        } catch (Exception $e) {
+            $_SESSION['message'] = $e->GetMessage();
+            $_SESSION['type'] = 'danger';
+        }
+        close_database($database);
+    }
+    return $found;
+}
+
+function chamado_prioridade_select($itens){
+
+    $found = array();
+    foreach($itens as $item){
+        $database = open_database();
+        try {
+            $sql = "SELECT * FROM chamado WHERE id=" . $item['chamado_id'] ." AND status=1";
+            $result = $database->query($sql);
+            if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    array_push( $found, array("chamado_id"=> $item['chamado_id'],
+                        "setor_id" => $item["setor_id"],
+                        "setor_nome" => $item['setor_nome'],
+                        "local_nome" => $item['local_nome'],
+                        "user_id" => $row['user_id'],
+                        "data_pedido_chamado" => $row["data_pedido"],
+                        "prioridade_chamado" => $row["prioridade"],
+                        "mensagem" => $row['mensagem_chamado']));
+                }
+            }
+        } catch (Exception $e) {
+            $_SESSION['message'] = $e->GetMessage();
+            $_SESSION['type'] = 'danger';
+        }
+        close_database($database);
+    }
+
+    return $found;
+}
+
+function chamado_novo_select($itens){
+
+    $found = array();
+    $verificacao = false;
+    foreach($itens as $item){
+        $database = open_database();
+        try {
+            $sql = "SELECT * FROM chamado WHERE id=" . $item['chamado_id'] ." AND 'status'=0";
+            $result = $database->query($sql);
+            if ($result->num_rows > 0) {
+                $verificacao = true;
+                while($row = $result->fetch_assoc()) {
+                    array_push( $found, array("chamado_id"=> $item['chamado_id'],
+                        "setor_id" => $item["setor_id"],
+                        "setor_nome" => $item['setor_nome'],
+                        "local_nome" => $item['local_nome'],
+                        "user_id" => $row['user_id'],
+                        "data_pedido_chamado" => $row["data_pedido"],
+                        "prioridade_chamado" => $row["prioridade"],
+                        "mensagem" => $row['mensagem_chamado']));
+                }
+            }
+        } catch (Exception $e) {
+            $_SESSION['message'] = $e->GetMessage();
+            $_SESSION['type'] = 'danger';
+        }
+        close_database($database);
+    }
+    if($verificacao)
+        return $found;
+    else
+        return null;
+}

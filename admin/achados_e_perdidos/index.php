@@ -47,7 +47,7 @@
     <div class="row">
         <div class="col-xs-12">
 
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger alert-dismissible" role="alert">
                 Os “Achados” estarão
                 disponíveis para resgate, no prazo de <strong>06 meses</strong>, a contar da data de
                 entrega na Assistência de Alunos. Após o prazo vencido os itens serão

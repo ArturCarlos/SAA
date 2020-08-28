@@ -1,0 +1,64 @@
+.chamado-box-head-yellow {
+    background-color: #f39c12;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 3%;
+}
+
+.chamado-box-head-red {
+    background-color: #dd4b39;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 3%;
+}
+
+.chamado-box-head-green {
+    background-color: #17ca46;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 3%;
+}
+
+.chamado-box-head-blue {
+    background-color: #00c0ef;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 3%;
+}
+
+.chamado-box-head-blue {
+    background-color: #00c0ef;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 3%;
+}
+
+.chamado-box-head-neutro {
+    background-color: #39CCCC;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 3%;
+}
+
+
+.chamado-box-user {
+    margin: 0 0 0 0;
+    font-size: 25px;
+    color: #ffffff;
+}
+
+.chamado-box-setor {
+    margin: 0 0 0 0;
+    font-size: 17px;
+    color: #ffffff;
+}
+
+.chamado-box-body {
+    background-color: #eaeaea;
+    color: #000000;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 3%;
+    padding-right: 3%;
+    height: 140px;
+}

@@ -99,5 +99,8 @@
     if ( !defined('EMPRESTIMOS_PDF') )
         define('EMPRESTIMOS_PDF', BASEURL . 'model/emprestimos/pdf.php');
 
+    /** caminho para as funções do chamado **/
+    if( !defined('CHAMADO') )
+        define('CHAMADO' , ABSPATH . 'model/chamado/funcoes.php');
     
 
