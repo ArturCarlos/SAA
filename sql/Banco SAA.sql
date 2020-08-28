@@ -149,11 +149,11 @@ CREATE TABLE chamado
 
 CREATE TABLE `chamado_atr_setor`
 (
-    id                int(11) NOT NULL,
-    chamado_id        int(11) NOT NULL,
-    setor_id          int(11) NOT NULL,
-    permissao_chamado int(5)  NOT NULL,
-    status            int(5)  NOT NULL,
+    id                int(11) AUTO_INCREMENT NOT NULL,
+    chamado_id        int(11)                NOT NULL,
+    setor_id          int(11)                NOT NULL,
+    permissao_chamado int(5)                 NOT NULL,
+    status            int(5)                 NOT NULL,
 
     FOREIGN KEY (chamado_id) REFERENCES chamado (id),
     FOREIGN KEY (setor_id) REFERENCES setor (id),
