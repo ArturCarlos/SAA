@@ -34,11 +34,11 @@ CREATE TABLE locais
 
 CREATE TABLE setor
 (
-    id         INT AUTO_INCREMENT NOT NULL,
-    local_id   INT                NOT NULL,
-    numero     VARCHAR(10)        NOT NULL,
-    nome       VARCHAR(100)       NOT NULL,
-    img        VARCHAR(255) DEFAULT NULL,
+    id       INT AUTO_INCREMENT NOT NULL,
+    local_id INT                NOT NULL,
+    numero   VARCHAR(10)        NOT NULL,
+    nome     VARCHAR(100)       NOT NULL,
+    img      VARCHAR(255) DEFAULT NULL,
 
 
     PRIMARY KEY (id),
@@ -119,7 +119,8 @@ CREATE TABLE achados_e_perdidos
 ) ENGINE = InnoDB;
 
 
-CREATE TABLE user_setor(
+CREATE TABLE user_setor
+(
 
     user_id  INT NOT NULL,
     setor_id INT NOT NULL,
@@ -127,6 +128,38 @@ CREATE TABLE user_setor(
     FOREIGN KEY (user_id) REFERENCES usuario (id),
     PRIMARY KEY (user_id, setor_id)
 );
+
+CREATE TABLE chamado
+(
+    id               int(11)      NOT NULL,
+    setor_id_user    int(11)      NOT NULL,
+    user_id          int(11)      NOT NULL,
+    data_pedido      date         NOT NULL,
+    mensagem_chamado text         NOT NULL,
+    status           int(11)      NOT NULL,
+    prioridade       int(5)       NOT NULL,
+    img              varchar(200) NOT NULL,
+
+    FOREIGN KEY (setor_id_user) REFERENCES setor (id),
+    FOREIGN KEY (user_id) REFERENCES usuario (id),
+    PRIMARY KEY (id)
+
+);
+
+
+CREATE TABLE `chamado_atr_setor`
+(
+    id                int(11) NOT NULL,
+    chamado_id        int(11) NOT NULL,
+    setor_id          int(11) NOT NULL,
+    permissao_chamado int(5)  NOT NULL,
+    status            int(5)  NOT NULL,
+
+    FOREIGN KEY (chamado_id) REFERENCES chamado (id),
+    FOREIGN KEY (setor_id) REFERENCES setor (id),
+    PRIMARY KEY (id)
+);
+
 
 insert into usuario(nome, matricula, email, senha, permissao, categoria)
     VALUE ('admin', '1', 'admin@admin', '14d777febb71c53630e9e843bedbd4d8', '1', 'SERVIDOR'),

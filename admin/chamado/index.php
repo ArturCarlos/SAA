@@ -48,10 +48,9 @@ indexLocal();
                             <li class="">
                                 <a href="#chamado_novos" data-toggle="tab" aria-expanded="false">Novos Chamados
                                     <?php
-                                    $item_chamando_novos = chamados_novos();
+                                    //$item_chamando_novos = chamados_novos();
                                     //var_dump( $item_chamando_novos);  
-                                    if (isset($item_chamando_novos)):
-                                        ?>
+                                    if (isset($item_chamando_novos)): ?>
                                         <span>
                                     <i class="fa  fa-exclamation"
                                        style="background-color: red; width: 15px; padding-top: 2px; padding-bottom: 2px; padding-left: 5px; padding-right: 5px; color:#ffffff; border-radius: 3px">
@@ -112,7 +111,7 @@ indexLocal();
                              style="padding-top:25px; position: relative; padding-bottom: 25px; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);">
                             <div class="row">
                                 <div class=col-md-12>
-                                    <?php $item_chamando_aberto = chamados_abertos();
+                                    <?php /* $item_chamando_aberto = chamados_abertos();
                                     foreach ($item_chamando_aberto as $chamado): ?>
                                         <div class="col-md-3">
                                             <div class="chamado-box box-body">
@@ -152,7 +151,7 @@ indexLocal();
                                          *    '<br>Prioridade chamado -  ' . $chamado["prioridade_chamado"]  .
                                          *    '<br>Mensagem - - - - - - - - - ' . $chamado["mensagem"];
                                          */
-                                    endforeach; ?>
+                                   /* endforeach;*/ ?>
                                 </div>
                             </div>
                         </div>
