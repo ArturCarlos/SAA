@@ -121,44 +121,80 @@ CREATE TABLE achados_e_perdidos
 
 CREATE TABLE user_setor
 (
-
+    id       int AUTO_INCREMENT NOT NULL,
     user_id  INT NOT NULL,
     setor_id INT NOT NULL,
     FOREIGN KEY (setor_id) REFERENCES setor (id),
     FOREIGN KEY (user_id) REFERENCES usuario (id),
-    PRIMARY KEY (user_id, setor_id)
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE chamado
 (
-    id               int(11)      NOT NULL,
-    setor_id_user    int(11)      NOT NULL,
-    user_id          int(11)      NOT NULL,
-    data_pedido      date         NOT NULL,
-    mensagem_chamado text         NOT NULL,
-    status           int(11)      NOT NULL,
-    prioridade       int(5)       NOT NULL,
-    img              varchar(200) NOT NULL,
+    id            INT AUTO_INCREMENT NOT NULL,
+    titulo        varchar(200)       NOT NULL,
+    user_id       int                NOT NULL,
+    setor_origem  int                NOT NULL,
+    setor_destino int(11)            NOT NULL,
+    date          TIMESTAMP          NULL DEFAULT CURRENT_TIMESTAMP,
+    mensagem      text               NOT NULL,
+    status        int(11)            NOT NULL,
+    anexo         varchar(200)       NOT NULL,
 
-    FOREIGN KEY (setor_id_user) REFERENCES setor (id),
+    FOREIGN KEY (setor_origem) REFERENCES setor (id),
+    FOREIGN KEY (setor_destino) REFERENCES setor (id),
     FOREIGN KEY (user_id) REFERENCES usuario (id),
     PRIMARY KEY (id)
 
 );
 
 
-CREATE TABLE `chamado_atr_setor`
+CREATE TABLE `resp_chamado`
 (
-    id                int(11) AUTO_INCREMENT NOT NULL,
-    chamado_id        int(11)                NOT NULL,
-    setor_id          int(11)                NOT NULL,
-    permissao_chamado int(5)                 NOT NULL,
-    status            int(5)                 NOT NULL,
+    id         int AUTO_INCREMENT NOT NULL,
+    chamado_id int                NOT NULL,
+    user_id    int                NOT NULL,
+    resposta   text               NOT NULL,
+    date       TIMESTAMP          NULL DEFAULT CURRENT_TIMESTAMP,
 
-    FOREIGN KEY (chamado_id) REFERENCES chamado (id),
-    FOREIGN KEY (setor_id) REFERENCES setor (id),
+    FOREIGN KEY (chamado_id) REFERENCES chamado (id) ON DELETE CASCADE,
+
+    FOREIGN KEY (user_id) REFERENCES usuario (id),
     PRIMARY KEY (id)
 );
+
+
+
+CREATE TABLE `acesso_chamado`
+(
+    id       int AUTO_INCREMENT NOT NULL,
+    setor_id int                NOT NULL,
+
+    FOREIGN KEY (setor_id) REFERENCES setor (id)
+        ON DELETE CASCADE,
+    PRIMARY KEY (id)
+);
+
+
+CREATE TABLE `tag`
+(
+    id   int AUTO_INCREMENT NOT NULL,
+    nome varchar(200)       NOT NULL,
+
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE `tag_chamado`
+(
+    id         int AUTO_INCREMENT NOT NULL,
+    tag_id     int                NOT NULL,
+    chamado_id int                NOT NULL,
+
+    FOREIGN KEY (tag_id) REFERENCES tag (id) ON DELETE CASCADE,
+    FOREIGN KEY (chamado_id) REFERENCES chamado (id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+);
+
 
 
 insert into usuario(nome, matricula, email, senha, permissao, categoria)
