@@ -16,7 +16,7 @@ verificaLoginAdmin();
                     <li><a href="<?php echo BASEURL; ?>index.php"><i class="fa fa-home"></i>Página Inicial</a></li>
                     <li><i class="fa fa-gears "></i>
 
-                        <small> Gerenciar</small>
+                        <small>Gerenciar</small>
                     </li>
                 </ol>
             </div>
@@ -46,7 +46,7 @@ verificaLoginAdmin();
 
                         <div class="box-body col-xs-6">
                             <a class="btn-lg btn-primary btn-block" href="tag.php"><i class="fa fa-tags">
-                                </i> &nbsp Gerenciar Tags de classificação </a>
+                                </i> &nbsp Gerenciar Tags </a>
                         </div>
                     </div>
                 </div>
