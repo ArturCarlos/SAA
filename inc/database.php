@@ -924,3 +924,40 @@ function remove_setor_acesso($table = null)
     close_database($database);
     return $found;
 }
+
+/** *  Insere um registro no BD sem arquivos em anexo     */
+function add($table = null, $data = null)
+{
+    $database = open_database();
+
+    $columns = null;
+    $values = null;
+    foreach ($data as $key => $value) {
+        $columns .= trim($key, "'") . ",";
+        $values .= "'$value',";
+    }
+
+
+    // remove a ultima virgula
+    $columns = rtrim($columns, ',');
+    $values = rtrim($values, ',');
+
+    $sql = "INSERT INTO " . $table . "($columns)" . " VALUES " . "($values);";
+
+    try {
+        $database->query($sql);
+        if (($database->affected_rows) > 0) {
+
+            $_SESSION['message'] = 'Registro cadastrado com sucesso.';
+            $_SESSION['type'] = 'success';
+        } else {
+            $_SESSION['message'] = 'Registro já cadastrado no sistema';
+            $_SESSION['type'] = 'warning';
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = 'Nao foi possivel realizar a operacao.';
+        $_SESSION['type'] =     'danger';
+
+    }
+    close_database($database);
+}
