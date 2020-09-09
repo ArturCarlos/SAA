@@ -8,6 +8,8 @@ $chamado = null;
 
 $acesso_chamado = null;
 
+$tags = null;
+
 function add_acesso_chamado()
 {
     if ((!empty($_POST['acesso_chamado']))) {
@@ -19,7 +21,7 @@ function add_acesso_chamado()
             foreach ($setor as $id):
                 $setor_id["'setor_id'"] = $id;
 
-                save('acesso_chamado', $setor_id);
+                add('acesso_chamado', $setor_id);
 
             endforeach;
 
@@ -35,4 +37,22 @@ function index_acesso_chamado()
 {
     global $acesso_chamado;
     $acesso_chamado = find_all_user_setor('acesso_chamado');
+}
+
+function add_tag() {
+    if (!empty($_POST['tag'])) {
+        $tag = $_POST['tag'];
+        add('tag', $tag);
+    }
+}
+
+/** *  Listagem de tags	 */
+function indextag() {
+    global $tags;
+    $tags = find_all('tag');
+}
+
+function deletetag($id = null) {
+    remove('tag', $id);
+    header('location: tag.php');
 }

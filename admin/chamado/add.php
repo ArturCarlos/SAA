@@ -4,20 +4,7 @@
 require_once LOGIN2;
 verificaLoginAdmin();
 ?>
-<?php
-require_once CHAMADO;
-$setore = Setor_all();
 
-
-require_once SETOR;
-indexSetor();
-indexSetor_operacional();
-
-?>
-<?php
-require_once LOCAL;
-addLocal();
-?>
 <?php include(HEADER_TEMPLATE); ?>
 
     <section class="content-header">
@@ -44,68 +31,6 @@ addLocal();
                 <div class="box">
                     <!-- /.box-header -->
                     <div class="box-body">
-                        <form action='' method="post" enctype="multipart/form-data">
-                            <!-- area de campos do form -->
-                            <h3 class="text-center">Preencha os campos abaixo para criar um chamado</h3>
-                            <hr/>
-                            <div class="form-group">
-                                <label for="nome">Matricula do Solicitante </label>
-                                <input type="text" class="form-control"
-                                       value="<?php echo $_SESSION['matricula']; ?>" required="false" disabled="true">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="setor_id_user">Setor Solicitante</label><em> (Selecione seu setor)</em>
-                                <select class="form-control" id="setor_id"
-                                        name="setor_id_user" required="">
-
-                                    <?php if ($setores) : ?>
-                                        <?php foreach ($setores as $setor) : ?>
-                                            <option value="<?php echo $setor['user_id']; ?>"> <?php echo nome_setor($setor['setor_id']); ?>
-                                                - <?php echo nome_setor_local(local_id_setor($setor['setor_id'])); ?></option>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-
-                                </select>
-
-                            </div>
-
-                            <div class="form-group">
-                                <label for="setor_id_pedido">Setor Solicitado </label>
-                                <select class="form-control" id="setor_id_pedido" name="setor_id_pedido"
-                                        required="true">
-                                    <option value=""></option>
-                                    <?php if ($setore) : ?>
-                                        <?php foreach ($setore as $setor) : ?>
-                                            <option value="<?php echo $setor['id']; ?>"><?php echo $setor['nome']; ?> -
-                                                <?php echo nome_setor_local($setor['local_id']); ?></option>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                </select>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="descricao">Descriação Chamado </label>
-                                <textarea type="text" rows='10' class="form-control" id="descricao"
-                                          name="mensagem_chamado" required="true" maxlength="1000"
-                                          style="resize:none;"> </textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="imagem">Foto do Local </label>
-                                <input id="imagem" type="file" accept="image/png, image/jpeg, image/jpg" name="img">
-                            </div>
-
-                            <div id="actions" class="row">
-                                <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary" name='cadastrar_chamado'>
-                                        <i class="fa fa-check"></i> Cadastrar
-                                    </button>
-                                    <a href="index.php" class="btn btn-default">
-                                        <i class="fa fa-close"></i> Cancelar</a>
-                                </div>
-                            </div>
-                        </form>
                     </div>
                     <!-- /.box-body -->
                 </div>

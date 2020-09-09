@@ -31,7 +31,7 @@ index_acesso_chamado();
         <div class="col-sm-6 text-left">
             <ol class="breadcrumb">
                 <li><a href="<?php echo BASEURL; ?>index.php"><i class="fa fa-home"></i>Página Inicial</a></li>
-                <li><a href="<?php echo BASEURL; ?>admin/chamado/gerenciar.php"><i class="glyphicon glyphicon-bullhorn"></i>Gerenciar</a></li>
+                <li><a href="<?php echo BASEURL; ?>admin/chamado/gerenciar.php"><i class="fa fa-gears "></i>Gerenciar</a></li>
                 <li><i class="fa fa-th-large"></i>
 
                     <small>Acesso</small>

@@ -167,7 +167,7 @@
                     </a>
                     <ul class="treeview-menu">
                         <li><a href="<?php echo BASEURL; ?>admin/chamado/gerenciar.php"><i class="fa fa-circle-o"></i>
-                                Gerenciar acesso</a></li>
+                                Gerenciar</a></li>
                         <li><a href="<?php echo BASEURL; ?>admin/chamado/index.php"><i class="fa fa-circle-o"></i>
                                 Chamados em Aberto</a></li>
                         <li><a href="#"><i class="fa fa-circle-o"></i> Histórico Chamado</a></li>

@@ -14,9 +14,9 @@ verificaLoginAdmin();
             <div class="col-sm-6 text-left">
                 <ol class="breadcrumb">
                     <li><a href="<?php echo BASEURL; ?>index.php"><i class="fa fa-home"></i>Página Inicial</a></li>
-                    <li><i class="glyphicon glyphicon-bullhorn"></i>
+                    <li><i class="fa fa-gears "></i>
 
-                        <small> Chamados</small>
+                        <small> Gerenciar</small>
                     </li>
                 </ol>
             </div>
@@ -45,7 +45,7 @@ verificaLoginAdmin();
                         </div>
 
                         <div class="box-body col-xs-6">
-                            <a class="btn-lg btn-primary btn-block" href="./tag.php"><i class="fa fa-tags">
+                            <a class="btn-lg btn-primary btn-block" href="tag.php"><i class="fa fa-tags">
                                 </i> &nbsp Gerenciar Tags de classificação </a>
                         </div>
                     </div>
