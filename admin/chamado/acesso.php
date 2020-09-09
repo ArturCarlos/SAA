@@ -31,9 +31,10 @@ index_acesso_chamado();
         <div class="col-sm-6 text-left">
             <ol class="breadcrumb">
                 <li><a href="<?php echo BASEURL; ?>index.php"><i class="fa fa-home"></i>Página Inicial</a></li>
-                <li><i class="glyphicon glyphicon-bullhorn"></i>
+                <li><a href="<?php echo BASEURL; ?>admin/chamado/gerenciar.php"><i class="glyphicon glyphicon-bullhorn"></i>Gerenciar</a></li>
+                <li><i class="fa fa-th-large"></i>
 
-                    <small>Chamados</small>
+                    <small>Acesso</small>
                 </li>
             </ol>
         </div>
@@ -42,8 +43,6 @@ index_acesso_chamado();
 </section>
 
 <section class="content">
-
-    <?php include(ALERT_MSG); ?>
 
     <div class='row'>
         <div class="col-xs-12">
@@ -57,7 +56,7 @@ index_acesso_chamado();
                     <form action=acesso.php method="post">
 
                         <div class="form-group">
-                            <label for="setor_id">Setores com acesso ao chamado </label>
+                            <h4>Setores com acesso ao chamado</h4>
                             <select class="form-control select2" id="setor_id"
                                     name="acesso_chamado['setor_id'][]" multiple="multiple" required="">
                                 <?php if ($setores) : ?>
@@ -94,7 +93,7 @@ index_acesso_chamado();
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-check"></i> Cadastrar
                                 </button>
-                                <a href="index.php" class="btn btn-default">
+                                <a href="gerenciar.php" class="btn btn-default">
                                     <i class="fa fa-close"></i> Cancelar</a>
                             </div>
                         </div>
