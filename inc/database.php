@@ -275,7 +275,7 @@ function save($table = null, $data = null)
         }
     } catch (Exception $e) {
         $_SESSION['message'] = 'Nao foi possivel realizar a operacao.';
-        $_SESSION['type'] =     'danger';
+        $_SESSION['type'] = 'danger';
 
     }
     close_database($database);
@@ -908,8 +908,7 @@ function find_user_setor($table = null)
 function remove_setor_acesso($table = null)
 {
     $database = open_database();
-    $found = null
-    ;
+    $found = null;
     try {
         if ($table = 'acesso_chamado') {
             $sql = "DELETE FROM " . $table;
@@ -956,8 +955,50 @@ function add($table = null, $data = null)
         }
     } catch (Exception $e) {
         $_SESSION['message'] = 'Nao foi possivel realizar a operacao.';
-        $_SESSION['type'] =     'danger';
+        $_SESSION['type'] = 'danger';
 
     }
     close_database($database);
 }
+
+/* Pesquisa Todos os Registros de uma Tabela */
+function find_all_chamado($table, $id_user, $type)
+{
+    if ($type == 'setor') {
+        //Pesquisa o atribuido ao setor
+        $pesquisa = 'setor_destino';
+        return find_chamado($table, $id_user, $pesquisa);
+
+    } elseif ($type == 'user') {
+        $pesquisa = 'user_id';
+
+        //Pesquisa o chamado criado por um usuario
+        return find_chamado($table, $id_user, $pesquisa);
+    }
+}
+
+function find_chamado($table, $id, $type)
+{
+    $database = open_database();
+    $found = null;
+    try {
+        if ($id) {
+            $sql = "SELECT * FROM " . $table . " WHERE " . $type . " = " . $id;
+        }
+        $result = $database->query($sql);
+        if ($result->num_rows > 0) {
+            $found = $result->fetch_all(MYSQLI_ASSOC);
+
+        }
+
+    } catch
+    (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+
+    return $found;
+}
+
+

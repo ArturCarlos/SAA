@@ -8,6 +8,8 @@ $chamado = null;
 
 $acesso_chamado = null;
 
+$chamado_setor = null;
+
 $tags = null;
 
 function add_acesso_chamado()
@@ -39,20 +41,63 @@ function index_acesso_chamado()
     $acesso_chamado = find_all_user_setor('acesso_chamado');
 }
 
-function add_tag() {
+function add_tag()
+{
     if (!empty($_POST['tag'])) {
         $tag = $_POST['tag'];
         add('tag', $tag);
     }
 }
 
-/** *  Listagem de tags	 */
-function indextag() {
+/** *  Listagem de tags     */
+function indextag()
+{
     global $tags;
     $tags = find_all('tag');
 }
 
-function deletetag($id = null) {
+function deletetag($id = null)
+{
     remove('tag', $id);
     header('location: tag.php');
 }
+
+/** *  Cadastro de chamados     */
+function add_chamado()
+{
+
+    if (!empty($_POST['chamado'])) {
+
+        //usuario criador do chamado
+        $id_user = $_SESSION['id'];
+        $_POST['chamado']["'user_id'"] = $id_user;
+        $_POST['chamado']["'status'"] = 1; //status aberto
+        $chamado = $_POST['chamado'];
+        add('chamado', $chamado);
+        header('location: index.php');
+
+
+    }
+}
+
+/** *  Listagem de chamados     do usuario*/
+function index_chamado_user()
+{
+    global $chamados;
+    $id = $_SESSION['id'];
+    $chamados = find_all_chamado('chamado', $id, 'user');
+}
+
+/** *  Listagem de chamados     do setor*/
+function index_chamado_setor()
+{
+
+    global $chamado_setor;
+    $setor = find_setor_operacional('user_setor');
+    if ($setor) {
+        foreach ($setor as $chamado) {
+            $chamado_setor = find_all_chamado('chamado', $chamado['setor_id'], 'setor');
+        }
+    }
+}
+
