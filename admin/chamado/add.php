@@ -127,7 +127,7 @@ add_chamado();
                             <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label for="imagem">Anexo </label><em> (Opcional)</em>
-                                    <input type="file" accept="image/png, image/jpeg, image/jpg" name='img'>
+                                    <input type="file" name='anexo'>
 
                                 </div>
                             </div>

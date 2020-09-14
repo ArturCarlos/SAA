@@ -113,3 +113,8 @@ function formata_data($data)
     return $data;
 }
 
+function viewchamado($id = null) {
+    global $chamado;
+    $chamado = find_chamado('chamado', $id);
+}
+

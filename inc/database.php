@@ -924,7 +924,7 @@ function remove_setor_acesso($table = null)
     return $found;
 }
 
-/** *  Insere um registro no BD sem arquivos em anexo     */
+/** *  Insere um registro no BD Com arquivos em anexo     */
 function add($table = null, $data = null)
 {
     $database = open_database();
@@ -936,6 +936,15 @@ function add($table = null, $data = null)
         $values .= "'$value',";
     }
 
+    //Verifica se o arquivo foi enviado
+    if (is_uploaded_file($_FILES['anexo']['tmp_name'])) {
+        //pega a extensao do arquivo
+        $extensao = strtolower(substr($_FILES['anexo']['name'], -4));
+        $novo_nome = md5(time()) . $extensao; //define o nome do arquivo
+        $columns .= 'anexo';
+        $values .= "'$novo_nome',";
+    }
+
 
     // remove a ultima virgula
     $columns = rtrim($columns, ',');
@@ -945,7 +954,14 @@ function add($table = null, $data = null)
 
     try {
         $database->query($sql);
+
         if (($database->affected_rows) > 0) {
+
+            //move o anexo para pasta
+            if (isset($_FILES['anexo'])) {
+                $diretorio = '../../anexo/'; //define o diretorio para onde enviaremos o arquivo
+                move_uploaded_file($_FILES['anexo']['tmp_name'], $diretorio . $table . '/' . $novo_nome); //efetua o upload
+            }
 
             $_SESSION['message'] = 'Registro cadastrado com sucesso.';
             $_SESSION['type'] = 'success';
@@ -977,13 +993,16 @@ function find_all_chamado($table, $id_user, $type)
     }
 }
 
-function find_chamado($table, $id, $type)
+function find_chamado($table= null, $id = null, $type = null)
 {
     $database = open_database();
     $found = null;
     try {
-        if ($id) {
+        if ($type) {
             $sql = "SELECT * FROM " . $table . " WHERE " . $type . " = " . $id;
+        }elseif($id){
+            $sql = "SELECT * FROM " . $table . " WHERE id = " . $id;
+
         }
         $result = $database->query($sql);
         if ($result->num_rows > 0) {
