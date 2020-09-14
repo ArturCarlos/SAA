@@ -10,7 +10,6 @@ index_chamado_user();
 ?>
 <?php include(HEADER_TEMPLATE); ?>
 
-    <!-- Main conteudoCentral -->
 
     <section class="content-header">
         <div class="row">
@@ -33,6 +32,7 @@ index_chamado_user();
     <section class="content">
 
         <?php include(ALERT_MSG); ?>
+
         <h2 class="page-header">Chamados abertos</h2>
 
         <div class='row'>

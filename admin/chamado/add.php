@@ -33,12 +33,6 @@ add_chamado();
     </section>
 
     <section class="content">
-
-        <!-- *****Alertas de Operações*****-->
-        <?php
-
-        include(ALERT_MSG); ?>
-
         <div class="row">
             <div class="col-md-12 ">
                 <div class="box">
@@ -153,7 +147,7 @@ add_chamado();
             <!-- /.col -->
 
 
-        <!-- /.row -->
+            <!-- /.row -->
     </section>
 <?php include('modal.php'); ?>
 
