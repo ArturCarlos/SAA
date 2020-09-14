@@ -113,8 +113,22 @@ function formata_data($data)
     return $data;
 }
 
+function formata_data_hora($data = null, $tipo = null){
+    $data = formata_data($data);
+    $data = explode(' ', $data);
+    if($tipo == 'data') {
+        return $data[0];
+    }elseif ($tipo == 'hora'){
+        return $data[1];
+
+    }
+
+}
+
+
 function viewchamado($id = null) {
     global $chamado;
     $chamado = find_chamado('chamado', $id);
+    $chamado = $chamado[0];
 }
 

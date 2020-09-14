@@ -57,15 +57,20 @@ index_chamado_user();
                                 <tbody>
                                 <?php if ($chamado_setor) : ?>
 
-
                                     <?php foreach ($chamado_setor as $cham) : ?>
                                         <tr>
-                                            <td><?php echo $cham['titulo']; ?></td>
+                                            <td><?php echo substr($cham['titulo'], 0, 30);
+                                                if (strlen($cham['titulo']) > 20):?>
+                                                    <a href="view.php?id=<?php echo $cham['id']; ?>">[...]</a>
+                                                <?php endif; ?>
+                                            </td>
                                             <td><?php echo formata_data($cham['date']); ?></td>
 
                                             <td class="actions text-center">
                                                 <a href="view.php?id=<?php echo $cham['id']; ?>"
-                                                   class="btn btn-sm btn-success"> Visualizar</a>
+                                                   class="btn btn-sm btn-success" data-toggle="tooltip"
+                                                   data-placement="left" title="Visualizar"><i class="fa fa-eye"></i>
+                                                </a>
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -105,7 +110,6 @@ index_chamado_user();
                                     <th title="Ordenar Tabela">Título</th>
                                     <th>Data</th>
 
-
                                     <th>Ações</th>
                                 </tr>
                                 </thead>
@@ -114,12 +118,23 @@ index_chamado_user();
 
                                     <?php foreach ($chamados as $chamado) : ?>
                                         <tr>
-                                            <td ><?php echo $chamado['titulo']; ?></td>
+                                            <td><?php echo substr($chamado['titulo'], 0, 30);
+                                                if (strlen($chamado['titulo']) > 20):?>
+                                                    <a href="view.php?id=<?php echo $chamado['id']; ?>">[...]</a>
+                                                <?php endif; ?>
+                                            </td>
                                             <td><?php echo formata_data($chamado['date']); ?></td>
 
                                             <td class="actions text-center">
                                                 <a href="view.php?id=<?php echo $chamado['id']; ?>"
-                                                   class="btn btn-sm btn-success"> Visualizar</a>
+                                                   class="btn btn-sm btn-success" data-toggle="tooltip"
+                                                   data-placement="left" title="Visualizar"><i class="fa fa-eye"></i>
+                                                </a>
+                                                <a href="edit.php?id=<?php echo $chamado['id']; ?>"
+                                                   class="btn btn-sm btn-warning" data-toggle="tooltip"
+                                                   data-placement="left" title="Editar"><i class="fa fa-pencil"></i>
+                                                </a>
+
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
@@ -147,4 +162,5 @@ index_chamado_user();
     <!-- /.content -->
 
 <?php include('modal.php'); ?>
+
 <?php include(FOOTER_TEMPLATE); ?>
