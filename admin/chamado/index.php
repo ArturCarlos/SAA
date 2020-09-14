@@ -37,21 +37,22 @@ index_chamado_user();
 
         <div class='row'>
             <div class="col-md-6">
-                <div class="box box-default">
+                <div class="box box-success">
                     <div class="box-header with-border">
                         <i class="fa fa-th-large"></i>
                         <h3 class="box-title">Chamados do setor</h3>
                     </div>
                     <!-- /.box-header -->
-                    <div class="box-body">
+                    <div class="box-body ">
                         <div class="box-body">
                             <table id="example1" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th title="Ordenar Tabela">Título</th>
 
-<!--                                    <th>Ações</th>
--->                                </tr>
+                                    <th>Data</th>
+                                    <th>Ações</th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 <?php if ($chamado_setor) : ?>
@@ -60,14 +61,12 @@ index_chamado_user();
                                     <?php foreach ($chamado_setor as $cham) : ?>
                                         <tr>
                                             <td><?php echo $cham['titulo']; ?></td>
+                                            <td><?php echo formata_data($cham['date']); ?></td>
 
-                                           <!-- <td class="actions text-center">
-
-                                                <a href=# class="btn btn-sm btn-danger" data-toggle="modal"
-                                                   data-target="#delete-modal"
-                                                   data-customer="<?php /*echo '&id=' . $cham['id']; */?>">
-                                                    <i class="fa fa-trash"></i> Excluir </a>
-                                            </td>-->
+                                            <td class="actions text-center">
+                                                <a href="view.php?id=<?php echo $cham['id']; ?>"
+                                                   class="btn btn-sm btn-success"> Visualizar</a>
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php else : ?>
@@ -91,7 +90,7 @@ index_chamado_user();
 
 
             <div class="col-md-6">
-                <div class="box box-default">
+                <div class="box box-success">
                     <div class="box-header with-border">
                         <i class="fa fa-user-circle"></i>
 
@@ -104,24 +103,24 @@ index_chamado_user();
                                 <thead>
                                 <tr>
                                     <th title="Ordenar Tabela">Título</th>
+                                    <th>Data</th>
 
-<!--                                    <th>Ações</th>
--->                                </tr>
+
+                                    <th>Ações</th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                 <?php if ($chamados) : ?>
 
                                     <?php foreach ($chamados as $chamado) : ?>
                                         <tr>
-                                            <td><?php echo $chamado['titulo']; ?></td>
+                                            <td ><?php echo $chamado['titulo']; ?></td>
+                                            <td><?php echo formata_data($chamado['date']); ?></td>
 
-                                           <!-- <td class="actions text-center">
-
-                                               <a href=# class="btn btn-sm btn-danger" data-toggle="modal"
-                                                   data-target="#delete-modal"
-                                                   data-customer="<?php /*echo '&id=' . $chamado['id']; */?>">
-                                                    <i class="fa fa-trash"></i> Excluir </a>
-                                            </td>-->
+                                            <td class="actions text-center">
+                                                <a href="view.php?id=<?php echo $chamado['id']; ?>"
+                                                   class="btn btn-sm btn-success"> Visualizar</a>
+                                            </td>
                                         </tr>
                                     <?php endforeach; ?>
                                 <?php else : ?>

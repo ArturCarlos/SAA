@@ -101,3 +101,15 @@ function index_chamado_setor()
     }
 }
 
+function formata_data($data)
+{
+    $data = explode('-', $data);
+    $ano = $data[0];
+    $mes = $data[1];
+    $data = explode(' ', $data[2]);
+    $dia = $data[0];
+    $hora = $data[1];
+    $data = $dia . '-' . $mes . '-' . $ano . ' ' . $hora;
+    return $data;
+}
+
