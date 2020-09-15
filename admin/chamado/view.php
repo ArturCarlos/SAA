@@ -52,14 +52,18 @@ viewchamado($_GET['id']);
                             <span class="time"><i class="fa fa-clock-o"></i>
                                 <?php echo formata_data_hora($chamado['date'], 'hora') ?>
                             </span>
-
-                            <h3 class="timeline-header"><a>Título</a> <?php echo($chamado['titulo'])?></h3>
-
+                            <h3 class="timeline-header"><a>Título</a> <?php echo($chamado['titulo']) ?></h3>
+                            <em class="timeline-footer">Autor(a) : <?php echo(nome_usuario($chamado['user_id'])) ?></em>
+                            <br>
                             <div class="timeline-body">
-                                <?php echo($chamado['mensagem'])?>
+                                <?php echo(nl2br($chamado['mensagem'])) ?>
                             </div>
                             <div class="timeline-footer">
-                                <a class="btn btn-primary btn-xs">Responder</a>
+                                <?php if ($chamado['anexo'] ): ?>
+                                    <a href="view-anexo.php?id=<?php echo ($chamado['anexo'] ) ?>" target="_blank" class="btn btn-primary btn-xs">Baixar Anexo</a>
+                                <?php endif; ?>
+
+                                <a class="btn btn-warning btn-xs">Responder</a>
                                 <a class="btn btn-danger btn-xs">Fechar</a>
                             </div>
                         </div>
