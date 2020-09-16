@@ -1004,10 +1004,10 @@ function find_chamado($table= null, $id = null, $type = null)
             $sql = "SELECT * FROM " . $table . " WHERE id = " . $id;
 
         }
+
         $result = $database->query($sql);
         if ($result->num_rows > 0) {
             $found = $result->fetch_all(MYSQLI_ASSOC);
-
         }
 
     } catch
@@ -1018,6 +1018,72 @@ function find_chamado($table= null, $id = null, $type = null)
     close_database($database);
 
     return $found;
+}
+
+function recupera_anexo($table = null, $id = null)
+{
+
+    $database = open_database();
+    //Recupera o valor da imagem
+    $img = mysqli_fetch_array($database->query("SELECT anexo FROM " . $table . " WHERE id = " . $id));
+    $img = $img[0];
+    close_database($database);
+    return $img;
+
+}
+
+
+/** *  Atualiza um registro no BD   */
+function update_chamado($table = null, $id = 0, $data = null)
+{
+    $database = open_database();
+
+    $img = recupera_anexo($table, $id);
+    $items = null;
+
+    //Verifica se um arquivo foi enviado
+    if (is_uploaded_file($_FILES['anexo']['tmp_name'])) {
+        //pega a extensao do arquivo
+        $extensao = strtolower(substr($_FILES['anexo']['name'], -4));
+        $novo_nome = md5(time()) . $extensao;
+        //define o nome do arquivo
+        $items .= trim('anexo', "'") . "='$novo_nome',";
+
+        //move a foto para pasta
+        $diretorio = '../../anexo/';//define o diretorio para onde enviaremos o arquivo
+        move_uploaded_file($_FILES['anexo']['tmp_name'], $diretorio . $table . '/' . $novo_nome); //efetua o upload
+
+        //diretorio da imagem da imagem antida
+        $dir_img = ABSPATH . 'anexo/' . $table . '/' . $img;
+        //apaga imagem antiga
+        unlink($dir_img);
+
+    }
+
+    foreach ($data as $key => $value) {
+        $items .= trim($key, "'") . "='$value',";
+    }    // remove a ultima virgula
+
+
+    $items = rtrim($items, ',');
+    $sql = "UPDATE " . $table;
+    $sql .= " SET $items";
+    $sql .= " WHERE id=" . $id . ";";
+    try {
+        $database->query($sql);
+        //verifica se ouve alguma alteracão no banco
+        if (($database->affected_rows) > 0) {
+            $_SESSION['message'] = 'Registro atualizado com sucesso.';
+            $_SESSION['type'] = 'success';
+        } else {
+            $_SESSION['message'] = 'Não foi possível realizar essa operacão! Verifique se os dados editados estão corretos ou já estão cadastrados.';
+            $_SESSION['type'] = 'warning';
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = 'Nao foi possivel realizar a operacao.';
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
 }
 
 

@@ -137,8 +137,23 @@ function viewchamado($id = null)
 function anexo($nome)
 {
     $caminho = BASEURL."anexo/chamado/{$nome}";
-
     return $caminho;
+}
 
+function edit_chamado() {
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        if (isset($_POST['chamado'])) {
+            $chamado = $_POST['chamado'];
+            update_chamado('chamado', $id, $chamado);
+            header('location: index.php');
+        } else {
+            global $chamado;
+            $chamado = find_chamado('chamado', $id);
+            $chamado = $chamado[0];
+        }
+    } else {
+        header('location: index.php');
+    }
 }
 
