@@ -113,12 +113,13 @@ function formata_data($data)
     return $data;
 }
 
-function formata_data_hora($data = null, $tipo = null){
+function formata_data_hora($data = null, $tipo = null)
+{
     $data = formata_data($data);
     $data = explode(' ', $data);
-    if($tipo == 'data') {
+    if ($tipo == 'data') {
         return $data[0];
-    }elseif ($tipo == 'hora'){
+    } elseif ($tipo == 'hora') {
         return $data[1];
 
     }
@@ -126,9 +127,18 @@ function formata_data_hora($data = null, $tipo = null){
 }
 
 
-function viewchamado($id = null) {
+function viewchamado($id = null)
+{
     global $chamado;
     $chamado = find_chamado('chamado', $id);
     $chamado = $chamado[0];
+}
+
+function anexo($nome)
+{
+    $caminho = BASEURL."anexo/chamado/{$nome}";
+
+    return $caminho;
+
 }
 

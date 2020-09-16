@@ -59,8 +59,9 @@ viewchamado($_GET['id']);
                                 <?php echo(nl2br($chamado['mensagem'])) ?>
                             </div>
                             <div class="timeline-footer">
-                                <?php if ($chamado['anexo'] ): ?>
-                                    <a href="view-anexo.php?id=<?php echo ($chamado['anexo'] ) ?>" target="_blank" class="btn btn-primary btn-xs">Baixar Anexo</a>
+                                <?php if ($chamado['anexo']): ?>
+                                    <a href="<?php echo(anexo($chamado['anexo'])); ?>" target="_blank"
+                                       class="btn btn-primary btn-xs" download="anexo"> Baixar Anexo</a>
                                 <?php endif; ?>
 
                                 <a class="btn btn-warning btn-xs">Responder</a>
