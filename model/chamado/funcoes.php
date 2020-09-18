@@ -45,7 +45,7 @@ function add_tag()
 {
     if (!empty($_POST['tag'])) {
         $tag = $_POST['tag'];
-        add('tag', $tag);
+        adicionar('tag', $tag);
     }
 }
 
