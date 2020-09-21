@@ -11,6 +11,7 @@ verificaLoginAdmin();
 
 <?php require_once CHAMADO;
 viewchamado($_GET['id']);
+index_tag_chamado();
 ?>
 
 <?php include(HEADER_TEMPLATE); ?>
@@ -44,6 +45,20 @@ viewchamado($_GET['id']);
                   <span class="bg-red">
                     <?php echo formata_data_hora($chamado['date'], 'data') ?>
                   </span>
+                        <a class="btn" href="./tag_chamado.php?id=<?php echo $chamado['id'] ?>" data-placement="left"
+                           title="Adicionar/Remover Tags">
+                            <?php if ($tags_chamado):
+                                foreach ($tags_chamado as $tag_chamado):?>
+                                    <i class="fa fa-tag"></i>
+                                    <?php echo nome_tag($tag_chamado['tag_id']) . "&nbsp";
+                                endforeach;
+                            else: ?>
+
+                            <i class="fa fa-tags"></i>Tags:</a>
+                        <?php
+                        endif;
+                        ?>
+                        </a>
                     </li>
                     <li>
                         <i class="glyphicon glyphicon-bullhorn bg-blue"></i>
@@ -53,15 +68,25 @@ viewchamado($_GET['id']);
                                 <?php echo formata_data_hora($chamado['date'], 'hora') ?>
                             </span>
                             <h3 class="timeline-header"><a>Título</a> <?php echo($chamado['titulo']) ?></h3>
-                            <em class="timeline-footer">Autor(a) : <?php echo(nome_usuario($chamado['user_id'])) ?></em>
+                            <span class="time">
+                                <em class="timeline-footer">
+                                    De: <?php echo(nome_setor($chamado['setor_origem'])) ?>
+                                </em>
+                                <br>
+                                <em class="timeline-footer">
+                                    Para: <?php echo(nome_setor($chamado['setor_destino'])) ?>
+                                </em>
+                            </span>
                             <br>
+                            <em class="timeline-footer">Autor(a) : <?php echo(nome_usuario($chamado['user_id'])) ?></em>
+                            <hr>
                             <div class="timeline-body">
                                 <?php echo(nl2br($chamado['mensagem'])) ?>
                             </div>
                             <div class="timeline-footer">
                                 <?php if ($chamado['anexo']): ?>
                                     <a href="<?php echo(anexo($chamado['anexo'])); ?>" target="_blank"
-                                       class="btn btn-primary btn-xs" download="anexo"> Baixar Anexo</a>
+                                       class="btn btn-default btn-xs" download="anexo"> <b>Baixar Anexo</b></a>
                                 <?php endif; ?>
 
                                 <a class="btn btn-warning btn-xs">Responder</a>

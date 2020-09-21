@@ -1029,17 +1029,23 @@ function find_all_chamado($table, $id_user, $type)
 
         //Pesquisa o chamado criado por um usuario
         return find_chamado($table, $id_user, $pesquisa);
+
+    } elseif ($type == 'tag_chamado') {
+        $pesquisa = 'chamado_id';
+
+        //Pesquisa o chamado criado por um usuario
+        return find_chamado($table, $id_user, $pesquisa);
     }
 }
 
-function find_chamado($table= null, $id = null, $type = null)
+function find_chamado($table = null, $id = null, $type = null)
 {
     $database = open_database();
     $found = null;
     try {
         if ($type) {
             $sql = "SELECT * FROM " . $table . " WHERE " . $type . " = " . $id;
-        }elseif($id){
+        } elseif ($id) {
             $sql = "SELECT * FROM " . $table . " WHERE id = " . $id;
 
         }
@@ -1125,4 +1131,29 @@ function update_chamado($table = null, $id = 0, $data = null)
     close_database($database);
 }
 
+/** *  Remove usuario do setor id     */
+function remove_tag_chamado($table = null, $id = null)
+{
+    $database = open_database();
 
+    try {
+        if ($id) {
+            $sql = "DELETE FROM " . $table . " WHERE chamado_id = " . $id;
+            $result = $database->query($sql);
+            if ($result = $database->query($sql)) {
+
+                $_SESSION['message'] = "Registro Removido com Sucesso";
+                $_SESSION['type'] = 'success';
+            } else {
+
+                $_SESSION['message'] = "Viiixe! Não foi possivel realizar a operação. Verifique se esse registro está sendo referenciado em outro local";
+                $_SESSION['type'] = 'danger';
+            }
+        }
+
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+}

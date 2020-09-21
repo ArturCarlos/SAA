@@ -12,6 +12,8 @@ $chamado_setor = null;
 
 $tags = null;
 
+$tags_chamado = null;
+
 function add_acesso_chamado()
 {
     if ((!empty($_POST['acesso_chamado']))) {
@@ -35,10 +37,40 @@ function add_acesso_chamado()
 
 }
 
+function add_tag_chamado()
+{
+
+    if ((!empty($_POST['tag_chamado'])) & (!empty($_POST['chamado_id']))) {
+        $id_chamdo = $_POST['chamado_id'];
+        $tags = $_POST['tag_chamado'];
+        remove_tag_chamado('tag_chamado',$id_chamdo["'chamado_id'"]);
+
+        foreach ($tags as $tag):
+            foreach ($tag as $id):
+                $tags["'tag_id'"] = $id;
+                $result = array_merge($id_chamdo, $tags);
+                adicionar('tag_chamado', $result);
+            endforeach;
+        endforeach;
+
+        $id = $id_chamdo["'chamado_id'"];
+        header('location: view.php?id='.$id);
+
+    }
+
+}
+
 function index_acesso_chamado()
 {
     global $acesso_chamado;
     $acesso_chamado = find_all_user_setor('acesso_chamado');
+}
+
+function index_tag_chamado()
+{
+    global $tags_chamado;
+    $id = $_GET['id'];
+    $tags_chamado = find_all_chamado('tag_chamado', $id, 'tag_chamado');
 }
 
 function add_tag()
@@ -47,6 +79,11 @@ function add_tag()
         $tag = $_POST['tag'];
         adicionar('tag', $tag);
     }
+}
+
+function nome_tag($tag_id)
+{
+    return find_nome('tag', $tag_id);
 }
 
 /** *  Listagem de tags     */
@@ -136,11 +173,12 @@ function viewchamado($id = null)
 
 function anexo($nome)
 {
-    $caminho = BASEURL."anexo/chamado/{$nome}";
+    $caminho = BASEURL . "anexo/chamado/{$nome}";
     return $caminho;
 }
 
-function edit_chamado() {
+function edit_chamado()
+{
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
         if (isset($_POST['chamado'])) {
