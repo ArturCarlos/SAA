@@ -1017,38 +1017,63 @@ function add($table = null, $data = null)
 }
 
 /* Pesquisa Todos os Registros de uma Tabela */
-function find_all_chamado($table, $id_user, $type)
+function find_all_chamado($table, $id_user, $type, $status = null)
 {
-    if ($type == 'setor') {
-        //Pesquisa o atribuido ao setor
-        $pesquisa = 'setor_destino';
-        return find_chamado($table, $id_user, $pesquisa);
+    if ($status) {
+        if ($type == 'setor') {
+            //Pesquisa o atribuido ao setor
+            $pesquisa = 'setor_destino';
+            return find_chamado($table, $id_user, $pesquisa, $status);
 
-    } elseif ($type == 'user') {
-        $pesquisa = 'user_id';
+        } elseif ($type == 'user') {
+            $pesquisa = 'user_id';
 
-        //Pesquisa o chamado criado por um usuario
-        return find_chamado($table, $id_user, $pesquisa);
+            //Pesquisa o chamado criado por um usuario
+            return find_chamado($table, $id_user, $pesquisa, $status);
 
-    } elseif ($type == 'tag_chamado') {
-        $pesquisa = 'chamado_id';
+        } elseif ($type == 'tag_chamado') {
+            $pesquisa = 'chamado_id';
 
-        //Pesquisa o chamado criado por um usuario
-        return find_chamado($table, $id_user, $pesquisa);
+            //Pesquisa o chamado criado por um usuario
+            return find_chamado($table, $id_user, $pesquisa, $status);
+        }
+
+    } else {
+        if ($type == 'setor') {
+            //Pesquisa o atribuido ao setor
+            $pesquisa = 'setor_destino';
+            return find_chamado($table, $id_user, $pesquisa);
+
+        } elseif ($type == 'user') {
+            $pesquisa = 'user_id';
+
+            //Pesquisa o chamado criado por um usuario
+            return find_chamado($table, $id_user, $pesquisa);
+
+        } elseif ($type == 'tag_chamado') {
+            $pesquisa = 'chamado_id';
+
+            //Pesquisa o chamado criado por um usuario
+            return find_chamado($table, $id_user, $pesquisa);
+        }
     }
 }
 
-function find_chamado($table = null, $id = null, $type = null)
+
+function find_chamado($table = null, $id = null, $type = null, $status = null)
 {
     $database = open_database();
     $found = null;
     try {
-        if ($type) {
+        if ($status) {
+            $sql = "SELECT * FROM " . $table . " WHERE " . $type . " = " . $id . " AND status = " . $status;
+        } elseif ($type) {
             $sql = "SELECT * FROM " . $table . " WHERE " . $type . " = " . $id;
         } elseif ($id) {
             $sql = "SELECT * FROM " . $table . " WHERE id = " . $id;
 
         }
+
 
         $result = $database->query($sql);
         if ($result->num_rows > 0) {
@@ -1130,6 +1155,41 @@ function update_chamado($table = null, $id = 0, $data = null)
     }
     close_database($database);
 }
+
+
+/** *  Atualiza um registro no BD   */
+function chamado_fechar($table = null, $id = 0, $data = null)
+{
+    $database = open_database();
+
+    $items = null;
+
+    foreach ($data as $key => $value) {
+        $items .= trim($key, "'") . "='$value',";
+    }    // remove a ultima virgula
+
+
+    $items = rtrim($items, ',');
+    $sql = "UPDATE " . $table;
+    $sql .= " SET $items";
+    $sql .= " WHERE id=" . $id . ";";
+    try {
+        $database->query($sql);
+        //verifica se ouve alguma alteracão no banco
+        if (($database->affected_rows) > 0) {
+            $_SESSION['message'] = 'Registro atualizado com sucesso.';
+            $_SESSION['type'] = 'success';
+        } else {
+            $_SESSION['message'] = 'Não foi possível realizar essa operacão! Verifique se os dados editados estão corretos ou já estão cadastrados.';
+            $_SESSION['type'] = 'warning';
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = 'Nao foi possivel realizar a operacao.';
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+}
+
 
 /** *  Remove usuario do setor id     */
 function remove_tag_chamado($table = null, $id = null)

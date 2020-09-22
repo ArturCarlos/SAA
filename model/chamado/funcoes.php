@@ -43,7 +43,7 @@ function add_tag_chamado()
     if ((!empty($_POST['tag_chamado'])) & (!empty($_POST['chamado_id']))) {
         $id_chamdo = $_POST['chamado_id'];
         $tags = $_POST['tag_chamado'];
-        remove_tag_chamado('tag_chamado',$id_chamdo["'chamado_id'"]);
+        remove_tag_chamado('tag_chamado', $id_chamdo["'chamado_id'"]);
 
         foreach ($tags as $tag):
             foreach ($tag as $id):
@@ -54,7 +54,7 @@ function add_tag_chamado()
         endforeach;
 
         $id = $id_chamdo["'chamado_id'"];
-        header('location: view.php?id='.$id);
+        header('location: view.php?id=' . $id);
 
     }
 
@@ -95,8 +95,10 @@ function indextag()
 
 function deletetag($id = null)
 {
-    remove('tag', $id);
-    header('location: tag.php');
+    if ($id) {
+        remove('tag', $id);
+        header('location: tag.php');
+    }
 }
 
 /** *  Cadastro de chamados     */
@@ -122,7 +124,7 @@ function index_chamado_user()
 {
     global $chamados;
     $id = $_SESSION['id'];
-    $chamados = find_all_chamado('chamado', $id, 'user');
+    $chamados = find_all_chamado('chamado', $id, 'user',1);
 }
 
 /** *  Listagem de chamados     do setor*/
@@ -133,7 +135,7 @@ function index_chamado_setor()
     $setor = find_setor_operacional('user_setor');
     if ($setor) {
         foreach ($setor as $chamado) {
-            $chamado_setor = find_all_chamado('chamado', $chamado['setor_id'], 'setor');
+            $chamado_setor = find_all_chamado('chamado', $chamado['setor_id'], 'setor', 1);
         }
     }
 }
@@ -195,3 +197,17 @@ function edit_chamado()
     }
 }
 
+function fechar_chamado()
+{
+    if (isset($_GET['fechar_id'])) {
+        $id = $_GET['fechar_id'];
+        $_POST['chamado']["'status'"] = 0;//status fechado
+
+        if (isset($_POST['chamado'])) {
+
+            $chamado = $_POST['chamado'];
+            chamado_fechar('chamado', $id, $chamado);
+            header('location: index.php');
+        }
+    }
+}

@@ -90,7 +90,10 @@ index_tag_chamado();
                                 <?php endif; ?>
 
                                 <a class="btn btn-warning btn-xs">Responder</a>
-                                <a class="btn btn-danger btn-xs">Fechar</a>
+                                <a href=# class="btn btn-danger btn-xs" data-toggle="modal"
+                                   data-target="#fechar-modal"
+                                   data-customer="<?php echo $chamado['id']; ?>">
+                                    Fechar </a>
                             </div>
                         </div>
                     </li>
@@ -101,10 +104,6 @@ index_tag_chamado();
                 </ul>
 
             </div>
-            <!-- /.col -->
-
-
-            <!-- /.row -->
     </section>
 <?php include('modal.php'); ?>
 

@@ -87,7 +87,7 @@ add_tag_chamado();
                                 <button type="submit" class="btn btn-primary">
                                     <i class="fa fa-check"></i> Adicionar
                                 </button>
-                                <a href="gerenciar.php" class="btn btn-default">
+                                <a href="javascript:history.back()" class="btn btn-default">
                                     <i class="fa fa-close"></i> Cancelar</a>
                             </div>
                         </div>

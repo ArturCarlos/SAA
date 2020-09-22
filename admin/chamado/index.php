@@ -104,7 +104,7 @@ index_chamado_user();
                     <!-- /.box-header -->
                     <div class="box-body">
                         <div class="box-body">
-                            <table id="tab_setor" class="table table-bordered table-hover">
+                            <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
                                     <th title="Ordenar Tabela">Título</th>
