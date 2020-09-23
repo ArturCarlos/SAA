@@ -172,7 +172,9 @@ function viewchamado($id = null)
 {
     global $chamado;
     $chamado = find_chamado('chamado', $id);
-    $chamado = $chamado[0];
+    if($chamado) {
+        $chamado = $chamado[0];
+    }
 }
 
 function anexo($nome)

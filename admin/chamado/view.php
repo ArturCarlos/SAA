@@ -89,12 +89,29 @@ index_tag_chamado();
                                        class="btn btn-default btn-xs" download="anexo"> <b>Baixar Anexo</b></a>
                                 <?php endif; ?>
 
-                                <a class="btn btn-warning btn-xs">Responder</a>
+                                <a href=resp_chamado.php?id=<?php echo $chamado['id']; ?>
+                                   class="btn btn-warning btn-xs">Responder</a>
                                 <a href=# class="btn btn-danger btn-xs" data-toggle="modal"
                                    data-target="#fechar-modal"
                                    data-customer="<?php echo $chamado['id']; ?>">
                                     Fechar </a>
                             </div>
+                        </div>
+                    </li>
+
+                    <li class="time-label">
+                  <span class="bg-green">
+                    3 Jan. 2014
+                  </span>
+                    </li>
+                    <li>
+                        <i class="fa fa-comments bg-yellow"></i>
+
+                        <div class="timeline-item">
+                            <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+
+                            <h3 class="timeline-header no-border"><a href="#">Autor(a):</a> accepted your friend
+                                request</h3>
                         </div>
                     </li>
 
