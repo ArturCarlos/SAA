@@ -121,12 +121,11 @@ CREATE TABLE achados_e_perdidos
 
 CREATE TABLE user_setor
 (
-    id       int AUTO_INCREMENT NOT NULL,
     user_id  INT NOT NULL,
     setor_id INT NOT NULL,
     FOREIGN KEY (setor_id) REFERENCES setor (id),
     FOREIGN KEY (user_id) REFERENCES usuario (id),
-    PRIMARY KEY (id)
+    PRIMARY KEY (user_id, setor_id)
 );
 
 CREATE TABLE chamado
@@ -156,6 +155,8 @@ CREATE TABLE `resp_chamado`
     user_id    int                NOT NULL,
     resposta   text               NOT NULL,
     date       TIMESTAMP          NULL DEFAULT CURRENT_TIMESTAMP,
+    anexo      varchar(200)       NOT NULL,
+
 
     FOREIGN KEY (chamado_id) REFERENCES chamado (id) ON DELETE CASCADE,
 
