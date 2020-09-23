@@ -1217,3 +1217,27 @@ function remove_tag_chamado($table = null, $id = null)
     }
     close_database($database);
 }
+
+
+function find_chamado_acesso($table, $id, $type, $status)
+{
+    $database = open_database();
+    $found = null;
+    try {
+        $sql = "SELECT * FROM " . $table . " WHERE " . $type . " = " . $id . " AND user_id = " . $status;
+
+
+        $result = $database->query($sql);
+        if ($result->num_rows > 0) {
+            $found = $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+    } catch
+    (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+
+    return $found;
+}

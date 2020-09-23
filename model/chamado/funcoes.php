@@ -213,3 +213,16 @@ function fechar_chamado()
         }
     }
 }
+
+/*** Verifica se o usuário pode acessar a pagina pelo id*/
+function chamado_acesso(){
+    $id_user = $_SESSION['id'];
+    $id_cham = $_GET['id'];
+    $result = find_chamado_acesso('chamado',$id_cham,'id',$id_user);
+    if($result){
+        return true;
+    }else{
+        return false;
+
+    }
+}

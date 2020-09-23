@@ -34,6 +34,7 @@ edit_chamado();
         </div>
     </section>
 
+<?php if (chamado_acesso()): ?>
     <section class="content">
         <div class="row">
             <div class="col-md-12 ">
@@ -168,6 +169,20 @@ edit_chamado();
 
             <!-- /.row -->
     </section>
-<?php include('modal.php'); ?>
+    <?php include('modal.php'); ?>
+
+<?php else: ?>
+    <section class="content">
+        <div class="error-page ">
+            <div class="box-danger text-center">
+                <h3><i class="fa fa-warning text-yellow"></i> Oops! Página não encontrada.</h3>
+
+            </div>
+            <!-- /.error-content -->
+        </div>
+        <!-- /.error-page -->
+    </section>
+<?php endif; ?>
+
 
 <?php include(FOOTER_TEMPLATE); ?>
