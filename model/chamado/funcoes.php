@@ -192,7 +192,9 @@ function edit_chamado()
         } else {
             global $chamado;
             $chamado = find_chamado('chamado', $id);
-            $chamado = $chamado[0];
+            if($chamado) {
+                $chamado = $chamado[0];
+            }
         }
     } else {
         header('location: index.php');
