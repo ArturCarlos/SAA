@@ -136,7 +136,10 @@ function index_chamado_setor()
     $setor = find_setor_operacional('user_setor');
     if ($setor) {
         foreach ($setor as $chamado) {
-            $chamado_setor = array_merge($chamado_setor,find_all_chamado('chamado', $chamado['setor_id'], 'setor', 1));
+            $result = find_all_chamado('chamado', $chamado['setor_id'], 'setor', 1);
+            if($result) {
+                $chamado_setor = array_merge($chamado_setor, $result);
+            }
         }
     }
 
