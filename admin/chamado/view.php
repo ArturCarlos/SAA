@@ -91,7 +91,7 @@ index_resp_chamado();
                                 <?php endif; ?>
 
                                 <a href=resp_chamado.php?id=<?php echo $chamado['id']; ?>
-                                   class="btn btn-warning btn-xs">Responder</a>
+                                   class="btn bg-purple btn-xs">Responder</a>
                                 <a href=# class="btn btn-danger btn-xs" data-toggle="modal"
                                    data-target="#fechar-modal"
                                    data-customer="<?php echo $chamado['id']; ?>">
@@ -109,10 +109,11 @@ index_resp_chamado();
                             </li>
                             <li>
 
-                                <i class="fa fa-comments bg-yellow"></i>
+                                <i class="fa fa-comments bg-purple"></i>
 
                                 <div class="timeline-item">
-                                    <span class="time"><i class="fa fa-clock-o"></i> <?php echo formata_data_hora($resp['date'], 'hora'); ?></span>
+                                    <span class="time"><i
+                                                class="fa fa-clock-o"></i> <?php echo formata_data_hora($resp['date'], 'hora'); ?></span>
 
 
                                     <h3 class="timeline-header no-border"><a
@@ -127,6 +128,10 @@ index_resp_chamado();
                                             <a href="<?php echo(anexo($resp['anexo'])); ?>" target="_blank"
                                                class="btn btn-default btn-xs" download="anexo"> <b>Baixar Anexo</b></a>
                                         <?php endif; ?>
+                                        <?php if ($resp['user_id'] == $_SESSION['id']): ?>
+                                            <a href=#
+                                               class="btn bg-orange btn-xs">Editar</a>                                        <?php endif; ?>
+
                                     </div>
                                 </div>
 
