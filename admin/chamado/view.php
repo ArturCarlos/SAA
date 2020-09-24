@@ -43,7 +43,7 @@ index_resp_chamado();
             <div class="col-md-12 ">
                 <ul class="timeline">
                     <li class="time-label">
-                  <span class="bg-red">
+                  <span class="bg-blue">
                     <?php echo formata_data_hora($chamado['date'], 'data') ?>
                   </span>
                         <a class="btn" href="./tag_chamado.php?id=<?php echo $chamado['id'] ?>" data-placement="left"
@@ -92,7 +92,7 @@ index_resp_chamado();
 
                                 <a href=resp_chamado.php?id=<?php echo $chamado['id']; ?>
                                    class="btn bg-purple btn-xs">Responder</a>
-                                <a href=# class="btn btn-danger btn-xs" data-toggle="modal"
+                                <a href=# class="btn bg-navy btn-xs" data-toggle="modal"
                                    data-target="#fechar-modal"
                                    data-customer="<?php echo $chamado['id']; ?>">
                                     Fechar </a>
@@ -105,7 +105,7 @@ index_resp_chamado();
 
 
                             <li class="time-label">
-                                <span class="bg-green"><?php echo formata_data_hora($resp['date'], 'data'); ?></span>
+                                <span class="bg-purple-gradient"><?php echo formata_data_hora($resp['date'], 'data'); ?></span>
                             </li>
                             <li>
 
@@ -116,8 +116,7 @@ index_resp_chamado();
                                                 class="fa fa-clock-o"></i> <?php echo formata_data_hora($resp['date'], 'hora'); ?></span>
 
 
-                                    <h3 class="timeline-header no-border"><a
-                                                href="#">Autor(a):</a> <?php echo(nome_usuario($resp['user_id'])); ?>
+                                    <h3 class="timeline-header no-border"><a>Autor(a):</a> <?php echo(nome_usuario($resp['user_id'])); ?>
                                     </h3>
                                     <hr>
                                     <div class="timeline-body">
@@ -130,7 +129,9 @@ index_resp_chamado();
                                         <?php endif; ?>
                                         <?php if ($resp['user_id'] == $_SESSION['id']): ?>
                                             <a href=#
-                                               class="btn bg-orange btn-xs">Editar</a>                                        <?php endif; ?>
+                                               class="btn bg-orange btn-xs">Editar</a>
+                                            <a href=#
+                                               class="btn bg-red btn-xs">Excluir</a>                                       <?php endif; ?>
 
                                     </div>
                                 </div>
