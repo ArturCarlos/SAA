@@ -14,6 +14,8 @@ $tags = null;
 
 $tags_chamado = null;
 
+$resp_chamado = null;
+
 function add_acesso_chamado()
 {
     if ((!empty($_POST['acesso_chamado']))) {
@@ -119,12 +121,48 @@ function add_chamado()
     }
 }
 
+/** *  Cadastro de chamados     */
+function add_resp_chamado()
+{
+
+    global $chamado;
+
+    if (!empty($_POST['resp_chamado'])) {
+
+        if ($chamado) {
+
+            //usuario respondeu chamado
+            $id_user = $_SESSION['id'];
+            $_POST['resp_chamado']["'user_id'"] = $id_user;
+            $id_chamado = $chamado['id'];
+
+            $_POST['resp_chamado']["'chamado_id'"] = $id_chamado;
+            $resp_chamado = $_POST['resp_chamado'];
+
+
+            add('resp_chamado', $resp_chamado);
+            header('location: view.php?id='.$id_chamado);
+        }
+
+    }
+}
+
 /** *  Listagem de chamados     do usuario*/
 function index_chamado_user()
 {
     global $chamados;
     $id = $_SESSION['id'];
-    $chamados = find_all_chamado('chamado', $id, 'user',1);
+    $chamados = find_all_chamado('chamado', $id, 'user', 1);
+}
+
+/** *  Listagem de chamados     do usuario*/
+function index_resp_chamado()
+{
+    global $resp_chamado;
+    global $chamado;
+    $id = $chamado['id'];
+
+    $resp_chamado = find_all_resp_chamado('resp_chamado', $id, 'chamado_id', 1);
 }
 
 /** *  Listagem de chamados     do setor*/
@@ -137,7 +175,7 @@ function index_chamado_setor()
     if ($setor) {
         foreach ($setor as $chamado) {
             $result = find_all_chamado('chamado', $chamado['setor_id'], 'setor', 1);
-            if($result) {
+            if ($result) {
                 $chamado_setor = array_merge($chamado_setor, $result);
             }
         }
@@ -175,7 +213,7 @@ function viewchamado($id = null)
 {
     global $chamado;
     $chamado = find_chamado('chamado', $id);
-    if($chamado) {
+    if ($chamado) {
         $chamado = $chamado[0];
     }
 }
@@ -197,7 +235,7 @@ function edit_chamado()
         } else {
             global $chamado;
             $chamado = find_chamado('chamado', $id);
-            if($chamado) {
+            if ($chamado) {
                 $chamado = $chamado[0];
             }
         }
@@ -222,13 +260,14 @@ function fechar_chamado()
 }
 
 /*** Verifica se o usuário pode acessar a pagina pelo id*/
-function chamado_acesso(){
+function chamado_acesso()
+{
     $id_user = $_SESSION['id'];
     $id_cham = $_GET['id'];
-    $result = find_chamado_acesso('chamado',$id_cham,'id',$id_user);
-    if($result){
+    $result = find_chamado_acesso('chamado', $id_cham, 'id', $id_user);
+    if ($result) {
         return true;
-    }else{
+    } else {
         return false;
 
     }

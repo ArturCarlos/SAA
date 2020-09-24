@@ -12,6 +12,7 @@ verificaLoginAdmin();
 <?php require_once CHAMADO;
 viewchamado($_GET['id']);
 index_tag_chamado();
+add_resp_chamado();
 ?>
 
 <?php include(HEADER_TEMPLATE); ?>
@@ -55,12 +56,12 @@ index_tag_chamado();
                                     <div class="form-group">
                                     <textarea class="form-control" id="mensagem"
                                               placeholder="Sua Resposta..."
-                                              rows="6" name="chamado['mensagem']" required="true"
+                                              rows="6" name="resp_chamado['resposta']" required=""
                                               maxlength="1000"></textarea>
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="imagem">Anexo </label><em> (Opcional)</em>
+                                        <label for="anexo">Anexo </label><em> (Opcional)</em>
                                         <input type="file" accept="image/png, image/jpeg, image/jpg, application/pdf"
                                                name='anexo'>
 

@@ -12,6 +12,7 @@ verificaLoginAdmin();
 <?php require_once CHAMADO;
 viewchamado($_GET['id']);
 index_tag_chamado();
+index_resp_chamado();
 ?>
 
 <?php include(HEADER_TEMPLATE); ?>
@@ -99,21 +100,40 @@ index_tag_chamado();
                         </div>
                     </li>
 
-                    <li class="time-label">
-                  <span class="bg-green">
-                    3 Jan. 2014
-                  </span>
-                    </li>
-                    <li>
-                        <i class="fa fa-comments bg-yellow"></i>
+                    <?php if ($resp_chamado):
+                        foreach ($resp_chamado as $resp):?>
 
-                        <div class="timeline-item">
-                            <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
 
-                            <h3 class="timeline-header no-border"><a href="#">Autor(a):</a> accepted your friend
-                                request</h3>
-                        </div>
-                    </li>
+                            <li class="time-label">
+                                <span class="bg-green"><?php echo formata_data_hora($resp['date'], 'data'); ?></span>
+                            </li>
+                            <li>
+
+                                <i class="fa fa-comments bg-yellow"></i>
+
+                                <div class="timeline-item">
+                                    <span class="time"><i class="fa fa-clock-o"></i> <?php echo formata_data_hora($resp['date'], 'hora'); ?></span>
+
+
+                                    <h3 class="timeline-header no-border"><a
+                                                href="#">Autor(a):</a> <?php echo(nome_usuario($resp['user_id'])); ?>
+                                    </h3>
+                                    <hr>
+                                    <div class="timeline-body">
+                                        <?php echo(nl2br($resp['resposta'])) ?>
+                                    </div>
+                                    <div class="timeline-footer">
+                                        <?php if ($resp['anexo']): ?>
+                                            <a href="<?php echo(anexo($resp['anexo'])); ?>" target="_blank"
+                                               class="btn btn-default btn-xs" download="anexo"> <b>Baixar Anexo</b></a>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+
+                            </li>
+
+                        <?php endforeach;
+                    endif; ?>
 
                     <li>
                         <i class="fa fa-clock-o bg-gray"></i>

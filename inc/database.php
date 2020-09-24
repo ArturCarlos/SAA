@@ -1059,6 +1059,18 @@ function find_all_chamado($table, $id_user, $type, $status = null)
     }
 }
 
+/* Pesquisa Todos os Registros de uma Tabela */
+function find_all_resp_chamado($table, $id_user, $type)
+{
+
+    if ($type == 'chamado_id') {
+        //Pesquisa o atribuido ao setor
+        $pesquisa = 'chamado_id';
+        return find_chamado($table, $id_user, $pesquisa);
+
+    }
+}
+
 
 function find_chamado($table = null, $id = null, $type = null, $status = null)
 {
