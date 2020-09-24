@@ -272,3 +272,13 @@ function chamado_acesso()
 
     }
 }
+
+
+
+function deletechamado($id = null)
+{
+    if ($id) {
+       /* remove('chamado', $id);
+        header('location: index.php');*/
+    }
+}

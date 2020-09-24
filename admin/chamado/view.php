@@ -96,6 +96,9 @@ index_resp_chamado();
                                    data-target="#fechar-modal"
                                    data-customer="<?php echo $chamado['id']; ?>">
                                     Fechar </a>
+                                <a href=# class="btn btn-xs btn-danger" <!--data-toggle="modal"
+                                   data-target="#delete-modal" data-customer="--><?php /*echo $chamado['id']; */?>">
+                                    <i class="fa fa-trash"></i> Excluir </a>
                             </div>
                         </div>
                     </li>

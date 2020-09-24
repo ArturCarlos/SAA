@@ -463,7 +463,7 @@ function login($table, $matricula, $senha)
 }
 
 /** *  Remove um registro no BD     */
-function remove($table = null, $id = null)
+function    remove($table = null, $id = null)
 {
     $database = open_database();
 
