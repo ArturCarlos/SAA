@@ -141,7 +141,7 @@ function add_resp_chamado()
 
 
             add('resp_chamado', $resp_chamado);
-            header('location: view.php?id='.$id_chamado);
+            header('location: view.php?id=' . $id_chamado);
         }
 
     }
@@ -218,7 +218,15 @@ function viewchamado($id = null)
     }
 }
 
-function anexo($nome,$table)
+/*retorna o id do chamado de uma resposta*/
+function id_chamado($id)
+{
+    $chamado = find_chamado('resp_chamado', $id,'id');
+    return $chamado[0]['chamado_id'];
+
+}
+
+function anexo($nome, $table)
 {
     $caminho = BASEURL . "anexo/{$table}/{$nome}";
     return $caminho;
@@ -274,7 +282,6 @@ function chamado_acesso()
 }
 
 
-
 function deletechamado($id = null)
 {
     if ($id) {
@@ -286,10 +293,32 @@ function deletechamado($id = null)
 function delete_resp_chamado($id = null)
 {
     if ($id) {
-        $id_chamado = find_chamado('resp_chamado',$id,'id');
+        $id_chamado = find_chamado('resp_chamado', $id, 'id');
         $id_chamado = $id_chamado[0]['chamado_id'];
         remove_chamado('resp_chamado', $id);
 
-        header('location: view.php?id='.$id_chamado);
+        header('location: view.php?id=' . $id_chamado);
+    }
+}
+
+function edit_resp_chamado()
+{
+    if (isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $id_chamado = find_chamado('resp_chamado', $id, 'id');
+        $id_chamado = $id_chamado[0]['chamado_id'];
+        if (isset($_POST['resp_chamado'])) {
+            $resp_chamado = $_POST['resp_chamado'];
+            update_chamado('resp_chamado', $id, $resp_chamado);
+            header('location: view.php?id=' . $id_chamado);
+        } else {
+            global $resp_chamado;
+            $resp_chamado = find_chamado('resp_chamado', $id);
+            if ($resp_chamado) {
+                $resp_chamado = $resp_chamado[0];
+            }
+        }
+    } else {
+        header('location: index.php');
     }
 }

@@ -86,7 +86,7 @@ index_resp_chamado();
                             </div>
                             <div class="timeline-footer">
                                 <?php if ($chamado['anexo']): ?>
-                                    <a href="<?php echo(anexo($chamado['anexo'],'chamado')); ?>" target="_blank"
+                                    <a href="<?php echo(anexo($chamado['anexo'], 'chamado')); ?>" target="_blank"
                                        class="btn btn-default btn-xs" download="anexo"> <b>Baixar Anexo</b></a>
                                 <?php endif; ?>
 
@@ -119,7 +119,8 @@ index_resp_chamado();
                                                 class="fa fa-clock-o"></i> <?php echo formata_data_hora($resp['date'], 'hora'); ?></span>
 
 
-                                    <h3 class="timeline-header no-border"><a>Autor(a):</a> <?php echo(nome_usuario($resp['user_id'])); ?>
+                                    <h3 class="timeline-header no-border">
+                                        <a>Autor(a):</a> <?php echo(nome_usuario($resp['user_id'])); ?>
                                     </h3>
                                     <hr>
                                     <div class="timeline-body">
@@ -127,15 +128,21 @@ index_resp_chamado();
                                     </div>
                                     <div class="timeline-footer">
                                         <?php if ($resp['anexo']): ?>
-                                            <a href="<?php echo(anexo($resp['anexo'],'resp_chamado')); ?>" target="_blank"
+                                            <a href="<?php echo(anexo($resp['anexo'], 'resp_chamado')); ?>"
+                                               target="_blank"
                                                class="btn btn-default btn-xs" download="anexo"> <b>Baixar Anexo</b></a>
                                         <?php endif; ?>
                                         <?php if ($resp['user_id'] == $_SESSION['id']): ?>
-                                            <a href=#
-                                               class="btn bg-orange btn-xs">Editar</a>
+                                            <a href="edit_resp.php?id=<?php echo $resp['id']; ?>"
+                                               class="btn bg-orange btn-xs" data-toggle="tooltip"
+                                               data-placement="left" title="Editar">Editar</a>
+
                                             <a href=# class="btn btn-xs btn-danger" data-toggle="modal"
-                                               data-target="#delete-resp-modal" data-customer="<?php echo $resp['id']; ?>">
-                                                <i class="fa fa-trash"></i> Excluir </a>                                     <?php endif; ?>
+                                               data-target="#delete-resp-modal"
+                                               data-customer="<?php echo $resp['id']; ?>">
+                                                <i class="fa fa-trash"></i> Excluir
+                                            </a>
+                                        <?php endif; ?>
 
                                     </div>
                                 </div>
