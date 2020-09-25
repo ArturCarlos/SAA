@@ -91,7 +91,8 @@ index_resp_chamado();
                                 <?php endif; ?>
 
                                 <a href=resp_chamado.php?id=<?php echo $chamado['id']; ?>
-                                   class="btn bg-purple btn-xs">Responder</a>
+                                   data-toggle="tooltip"
+                                   data-placement="top" title="Adicionar uma resposta" class="btn bg-purple btn-xs">Responder</a>
                                 <a href=# class="btn bg-navy btn-xs" data-toggle="modal"
                                    data-target="#fechar-modal"
                                    data-customer="<?php echo $chamado['id']; ?>">
@@ -153,7 +154,8 @@ index_resp_chamado();
                     endif; ?>
 
                     <li>
-                        <i class="fa fa-clock-o bg-gray"></i>
+                        <a href=resp_chamado.php?id=<?php echo $chamado['id'];?> class="fa fa-clock-o bg-purple" data-toggle="tooltip"
+                           data-placement="top" title="Adicionar uma resposta"></a>
                     </li>
                 </ul>
 
