@@ -162,7 +162,7 @@ function index_resp_chamado()
     global $chamado;
     $id = $chamado['id'];
 
-    $resp_chamado = find_all_resp_chamado('resp_chamado', $id, 'chamado_id', 1);
+    $resp_chamado = find_all_resp_chamado('resp_chamado', $id, 'chamado_id');
 }
 
 /** *  Listagem de chamados     do setor*/
@@ -218,9 +218,9 @@ function viewchamado($id = null)
     }
 }
 
-function anexo($nome)
+function anexo($nome,$table)
 {
-    $caminho = BASEURL . "anexo/chamado/{$nome}";
+    $caminho = BASEURL . "anexo/{$table}/{$nome}";
     return $caminho;
 }
 
@@ -278,7 +278,18 @@ function chamado_acesso()
 function deletechamado($id = null)
 {
     if ($id) {
-       /* remove('chamado', $id);
-        header('location: index.php');*/
+        remove_chamado('chamado', $id);
+        header('location: index.php');
+    }
+}
+
+function delete_resp_chamado($id = null)
+{
+    if ($id) {
+        $id_chamado = find_chamado('resp_chamado',$id,'id');
+        $id_chamado = $id_chamado[0]['chamado_id'];
+        remove_chamado('resp_chamado', $id);
+
+        header('location: view.php?id='.$id_chamado);
     }
 }

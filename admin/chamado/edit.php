@@ -140,7 +140,7 @@ edit_chamado();
 
                                 <div class="form-group">
                                     <?php if ($chamado['anexo']): ?>
-                                        <a href="<?php echo(anexo($chamado['anexo'])); ?>" target="_blank"
+                                        <a href="<?php echo(anexo($chamado['anexo'],'chamado')); ?>" target="_blank"
                                            class="btn btn-primary btn-xs" download="anexo">Anexo atual</a>
                                     <?php endif; ?>
                                 </div>

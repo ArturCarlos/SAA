@@ -463,7 +463,7 @@ function login($table, $matricula, $senha)
 }
 
 /** *  Remove um registro no BD     */
-function    remove($table = null, $id = null)
+function remove($table = null, $id = null)
 {
     $database = open_database();
 
@@ -1252,4 +1252,52 @@ function find_chamado_acesso($table, $id, $type, $status)
     close_database($database);
 
     return $found;
+}
+
+
+/** *  Remove um registro no BD     */
+function remove_chamado($table = null, $id = null)
+{
+    $database = open_database();
+
+    $img = recupera_anexo($table, $id);
+
+    $resp_chamado = null;
+    try {
+        if ($id) {
+            if ($table == 'chamado') {
+                $resp_chamado = find_all_resp_chamado('resp_chamado', $id, 'chamado_id');
+            }
+            $sql = "DELETE FROM " . $table . " WHERE id = " . $id;
+            $result = $database->query($sql);
+            if ($result = $database->query($sql)) {
+                if ($img != null) {
+                    //diretorio do anexo
+                    $dir_img = ABSPATH . 'anexo/' . $table . '/' . $img;
+                    //exclui o anexo
+                    unlink($dir_img);
+                }
+                if ($resp_chamado) {
+                    foreach ($resp_chamado as $anexo) {
+                        if ($anexo['anexo']) {
+                            $dir_img = ABSPATH . 'anexo/resp_chamado/' . $anexo['anexo'];
+                            //exclui o anexo
+                            unlink($dir_img);
+                        }
+                    }
+                }
+                $_SESSION['message'] = "Registro Removido com Sucesso";
+                $_SESSION['type'] = 'success';
+            } else {
+
+                $_SESSION['message'] = "Viiixe! Não foi possivel realizar a operação. Verifique se esse registro está sendo referenciado em outro local";
+                $_SESSION['type'] = 'danger';
+            }
+        }
+
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
 }

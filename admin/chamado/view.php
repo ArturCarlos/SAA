@@ -86,7 +86,7 @@ index_resp_chamado();
                             </div>
                             <div class="timeline-footer">
                                 <?php if ($chamado['anexo']): ?>
-                                    <a href="<?php echo(anexo($chamado['anexo'])); ?>" target="_blank"
+                                    <a href="<?php echo(anexo($chamado['anexo'],'chamado')); ?>" target="_blank"
                                        class="btn btn-default btn-xs" download="anexo"> <b>Baixar Anexo</b></a>
                                 <?php endif; ?>
 
@@ -96,8 +96,8 @@ index_resp_chamado();
                                    data-target="#fechar-modal"
                                    data-customer="<?php echo $chamado['id']; ?>">
                                     Fechar </a>
-                                <a href=# class="btn btn-xs btn-danger" <!--data-toggle="modal"
-                                   data-target="#delete-modal" data-customer="--><?php /*echo $chamado['id']; */?>">
+                                <a href=# class="btn btn-xs btn-danger" data-toggle="modal"
+                                   data-target="#delete-modal" data-customer="<?php echo $chamado['id']; ?>">
                                     <i class="fa fa-trash"></i> Excluir </a>
                             </div>
                         </div>
@@ -127,14 +127,15 @@ index_resp_chamado();
                                     </div>
                                     <div class="timeline-footer">
                                         <?php if ($resp['anexo']): ?>
-                                            <a href="<?php echo(anexo($resp['anexo'])); ?>" target="_blank"
+                                            <a href="<?php echo(anexo($resp['anexo'],'resp_chamado')); ?>" target="_blank"
                                                class="btn btn-default btn-xs" download="anexo"> <b>Baixar Anexo</b></a>
                                         <?php endif; ?>
                                         <?php if ($resp['user_id'] == $_SESSION['id']): ?>
                                             <a href=#
                                                class="btn bg-orange btn-xs">Editar</a>
-                                            <a href=#
-                                               class="btn bg-red btn-xs">Excluir</a>                                       <?php endif; ?>
+                                            <a href=# class="btn btn-xs btn-danger" data-toggle="modal"
+                                               data-target="#delete-resp-modal" data-customer="<?php echo $resp['id']; ?>">
+                                                <i class="fa fa-trash"></i> Excluir </a>                                     <?php endif; ?>
 
                                     </div>
                                 </div>
