@@ -155,6 +155,14 @@ function index_chamado_user()
     $chamados = find_all_chamado('chamado', $id, 'user', 1);
 }
 
+/** *  Listagem de chamados fechados do usuario*/
+function index_historico_user()
+{
+    global $chamados;
+    $id = $_SESSION['id'];
+    $chamados = find_all_chamado('chamado', $id, 'user', 0);
+}
+
 /** *  Listagem de chamados     do usuario*/
 function index_resp_chamado()
 {
@@ -175,6 +183,24 @@ function index_chamado_setor()
     if ($setor) {
         foreach ($setor as $chamado) {
             $result = find_all_chamado('chamado', $chamado['setor_id'], 'setor', 1);
+            if ($result) {
+                $chamado_setor = array_merge($chamado_setor, $result);
+            }
+        }
+    }
+
+}
+
+/** *  Listagem de chamados fechados do setor*/
+function index_historico_setor()
+{
+
+    global $chamado_setor;
+    $chamado_setor = [];
+    $setor = find_setor_operacional('user_setor');
+    if ($setor) {
+        foreach ($setor as $chamado) {
+            $result = find_all_chamado('chamado', $chamado['setor_id'], 'setor', 0);
             if ($result) {
                 $chamado_setor = array_merge($chamado_setor, $result);
             }
@@ -263,6 +289,21 @@ function fechar_chamado()
             $chamado = $_POST['chamado'];
             chamado_fechar('chamado', $id, $chamado);
             header('location: index.php');
+        }
+    }
+}
+
+function abrir_chamado()
+{
+    if (isset($_GET['fechar_id'])) {
+        $id = $_GET['fechar_id'];
+        $_POST['chamado']["'status'"] = 1;//status fechado
+
+        if (isset($_POST['chamado'])) {
+
+            $chamado = $_POST['chamado'];
+            chamado_fechar('chamado', $id, $chamado);
+            header('location: historico.php');
         }
     }
 }

@@ -5,25 +5,27 @@ require_once LOGIN2;
 verificaLoginAdmin();
 ?>
 <?php require_once CHAMADO;
-index_chamado_setor();
-index_chamado_user();
+index_historico_setor();
+index_historico_user();
 ?>
 <?php include(HEADER_TEMPLATE); ?>
+
 
     <section class="content-header">
         <div class="row">
             <div class="col-sm-6 text-left">
                 <ol class="breadcrumb">
                     <li><a href="<?php echo BASEURL; ?>index.php"><i class="fa fa-home"></i>Página Inicial</a></li>
-                    <li><i class="glyphicon glyphicon-bullhorn"></i>
+                    <li><a href="index.php"><i class="glyphicon glyphicon-bullhorn"></i> Chamados</a></li>
+                    <li><i class="fa fa-history"></i>
 
-                        <small> Chamados</small>
+                        <small> Histórico</small>
                     </li>
                 </ol>
             </div>
             <div class="breadcrumb text-right">
-                <a class="btn btn-info" href="historico.php"><i class="fa fa-history">
-                    </i> &nbsp Histórico de Chamado </a>
+                <a class="btn btn-info" href="index.php"><i class="glyphicon glyphicon-bullhorn">
+                    </i> &nbsp Chamados em Aberto </a>
 
                 <a class="btn btn-primary" href="./add.php"><i class="fa fa-plus">
                     </i> &nbsp Criar Chamado </a>
@@ -131,10 +133,6 @@ index_chamado_user();
                                                 <a href="view.php?id=<?php echo $chamado['id']; ?>"
                                                    class="btn btn-sm btn-success" data-toggle="tooltip"
                                                    data-placement="left" title="Visualizar"><i class="fa fa-eye"></i>
-                                                </a>
-                                                <a href="edit.php?id=<?php echo $chamado['id']; ?>"
-                                                   class="btn btn-sm btn-warning" data-toggle="tooltip"
-                                                   data-placement="left" title="Editar"><i class="fa fa-pencil"></i>
                                                 </a>
 
                                             </td>

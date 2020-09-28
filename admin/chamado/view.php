@@ -27,7 +27,7 @@ index_resp_chamado();
                 </ol>
             </div>
             <div class="breadcrumb text-right">
-                <a class="btn btn-default" href="./index.php"><i class="glyphicon glyphicon-arrow-left"></i> Voltar</a>
+                <a class="btn btn-default" href="javascript:history.back()"><i class="glyphicon glyphicon-arrow-left"></i> Voltar</a>
             </div>
         </div>
     </section>
@@ -89,14 +89,22 @@ index_resp_chamado();
                                     <a href="<?php echo(anexo($chamado['anexo'], 'chamado')); ?>" target="_blank"
                                        class="btn btn-default btn-xs" download="anexo"> <b>Baixar Anexo</b></a>
                                 <?php endif; ?>
+                                <?php if ($chamado['id'] == 1): ?>
+                                    <a href=resp_chamado.php?id=<?php echo $chamado['id']; ?>
+                                       data-toggle="tooltip"
+                                       data-placement="top" title="Adicionar uma resposta" class="btn bg-purple btn-xs">Responder</a>
 
-                                <a href=resp_chamado.php?id=<?php echo $chamado['id']; ?>
-                                   data-toggle="tooltip"
-                                   data-placement="top" title="Adicionar uma resposta" class="btn bg-purple btn-xs">Responder</a>
-                                <a href=# class="btn bg-navy btn-xs" data-toggle="modal"
-                                   data-target="#fechar-modal"
-                                   data-customer="<?php echo $chamado['id']; ?>">
-                                    Fechar </a>
+                                    <a href=# class="btn bg-navy btn-xs" data-toggle="modal"
+                                       data-target="#fechar-modal"
+                                       data-customer="<?php echo $chamado['id']; ?>">
+                                        Fechar </a>
+                                <?php else: ?>
+                                    <a href=# class="btn bg-navy btn-xs" data-toggle="modal"
+                                       data-target="#fechar-modal"
+                                       data-customer="<?php echo $chamado['id']; ?>">
+                                        Abrir </a>
+                                <?php endif; ?>
+
                                 <a href=# class="btn btn-xs btn-danger" data-toggle="modal"
                                    data-target="#delete-modal" data-customer="<?php echo $chamado['id']; ?>">
                                     <i class="fa fa-trash"></i> Excluir </a>
@@ -154,7 +162,8 @@ index_resp_chamado();
                     endif; ?>
 
                     <li>
-                        <a href=resp_chamado.php?id=<?php echo $chamado['id'];?> class="fa fa-clock-o bg-purple" data-toggle="tooltip"
+                        <a href=resp_chamado.php?id=<?php echo $chamado['id']; ?> class="fa fa-clock-o bg-purple"
+                           data-toggle="tooltip"
                            data-placement="top" title="Adicionar uma resposta"></a>
                     </li>
                 </ul>
