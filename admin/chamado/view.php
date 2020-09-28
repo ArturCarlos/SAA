@@ -27,7 +27,8 @@ index_resp_chamado();
                 </ol>
             </div>
             <div class="breadcrumb text-right">
-                <a class="btn btn-default" href="javascript:history.back()"><i class="glyphicon glyphicon-arrow-left"></i> Voltar</a>
+                <a class="btn btn-default" href="javascript:history.back()"><i
+                            class="glyphicon glyphicon-arrow-left"></i> Voltar</a>
             </div>
         </div>
     </section>
@@ -89,7 +90,7 @@ index_resp_chamado();
                                     <a href="<?php echo(anexo($chamado['anexo'], 'chamado')); ?>" target="_blank"
                                        class="btn btn-default btn-xs" download="anexo"> <b>Baixar Anexo</b></a>
                                 <?php endif; ?>
-                                <?php if ($chamado['id'] == 1): ?>
+                                <?php if ($chamado['status'] == 1): ?>
                                     <a href=resp_chamado.php?id=<?php echo $chamado['id']; ?>
                                        data-toggle="tooltip"
                                        data-placement="top" title="Adicionar uma resposta" class="btn bg-purple btn-xs">Responder</a>
@@ -100,7 +101,7 @@ index_resp_chamado();
                                         Fechar </a>
                                 <?php else: ?>
                                     <a href=# class="btn bg-navy btn-xs" data-toggle="modal"
-                                       data-target="#fechar-modal"
+                                       data-target="#abrir-modal"
                                        data-customer="<?php echo $chamado['id']; ?>">
                                         Abrir </a>
                                 <?php endif; ?>
@@ -141,7 +142,7 @@ index_resp_chamado();
                                                target="_blank"
                                                class="btn btn-default btn-xs" download="anexo"> <b>Baixar Anexo</b></a>
                                         <?php endif; ?>
-                                        <?php if ($resp['user_id'] == $_SESSION['id']): ?>
+                                        <?php if ($resp['user_id'] == $_SESSION['id'] & $chamado['status'] == 1): ?>
                                             <a href="edit_resp.php?id=<?php echo $resp['id']; ?>"
                                                class="btn bg-orange btn-xs" data-toggle="tooltip"
                                                data-placement="left" title="Editar">Editar</a>
@@ -160,15 +161,22 @@ index_resp_chamado();
 
                         <?php endforeach;
                     endif; ?>
-
-                    <li>
-                        <a href=resp_chamado.php?id=<?php echo $chamado['id']; ?> class="fa fa-clock-o bg-purple"
-                           data-toggle="tooltip"
-                           data-placement="top" title="Adicionar uma resposta"></a>
-                    </li>
+                    <?php if ($chamado['status'] == 1): ?>
+                        <li>
+                            <a href=resp_chamado.php?id=<?php echo $chamado['id']; ?> class="fa fa-clock-o bg-purple"
+                               data-toggle="tooltip"
+                               data-placement="top" title="Adicionar uma resposta"></a>
+                        </li>
+                    <?php else: ?>
+                        <li>
+                            <em class="fa fa-clock-o"></em>
+                        </li>
+                    <?php endif; ?>
                 </ul>
 
             </div>
+
+
     </section>
 <?php include('modal.php'); ?>
 

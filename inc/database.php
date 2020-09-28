@@ -1019,7 +1019,7 @@ function add($table = null, $data = null)
 /* Pesquisa Todos os Registros de uma Tabela */
 function find_all_chamado($table, $id_user, $type, $status = null)
 {
-    if ($status) {
+    if ($status == 1 || $status == 0) {
         if ($type == 'setor') {
             //Pesquisa o atribuido ao setor
             $pesquisa = 'setor_destino';
@@ -1077,7 +1077,7 @@ function find_chamado($table = null, $id = null, $type = null, $status = null)
     $database = open_database();
     $found = null;
     try {
-        if ($status) {
+        if (is_int($status)) {
             $sql = "SELECT * FROM " . $table . " WHERE " . $type . " = " . $id . " AND status = " . $status;
         } elseif ($type) {
             $sql = "SELECT * FROM " . $table . " WHERE " . $type . " = " . $id;

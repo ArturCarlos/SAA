@@ -27,6 +27,7 @@ index_chamado_user();
 
                 <a class="btn btn-primary" href="./add.php"><i class="fa fa-plus">
                     </i> &nbsp Criar Chamado </a>
+                <a class="btn btn-default" href="index.php"><i class="fa fa-refresh"></i> Atualizar</a>
             </div>
         </div>
     </section>

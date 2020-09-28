@@ -27,7 +27,7 @@ add_chamado();
                 </ol>
             </div>
             <div class="breadcrumb text-right">
-                <a class="btn btn-default" href="./index.php"><i class="glyphicon glyphicon-arrow-left"></i> Voltar</a>
+                <a class="btn btn-default" href="javascript:history.back()"><i class="glyphicon glyphicon-arrow-left"></i> Voltar</a>
             </div>
         </div>
     </section>

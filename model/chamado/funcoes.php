@@ -293,17 +293,16 @@ function fechar_chamado()
     }
 }
 
-function abrir_chamado()
+function abrir_chamado($id)
 {
-    if (isset($_GET['fechar_id'])) {
-        $id = $_GET['fechar_id'];
-        $_POST['chamado']["'status'"] = 1;//status fechado
+    if ($id) {
+        $_POST['chamado']["'status'"] = 1;//status aberto
 
         if (isset($_POST['chamado'])) {
 
             $chamado = $_POST['chamado'];
             chamado_fechar('chamado', $id, $chamado);
-            header('location: historico.php');
+            header('location: index.php');
         }
     }
 }
