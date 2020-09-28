@@ -35,7 +35,7 @@ edit_chamado();
     </section>
 
 <?php if (chamado_acesso()): ?>
-    <?php if ($chamado['id'] == 1): ?>
+    <?php if ($chamado['status']): ?>
 
         <section class="content">
             <div class="row">

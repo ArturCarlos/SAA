@@ -30,6 +30,7 @@ index_historico_user();
                 <a class="btn btn-primary" href="./add.php"><i class="fa fa-plus">
                     </i> &nbsp Criar Chamado </a>
             </div>
+
         </div>
     </section>
 
@@ -37,11 +38,11 @@ index_historico_user();
 
         <?php include(ALERT_MSG); ?>
 
-        <h2 class="page-header">Chamados abertos</h2>
+        <h2 class=" page-header">Histórico de Chamados</h2>
 
         <div class='row'>
             <div class="col-md-6">
-                <div class="box box-success">
+                <div class="box box-default">
                     <div class="box-header with-border">
                         <i class="fa fa-th-large"></i>
                         <h3 class="box-title">Chamados do setor</h3>
@@ -99,7 +100,7 @@ index_historico_user();
 
 
             <div class="col-md-6">
-                <div class="box box-success">
+                <div class="box box-default">
                     <div class="box-header with-border">
                         <i class="fa fa-user-circle"></i>
 
