@@ -38,7 +38,9 @@ index_historico_user();
 
         <?php include(ALERT_MSG); ?>
 
-        <h2 class=" page-header">Histórico de Chamados</h2>
+        <h2 class="page-header">Histórico de Chamados
+            <a class="btn-xs bg-blue-active" href="filtro.php"><i class="fa fa-filter">
+                </i> &nbsp Filtrar </a></h2>
 
         <div class='row'>
             <div class="col-md-6">
