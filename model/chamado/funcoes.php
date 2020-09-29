@@ -68,11 +68,16 @@ function index_acesso_chamado()
     $acesso_chamado = find_all_user_setor('acesso_chamado');
 }
 
-function index_tag_chamado()
+function index_tag_chamado($id = null)
 {
     global $tags_chamado;
-    $id = $_GET['id'];
-    $tags_chamado = find_all_chamado('tag_chamado', $id, 'tag_chamado');
+    if ($id) {
+        $tags_chamado = find_all_chamado('tag_chamado', $id, 'tag_chamado');
+    } else {
+
+        $id = $_GET['id'];
+        $tags_chamado = find_all_chamado('tag_chamado', $id, 'tag_chamado');
+    }
 }
 
 function add_tag()
@@ -247,7 +252,7 @@ function viewchamado($id = null)
 /*retorna o id do chamado de uma resposta*/
 function id_chamado($id)
 {
-    $chamado = find_chamado('resp_chamado', $id,'id');
+    $chamado = find_chamado('resp_chamado', $id, 'id');
     return $chamado[0]['chamado_id'];
 
 }
@@ -361,4 +366,59 @@ function edit_resp_chamado()
     } else {
         header('location: index.php');
     }
+}
+
+function filtro()
+{
+    global $chamados;
+
+    //Verifica se foi passa algun parametro de pesquisa
+    $result = 0;
+
+    $like = "%";
+    $filtro = array();
+
+    if (isset($_GET['tag'])) {
+        if (($_GET['tag'])) {
+            $tag = $_GET['tag'];
+
+            $filtro[] = "id IN (SELECT chamado_id FROM tag_chamado WHERE tag_id = '{$tag}')";
+
+            $result = 1;
+        }
+    }
+
+    if (isset($_GET['titulo'])) {
+        if (($_GET['titulo'])) {
+            $titulo = $like . "" . $_GET['titulo'] . "" . $like;
+            $filtro[] = "titulo LIKE '{$titulo}'";
+
+            $result = 1;
+        }
+    }
+
+    if (isset($_GET['setor_origem'])) {
+        if (($_GET['setor_origem'])) {
+            $setor = $_GET['setor_origem'];
+            $filtro[] = "setor_origem='{$setor}'";
+
+            $result = 1;
+        }
+    }
+    if (isset($_GET['setor_destino'])) {
+        if (($_GET['setor_destino'])) {
+            $setor = $_GET['setor_destino'];
+            $filtro[] = "setor_destino='{$setor}'";
+
+            $result = 1;
+        }
+    }
+
+
+    if ((sizeof($filtro)) > 0) {
+        $chamados = chamado_filtro('chamado', $filtro);
+    }
+
+    return $result;
+
 }

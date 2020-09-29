@@ -1301,3 +1301,32 @@ function remove_chamado($table = null, $id = null)
     }
     close_database($database);
 }
+
+function chamado_filtro($table, $filtro)
+{
+    return find_chamado_filtro($table, $filtro);
+}
+
+function find_chamado_filtro($table = null, $filtro = null)
+{
+    $database = open_database();
+    $found = null;
+
+    try {
+        if ($filtro != null) {
+
+            $sql = "SELECT * FROM " . $table . " WHERE " . implode(' and ', $filtro);
+
+            $result = $database->query($sql);
+
+            if ($result->num_rows > 0) {
+                $found = $result->fetch_all(MYSQLI_ASSOC);
+            }
+        }
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+}
