@@ -197,6 +197,31 @@ CREATE TABLE `tag_chamado`
 );
 
 
+CREATE TABLE `item_notificacao`
+(
+    id          int AUTO_INCREMENT NOT NULL,
+    resposta_id int,
+    chamado_id  int                NOT NULL,
+    descricao   varchar(250)       NOT NULL,
+
+    FOREIGN KEY (resposta_id) REFERENCES resp_chamado (id) ON DELETE CASCADE,
+    FOREIGN KEY (chamado_id) REFERENCES chamado (id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE `destino_notificacao`
+(
+    id                  int AUTO_INCREMENT NOT NULL,
+    item_notificacao_id int                NOT NULL,
+    user_id             int                NOT NULL,
+    status              int                NOT NULL,
+
+    FOREIGN KEY (item_notificacao_id) REFERENCES item_notificacao (id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES usuario (id) ON DELETE CASCADE,
+    PRIMARY KEY (id)
+);
+
+
 
 insert into usuario(nome, matricula, email, senha, permissao, categoria)
     VALUE ('admin', '1', 'admin@admin', '14d777febb71c53630e9e843bedbd4d8', '1', 'SERVIDOR'),

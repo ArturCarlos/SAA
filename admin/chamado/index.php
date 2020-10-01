@@ -123,7 +123,7 @@ index_chamado_user();
 
                                     <?php foreach ($chamados as $chamado) : ?>
                                         <tr>
-                                            <td><?php echo ($cham['id']); ?></td>
+                                            <td><?php echo ($chamado['id']); ?></td>
 
                                             <td><?php echo substr($chamado['titulo'], 0, 30);
                                                 if (strlen($chamado['titulo']) > 20):?>

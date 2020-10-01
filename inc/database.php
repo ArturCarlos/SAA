@@ -1001,7 +1001,7 @@ function add($table = null, $data = null)
                 $diretorio = '../../anexo/'; //define o diretorio para onde enviaremos o arquivo
                 move_uploaded_file($_FILES['anexo']['tmp_name'], $diretorio . $table . '/' . $novo_nome); //efetua o upload
             }
-
+            adicionar_notificacao($table, id_table($table));
             $_SESSION['message'] = 'Registro cadastrado com sucesso.';
             $_SESSION['type'] = 'success';
         } else {
@@ -1329,4 +1329,124 @@ function find_chamado_filtro($table = null, $filtro = null)
     }
     close_database($database);
     return $found;
+}
+
+
+//Adiciona sem anexo
+function adicionar_notificacao($table, $id)
+{
+    $database = open_database();
+
+    if ($table = 'chamado') {
+        $id_chamado = $id['id'];
+        $descricao = "Novo chamado";
+        $sql = "INSERT INTO item_notificacao (chamado_id, descricao) VALUE " . "({$id_chamado},'$descricao');";
+    }
+    if ($table = 'resp_chamado') {
+        $resposta_id = $id['id'];
+        $chamado = find_chamado('resp_chamado', $resposta_id, 'id');
+        $id_chamado = $chamado[0]['chamado_id'];
+        $descricao = "Resposta do chamado";
+        $sql = "INSERT INTO item_notificacao (chamado_id, resposta_id, descricao) VALUE " . "({$id_chamado},$resposta_id,'$descricao');";
+    }
+
+
+    try {
+        if ($sql) {
+            $database->query($sql);
+            destino_notificacao();
+        }
+
+    } catch (Exception $e) {
+        $_SESSION['message'] = 'Nao foi adicionar a notificação.';
+        $_SESSION['type'] = 'danger';
+
+    }
+    close_database($database);
+}
+
+//Adiciona sem anexo
+function destino_notificacao()
+{
+    $database = open_database();
+
+    $item_notificacao_id = id_table('item_notificacao');
+    $item_notificacao_id = $item_notificacao_id['id'];
+
+    $item_notificacao = find_chamado('item_notificacao', $item_notificacao_id);
+
+    $chamado_id = $item_notificacao[0]['chamado_id'];
+    $chamado = find_chamado('chamado', $chamado_id);
+
+    $setor_destino = find_chamado_setor('user_setor', $chamado[0]['setor_destino']);
+    $setor_origem = find_chamado_setor('user_setor', $chamado[0]['setor_origem']);
+
+    $user_setor = array_merge($setor_destino, $setor_origem);
+
+    $id_user = [];
+
+    foreach ($user_setor as $user) {
+        array_push($id_user, $user['user_id']);
+    }
+    $id_user = array_unique($id_user);
+    try {
+
+        foreach ($id_user as $id) {
+            if ($id != $_SESSION['id']) {
+                $sql = "INSERT INTO destino_notificacao (item_notificacao_id, user_id, status) VALUE " . "($item_notificacao_id,$id,1);";
+                $database->query($sql);
+
+            }
+        }
+
+
+    } catch (Exception $e) {
+        $_SESSION['message'] = 'Nao foi adicionar a notificação.';
+        $_SESSION['type'] = 'danger';
+
+    }
+    close_database($database);
+}
+
+/*Retorna usuarios de um setor*/
+function find_chamado_setor($table, $id)
+{
+    $database = open_database();
+    $found = null;
+    try {
+        $sql = "SELECT user_id FROM " . $table . " WHERE setor_id = " . $id;
+
+        $result = $database->query($sql);
+        if ($result->num_rows > 0) {
+            $found = $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
+}
+
+function count_notificacao(){
+    $database = open_database();
+    $id = $_SESSION['id'];
+    try {
+        //SELECT COUNT(column_name)
+        //FROM table_name
+        //WHERE condition;
+        $sql = "SELECT COUNT(item_notificacao_id) FROM destino_notificacao WHERE user_id = " . $id." AND status = 1";
+        $result = $database->query($sql);
+        if ($result->num_rows > 0) {
+            $found = $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return ($found[0]['COUNT(item_notificacao_id)']);
+
 }
