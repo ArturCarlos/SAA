@@ -55,6 +55,7 @@ index_historico_user();
                             <table id="example1" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
+                                    <th title="Número do Chamado">Número</th>
                                     <th title="Ordenar Tabela">Título</th>
 
                                     <th>Data</th>
@@ -66,6 +67,8 @@ index_historico_user();
 
                                     <?php foreach ($chamado_setor as $cham) : ?>
                                         <tr>
+                                            <td><?php echo ($cham['id']); ?></td>
+
                                             <td><?php echo substr($cham['titulo'], 0, 30);
                                                 if (strlen($cham['titulo']) > 20):?>
                                                     <a href="view.php?id=<?php echo $cham['id']; ?>">[...]</a>
@@ -114,6 +117,9 @@ index_historico_user();
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
+
+                                    <th title="Número do Chamado">Número</th>
+
                                     <th title="Ordenar Tabela">Título</th>
                                     <th>Data</th>
 
@@ -125,6 +131,8 @@ index_historico_user();
 
                                     <?php foreach ($chamados as $chamado) : ?>
                                         <tr>
+                                            <td><?php echo ($chamado['id']); ?></td>
+
                                             <td><?php echo substr($chamado['titulo'], 0, 30);
                                                 if (strlen($chamado['titulo']) > 20):?>
                                                     <a href="view.php?id=<?php echo $chamado['id']; ?>">[...]</a>
