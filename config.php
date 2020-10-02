@@ -102,5 +102,9 @@
     /** caminho para as funções do chamado **/
     if( !defined('CHAMADO') )
         define('CHAMADO' , ABSPATH . 'model/chamado/funcoes.php');
+
+    /** caminho para as notificacoes do chamado **/
+    if( !defined('NOTIFICACAO') )
+        define('NOTIFICACAO' , ABSPATH . 'model/chamado/list_notificacao.php');
     
 

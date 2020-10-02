@@ -1337,12 +1337,12 @@ function adicionar_notificacao($table, $id)
 {
     $database = open_database();
 
-    if ($table = 'chamado') {
+    if ($table == 'chamado') {
         $id_chamado = $id['id'];
         $descricao = "Novo chamado";
         $sql = "INSERT INTO item_notificacao (chamado_id, descricao) VALUE " . "({$id_chamado},'$descricao');";
     }
-    if ($table = 'resp_chamado') {
+    if ($table == 'resp_chamado') {
         $resposta_id = $id['id'];
         $chamado = find_chamado('resp_chamado', $resposta_id, 'id');
         $id_chamado = $chamado[0]['chamado_id'];
@@ -1353,6 +1353,7 @@ function adicionar_notificacao($table, $id)
 
     try {
         if ($sql) {
+            print_r($table);
             $database->query($sql);
             destino_notificacao();
         }
@@ -1429,14 +1430,15 @@ function find_chamado_setor($table, $id)
     return $found;
 }
 
-function count_notificacao(){
+function count_notificacao()
+{
     $database = open_database();
     $id = $_SESSION['id'];
     try {
         //SELECT COUNT(column_name)
         //FROM table_name
         //WHERE condition;
-        $sql = "SELECT COUNT(item_notificacao_id) FROM destino_notificacao WHERE user_id = " . $id." AND status = 1";
+        $sql = "SELECT COUNT(item_notificacao_id) FROM destino_notificacao WHERE user_id = " . $id . " AND status = 1";
         $result = $database->query($sql);
         if ($result->num_rows > 0) {
             $found = $result->fetch_all(MYSQLI_ASSOC);
@@ -1448,5 +1450,30 @@ function count_notificacao(){
     }
     close_database($database);
     return ($found[0]['COUNT(item_notificacao_id)']);
+
+}
+
+function lista_notificacao()
+{
+    $database = open_database();
+    $id = $_SESSION['id'];
+    $found = null;
+    try {
+        //SELECT chamado_id FROM item_notificacao WHERE id IN
+        // ( SELECT item_notificacao_id FROM destino_notificacao WHERE user_id = 1 AND status = 1)
+        $sql = "SELECT chamado_id FROM item_notificacao WHERE id IN" .
+            "(SELECT item_notificacao_id FROM destino_notificacao WHERE user_id = " . $id .
+            " AND status = 1)";
+        $result = $database->query($sql);
+        if ($result->num_rows > 0) {
+            $found = $result->fetch_all(MYSQLI_ASSOC);
+        }
+
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+    return $found;
 
 }

@@ -2,6 +2,9 @@
 require_once('../../config.php');
 require_once(DBAPI);
 
-$num = ['notificacao' => count_notificacao()];
-echo json_encode($num);
+if(count_notificacao()){
+    $num = ['notificacao' => count_notificacao()];
+    echo json_encode($num);
+
+}
 

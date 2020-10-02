@@ -72,11 +72,22 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <ul class="menu">
-                                    <li>
-                                        <a href="<?php echo BASEURL; ?>admin/chamado/index.php">
-                                            <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                    </li>
+                                    <?php include_once NOTIFICACAO; ?>
+                                    <?php if ($notificacao): ?>
+                                        <?php foreach ($notificacao as $noti): ?>
+                                            <li>
+                                                <a href="<?php echo BASEURL; ?>admin/chamado/view.php?id=<?php echo($noti['chamado_id']);?>">
+                                                    <i class="fa fa-users text-aqua"></i><?php echo($noti['chamado_id']); ?>
+                                                </a>
+                                            </li>
+                                        <?php endforeach; ?>
+                                        <?php else: ?>
+                                        <li>
+                                            <a href="#">
+                                                Sem notificações
+                                            </a>
+                                        </li>
+                                    <?php endif; ?>
 
                                 </ul>
                             </li>
@@ -95,7 +106,6 @@
                                                                onload="startCountdown();"> </span></b></h6>
                         </div>
                     </li>
-
 
 
                     <li class="dropdown user user-menu">
@@ -195,7 +205,8 @@
                                 Gerenciar</a></li>
                         <li><a href="<?php echo BASEURL; ?>admin/chamado/index.php"><i class="fa fa-circle-o"></i>
                                 Chamados em Aberto</a></li>
-                        <li><a href="<?php echo BASEURL; ?>admin/chamado/historico.php"><i class="fa fa-circle-o"></i> Histórico Chamado</a></li>
+                        <li><a href="<?php echo BASEURL; ?>admin/chamado/historico.php"><i class="fa fa-circle-o"></i>
+                                Histórico Chamado</a></li>
                     </ul>
 
                 </li>
