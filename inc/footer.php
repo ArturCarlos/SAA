@@ -51,6 +51,24 @@
 <script src="<?php echo BASEURL; ?>dist/js/tabelas.js"></script>
 
 <script src="<?php echo BASEURL; ?>dist/js/patrimonios.js"></script>
+<script>
+    // Função responsável por atualizar as notificacões
+    function atualizar()
+    {
+        // Fazendo requisição AJAX
+        $.post('<?php echo BASEURL; ?>model/chamado/notificacao.php', function (frase) {
+            // Exibindo frase
+            $('#notificacao').html('<i>' + frase.notificacao + '</i>');
+        }, 'JSON');
+    }
+    // Definindo intervalo que a função será chamada
+    setInterval("atualizar()", 10000);
+    // Quando carregar a página
+    $(function() {
+        // Faz a primeira atualização
+        atualizar();
+    });
+</script>
 
 <!-- Tempo de sessão -->
 <?php if(isset($_SESSION['id'])): ?>
