@@ -70,6 +70,30 @@
     });
 </script>
 
+<script>
+    // Função responsável por listar as notificacões
+    function listar()
+    {
+        var valor = "";
+        $.post('<?php echo BASEURL; ?>model/chamado/list_notificacao.php', function (frase) {
+            // Exibindo frase
+
+            for (var [key, value] of Object.entries(frase)) {
+                valor += '<li>' +
+
+                    '<a href="<?php echo BASEURL; ?>admin/chamado/view.php?id='+value.chamado_id+'">'+
+                    value.descricao+' #' +value.chamado_id+
+                    '</a>'
+
+                    + '</li>'
+            }
+
+            $('#list_notificacao').html(valor);
+        }, 'JSON');
+    }
+
+</script>
+
 <!-- Tempo de sessão -->
 <?php if(isset($_SESSION['id'])): ?>
     <script>

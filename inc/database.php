@@ -1461,9 +1461,9 @@ function lista_notificacao()
     try {
         //SELECT chamado_id FROM item_notificacao WHERE id IN
         // ( SELECT item_notificacao_id FROM destino_notificacao WHERE user_id = 1 AND status = 1)
-        $sql = "SELECT chamado_id FROM item_notificacao WHERE id IN" .
+        $sql = "SELECT * FROM item_notificacao WHERE id IN" .
             "(SELECT item_notificacao_id FROM destino_notificacao WHERE user_id = " . $id .
-            " AND status = 1)";
+            " AND status = 1) ORDER BY id desc";
         $result = $database->query($sql);
         if ($result->num_rows > 0) {
             $found = $result->fetch_all(MYSQLI_ASSOC);

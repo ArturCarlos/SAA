@@ -1,4 +1,6 @@
 <?php
+require_once('../../config.php');
+
 require_once(DBAPI);
 
 $num = list_notificacao();
@@ -10,8 +12,8 @@ if($num){
 
 function list_notificacao(){
     global $notificacao;
-
     $notificacao = lista_notificacao();
-    return $notificacao;
+
+    echo(json_encode($notificacao));
 
 }

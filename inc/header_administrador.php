@@ -65,33 +65,17 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown notifications-menu" style="margin-right: 10px;">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <a href="#" onclick="listar()" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <i class="fa fa-bell-o"></i>
                             <span id="notificacao" class="label label-danger"></span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <ul class="menu">
-                                    <?php include_once NOTIFICACAO; ?>
-                                    <?php if ($notificacao): ?>
-                                        <?php foreach ($notificacao as $noti): ?>
-                                            <li>
-                                                <a href="<?php echo BASEURL; ?>admin/chamado/view.php?id=<?php echo($noti['chamado_id']);?>">
-                                                    <i class="fa fa-users text-aqua"></i><?php echo($noti['chamado_id']); ?>
-                                                </a>
-                                            </li>
-                                        <?php endforeach; ?>
-                                        <?php else: ?>
-                                        <li>
-                                            <a href="#">
-                                                Sem notificações
-                                            </a>
-                                        </li>
-                                    <?php endif; ?>
+                                <ul id="list_notificacao" class="menu">
 
                                 </ul>
                             </li>
-                            <li class="footer"><a href="#">View all</a></li>
+                            <li class="footer"><a href="#">Marca todas como lida</a></li>
                         </ul>
                     </li>
 
