@@ -80,11 +80,14 @@
 
             for (var [key, value] of Object.entries(frase)) {
                 valor += '<li>' +
+                   '<a class="col-md-2 text-center" title="Marca como lida"' +
+                    ' href="<?php echo BASEURL; ?>admin/chamado/view.php?id='+value.chamado_id+'">'+
+                    '<i class="fa fa-circle text-green"></i>'+
+                    '</a>'+
 
                     '<a href="<?php echo BASEURL; ?>admin/chamado/view.php?id='+value.chamado_id+'">'+
                     value.descricao+' #' +value.chamado_id+
                     '</a>'
-
                     + '</li>'
             }
 

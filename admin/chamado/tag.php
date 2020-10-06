@@ -46,7 +46,7 @@ indextag();
                 <div class="box-body">
                     <div class="box-body">
 
-                        <table id="tab_setor" class="table table-bordered table-hover">
+                        <table id="example1" class="table table-bordered table-hover">
                             <thead>
                             <tr>
                                 <th title="Ordenar Tabela">Nome</th>
