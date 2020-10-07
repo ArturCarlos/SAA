@@ -1231,6 +1231,33 @@ function remove_tag_chamado($table = null, $id = null)
 }
 
 
+function remove_notificacao($table = null, $id = null)
+{
+    $database = open_database();
+
+    try {
+        if ($id) {
+            $sql = "DELETE FROM " . $table . " WHERE id = " . $id;
+            $result = $database->query($sql);
+            if ($result = $database->query($sql)) {
+
+                $_SESSION['message'] = "Notificação Lida";
+                $_SESSION['type'] = 'success';
+            } else {
+
+                $_SESSION['message'] = "Viiixe! Não foi possivel realizar a operação.";
+                $_SESSION['type'] = 'danger';
+            }
+        }
+
+    } catch (Exception $e) {
+        $_SESSION['message'] = $e->GetMessage();
+        $_SESSION['type'] = 'danger';
+    }
+    close_database($database);
+}
+
+
 function find_chamado_acesso($table, $id, $type, $status)
 {
     $database = open_database();
@@ -1459,11 +1486,15 @@ function lista_notificacao()
     $id = $_SESSION['id'];
     $found = null;
     try {
-        //SELECT chamado_id FROM item_notificacao WHERE id IN
-        // ( SELECT item_notificacao_id FROM destino_notificacao WHERE user_id = 1 AND status = 1)
-        $sql = "SELECT * FROM item_notificacao WHERE id IN" .
-            "(SELECT item_notificacao_id FROM destino_notificacao WHERE user_id = " . $id .
-            " AND status = 1) ORDER BY id desc";
+        //SELECT i.id, i.resposta_id, i.chamado_id, i.descricao , d.id as id_destino
+        // FROM item_notificacao as i
+        //JOIN destino_notificacao AS d ON i.id = d.item_notificacao_id AND d.user_id = 1
+
+
+        $sql = "SELECT i.id, i.resposta_id, i.chamado_id, i.descricao , d.id as id_destino 
+                FROM item_notificacao as i 
+                JOIN destino_notificacao AS d ON i.id = d.item_notificacao_id AND d.user_id =$id
+                order by id_destino DESC";
         $result = $database->query($sql);
         if ($result->num_rows > 0) {
             $found = $result->fetch_all(MYSQLI_ASSOC);

@@ -16,6 +16,12 @@ $tags_chamado = null;
 
 $resp_chamado = null;
 
+if(isset($_GET['msgLida_id'])){
+    $id_not = $_GET['msgLida_id'];
+    $id_chamado = $_GET['id'];
+    delete_notificacao($id_not,$id_chamado);
+}
+
 function add_acesso_chamado()
 {
     if ((!empty($_POST['acesso_chamado']))) {
@@ -106,6 +112,16 @@ function deletetag($id = null)
         remove('tag', $id);
         header('location: tag.php');
     }
+}
+
+function delete_notificacao($id_not = null, $id_cham = null)
+{
+    if ($id_not) {
+        remove_notificacao('destino_notificacao', $id_not);
+
+        header('location:view.php?id='.$id_cham);
+    }
+
 }
 
 /** *  Cadastro de chamados     */
