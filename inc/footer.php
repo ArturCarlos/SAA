@@ -112,6 +112,12 @@
                     <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="modalLabel">Marcar como lida?</h4>
             </div>
+            <div class="modal-body">
+                Está notificação será apagada! Você poderá visualizar este chamado na
+                seção de chamado!
+
+            </div>
+
             <div class="modal-footer">
                 <a id="confirm" class="btn btn-primary" href="#">Sim</a>
                 <a id="cancel" class="btn btn-default" data-dismiss="modal">N&atilde;o</a>

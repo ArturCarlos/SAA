@@ -65,7 +65,8 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown notifications-menu" style="margin-right: 10px;">
-                        <a href="#" onclick="listar()" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                        <a href="#" onclick="listar()" class="dropdown-toggle" data-toggle="dropdown"
+                           aria-expanded="false">
                             <i class="fa fa-bell-o"></i>
                             <span id="notificacao" class="label label-danger"></span>
                         </a>
@@ -75,7 +76,18 @@
 
                                 </ul>
                             </li>
-                            <li class="footer"><a href="#">Marca todas como lida</a></li>
+                            <li class="footer">
+                                <?php if (count_notificacao()): ?>
+                                    <a href="#" title="Marca como lida"
+                                       data-toggle="modal" data-target="#msgLida-modal"
+                                       data-customer="&all_msg=<?php echo $_SESSION['id']; ?>">
+                                        Marca todas como lida
+                                    </a>
+                                <?php else: ?>
+                                <a href="#">Sem novas notificações</a>
+                                <?php endif; ?>
+
+                            </li>
                         </ul>
                     </li>
 

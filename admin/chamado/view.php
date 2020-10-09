@@ -13,6 +13,7 @@ verificaLoginAdmin();
 viewchamado($_GET['id']);
 index_tag_chamado();
 index_resp_chamado();
+notificacao_lida();
 ?>
 
 <?php include(HEADER_TEMPLATE); ?>

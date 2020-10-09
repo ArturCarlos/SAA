@@ -7,6 +7,7 @@ verificaLoginAdmin();
 <?php require_once CHAMADO;
 index_chamado_setor();
 index_chamado_user();
+notificacao_lida();
 ?>
 <?php include(HEADER_TEMPLATE); ?>
 

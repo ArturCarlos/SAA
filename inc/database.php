@@ -1231,13 +1231,13 @@ function remove_tag_chamado($table = null, $id = null)
 }
 
 
-function remove_notificacao($table = null, $id = null)
+function remove_notificacao($table = null, $id = null, $tipo = null)
 {
     $database = open_database();
 
     try {
         if ($id) {
-            $sql = "DELETE FROM " . $table . " WHERE id = " . $id;
+            $sql = "DELETE FROM " . $table . " WHERE " . $tipo . " = " . $id;
             $result = $database->query($sql);
             if ($result = $database->query($sql)) {
 

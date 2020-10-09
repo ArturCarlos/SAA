@@ -16,10 +16,22 @@ $tags_chamado = null;
 
 $resp_chamado = null;
 
-if(isset($_GET['msgLida_id'])){
-    $id_not = $_GET['msgLida_id'];
-    $id_chamado = $_GET['id'];
-    delete_notificacao($id_not,$id_chamado);
+function notificacao_lida()
+{
+
+    if (isset($_GET['msgLida_id']) || isset($_GET['all_msg'])) {
+
+        if (isset($_GET['all_msg'])) {
+            $id_user = $_SESSION['id'];
+            delete_all_notificacao($id_user);
+
+        } elseif (isset($_GET['msgLida_id'])) {
+
+            $id_not = $_GET['msgLida_id'];
+            $id_chamado = $_GET['id'];
+            delete_notificacao($id_not, $id_chamado);
+        }
+    }
 }
 
 function add_acesso_chamado()
@@ -117,9 +129,19 @@ function deletetag($id = null)
 function delete_notificacao($id_not = null, $id_cham = null)
 {
     if ($id_not) {
-        remove_notificacao('destino_notificacao', $id_not);
+        remove_notificacao('destino_notificacao', $id_not, 'id');
 
-        header('location:view.php?id='.$id_cham);
+        header('location:view.php?id=' . $id_cham);
+    }
+
+}
+
+function delete_all_notificacao($id = null)
+{
+    if ($id) {
+        remove_notificacao('destino_notificacao', $id, 'user_id');
+
+        header('location:index.php');
     }
 
 }
