@@ -131,6 +131,7 @@ require_once SETOR;
                             <table id="example2" class="table table-bordered table-hover">
                                 <thead>
                                 <tr>
+                                    <th title="Ordenar Tabela">Número</th>
                                     <th title="Ordenar Tabela">Título</th>
                                     <th>Data</th>
                                     <th>Tag</th>
@@ -143,6 +144,8 @@ require_once SETOR;
 
                                     <?php foreach ($chamados as $chamado) : ?>
                                         <tr>
+                                            <td><?php echo ($chamado['id']); ?></td>
+
                                             <td><?php echo substr($chamado['titulo'], 0, 30);
                                                 if (strlen($chamado['titulo']) > 20):?>
                                                     <a href="view.php?id=<?php echo $chamado['id']; ?>">[...]</a>

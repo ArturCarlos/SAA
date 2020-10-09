@@ -70,7 +70,11 @@ notificacao_lida();
                             <span class="time"><i class="fa fa-clock-o"></i>
                                 <?php echo formata_data_hora($chamado['date'], 'hora') ?>
                             </span>
-                            <h3 class="timeline-header"><a>Título</a> <?php echo($chamado['titulo']) ?></h3>
+                            <h3 class="timeline-header">
+                                <a>Título:</a> <?php echo($chamado['titulo']) ?> -
+                                <strong title="Número do chamado">N°: <?php echo($chamado['id']) ?></strong>
+
+                            </h3>
                             <span class="time">
                                 <em class="timeline-footer">
                                     De: <?php echo(nome_setor($chamado['setor_origem'])) ?>
