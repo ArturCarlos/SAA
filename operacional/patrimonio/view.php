@@ -44,10 +44,10 @@ indexSetor();
                     <!--Verifica se a imagem está cadastrada-->
                     <?php if ($patrimonio['img'] != null) { ?>
                         <img src="<?php echo BASEURL; ?>imagens/patrimonio/<?php echo $patrimonio['img']; ?>"
-                             class="img-rounded center_img view_img" alt="Cinque Terre"/>
+                             class="img-rounded center_img img-responsive" alt="Cinque Terre"/>
                     <?php } else { ?>
                         <img src="<?php echo BASEURL; ?>dist/img/semFoto.png?>" width="500" height="400"
-                             class="img-rounded center_img" alt="Cinque Terre"/>
+                             class="img-rounded center_img img-responsive" alt="Cinque Terre"/>
 
                     <?php } ?>
 
