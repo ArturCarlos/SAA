@@ -10,6 +10,8 @@ $acesso_chamado = null;
 
 $chamado_setor = null;
 
+$chamado_setor_origem = null;
+
 $tags = null;
 
 $tags_chamado = null;
@@ -234,6 +236,23 @@ function index_chamado_setor()
 
 }
 
+function index_chamado_setor_origem()
+{
+
+    global $chamado_setor_origem;
+    $chamado_setor_origem = [];
+    $setor = find_setor_operacional('user_setor');
+    if ($setor) {
+        foreach ($setor as $chamado) {
+            $result = find_all_chamado('chamado', $chamado['setor_id'], 'setor_origem', 1);
+            if ($result) {
+                $chamado_setor_origem = array_merge($chamado_setor_origem, $result);
+            }
+        }
+    }
+
+}
+
 /** *  Listagem de chamados fechados do setor*/
 function index_historico_setor()
 {
@@ -246,6 +265,23 @@ function index_historico_setor()
             $result = find_all_chamado('chamado', $chamado['setor_id'], 'setor', 0);
             if ($result) {
                 $chamado_setor = array_merge($chamado_setor, $result);
+            }
+        }
+    }
+
+}
+/** *  Listagem de chamados fechados do setor*/
+function index_historico_setor_origem()
+{
+
+    global $chamado_setor_origem;
+    $chamado_setor_origem = [];
+    $setor = find_setor_operacional('user_setor');
+    if ($setor) {
+        foreach ($setor as $chamado) {
+            $result = find_all_chamado('chamado', $chamado['setor_id'], 'setor_origem', 0);
+            if ($result) {
+                $chamado_setor_origem = array_merge($chamado_setor_origem, $result);
             }
         }
     }

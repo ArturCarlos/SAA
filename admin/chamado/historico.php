@@ -7,6 +7,7 @@ verificaLoginAdmin();
 <?php require_once CHAMADO;
 index_historico_setor();
 index_historico_user();
+index_historico_setor_origem();
 ?>
 <?php include(HEADER_TEMPLATE); ?>
 
@@ -43,11 +44,11 @@ index_historico_user();
                 </i> &nbsp Filtrar </a></h2>
 
         <div class='row'>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="box box-default">
                     <div class="box-header with-border">
                         <i class="fa fa-th-large"></i>
-                        <h3 class="box-title">Chamados do setor</h3>
+                        <h3 class="box-title">Chamados enviados para o setor</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body ">
@@ -167,6 +168,65 @@ index_historico_user();
                     <!-- /.box-body -->
                 </div>
                 <!-- /.box -->
+            </div>
+
+            <div class="col-md-6">
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <i class="fa fa-th-large"></i>
+                        <h3 class="box-title">Chamados criado pelo setor</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body ">
+                        <div class="box-body">
+                            <table id="example3" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th title="Número do Chamado">Número</th>
+                                    <th title="Ordenar Tabela">Título</th>
+                                    <th>Data</th>
+                                    <th>Ações</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php if ($chamado_setor_origem) : ?>
+
+                                    <?php foreach ($chamado_setor_origem as $cham_origem) : ?>
+                                        <tr>
+                                            <td><?php echo ($cham_origem['id']); ?></td>
+
+                                            <td><?php echo substr($cham_origem['titulo'], 0, 30);
+                                                if (strlen($cham_origem['titulo']) > 20):?>
+                                                    <a href="view.php?id=<?php echo $cham_origem['id']; ?>">[...]</a>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td><?php echo formata_data($cham_origem['date']); ?></td>
+
+                                            <td class="actions text-center">
+                                                <a href="view.php?id=<?php echo $cham_origem['id']; ?>"
+                                                   class="btn btn-sm btn-success" data-toggle="tooltip"
+                                                   data-placement="left" title="Visualizar"><i class="fa fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else : ?>
+                                    <tr>
+                                        <td colspan="6">Nenhum registro encontrado.</td>
+                                    </tr>
+                                <?php endif; ?>
+                                </tbody>
+                                <tfoot>
+                                <tr style="background: #F4F4F4">
+
+                                </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+
+                    </div>
+                    <!-- nav-tabs-custom -->
+                </div>
             </div>
         </div>
     </section>

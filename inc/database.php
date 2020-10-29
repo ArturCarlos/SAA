@@ -1024,6 +1024,10 @@ function find_all_chamado($table, $id_user, $type, $status = null)
             //Pesquisa o atribuido ao setor
             $pesquisa = 'setor_destino';
             return find_chamado($table, $id_user, $pesquisa, $status);
+        }elseif($type == 'setor_origem') {
+            //Pesquisa o atribuido ao setor
+            $pesquisa = 'setor_origem';
+            return find_chamado($table, $id_user, $pesquisa, $status);
 
         } elseif ($type == 'user') {
             $pesquisa = 'user_id';
