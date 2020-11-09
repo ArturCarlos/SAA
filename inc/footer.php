@@ -52,6 +52,16 @@
 
 <script src="<?php echo BASEURL; ?>dist/js/tabelas.js"></script>
 
+<?php
+//Pega a url operacioal ou admin
+
+$url = $_SERVER['REQUEST_URI'];
+$url = (explode('/', $url));
+$url =  ($url[2]);
+print_r($url);
+//var_dump(parse_url($url));
+
+?>
 
 <!--Inicio das notificacoes-->
 
@@ -90,7 +100,7 @@
                     '<i class="fa fa-circle text-green"></i>' +
                     '</a>' +
 
-                    '<a href="<?php echo BASEURL; ?>admin/chamado/view.php?id=' + value.chamado_id + '">' +
+                    '<a href="<?php echo BASEURL.$url; ?>/chamado/view.php?id=' + value.chamado_id + '">' +
                     value.descricao + ' #' + value.chamado_id +
                     '</a>'
                     + '</li>'
@@ -134,10 +144,10 @@
         var button = $(event.relatedTarget);
         var id = button.data('customer');
         var modal = $(this);
-        var url = "<?php echo BASEURL; ?>"+'admin/chamado/view.php';
+        var url = "<?php echo BASEURL.$url; ?>" + '/chamado/view.php';
 
         //modal.find('.modal-title').text('O sistema precisa de sua confirmação');
-        modal.find('#confirm').attr('href',  url + '?msgLida_id=' + id);
+        modal.find('#confirm').attr('href', url + '?msgLida_id=' + id);
     })
 </script>
 
