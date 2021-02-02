@@ -1,20 +1,20 @@
 <?php require_once '../../config.php'; ?>
 <?php require_once DBAPI; ?>
 <?php
-    require_once LOGIN2;
-    verificaLoginAdmin();
+require_once LOGIN2;
+verificaLoginAdmin();
 ?>
 <?php
-    require_once ACHADOS_E_PERDIDOS;
-    indexAchados_e_Perdidos();
+require_once ACHADOS_E_PERDIDOS;
+indexAchados_e_Perdidos();
 ?>
 <?php
-    require_once SETOR;
-    indexSetor();
+require_once SETOR;
+indexSetor();
 ?>
 <?php
-    require_once LOCAL;
-    indexLocal();
+require_once LOCAL;
+indexLocal();
 ?>
 
 
@@ -58,10 +58,11 @@
             </div>
 
             <div class="box">
-                <div class="box-header text-center">
-                    <h3>Preencha os campos para Filtrar</h3>
-                    <hr/>
-                </div>
+                <div class="box-body">
+                    <div class="box-header text-center">
+                        <h3>Preencha os campos para Filtrar</h3>
+                        <hr/>
+                    </div>
 
 
                     <form method="get" class="form-horizontal">
@@ -106,93 +107,98 @@
 
                             <button type="submit" class="btn btn-primary">Pesquisar</button>
 
-                        <a title="Limpar busca" class="btn btn-warning" href="index.php"><i
-                                    class="fa fa-close"></i> Limpar</a>
-                    </div>
+                            <a title="Limpar busca" class="btn btn-warning" href="index.php"><i
+                                        class="fa fa-close"></i> Limpar</a>
+                        </div>
 
-                </form>
+                    </form>
 
 
-                <div class="box-body">
-                    <hr/>
+                    <div class="box-body">
+                        <hr/>
 
-                    <div class="col-xs-12">
-                        <?php if ($itens) : ?>
-                            <?php foreach ($itens as $item) : ?>
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="panel panel-default">
-                                        <div class="box-body">
-                                            <div class="media">
-                                                <div class="media-left">
-                                                    <a href="view.php?id=<?php echo $item['id']; ?>"
-                                                       class="ad-click-event">
-                                                        <?php if ($item['img'] != null) { ?>
-                                                            <img src="<?php echo BASEURL; ?>imagens/achados_e_perdidos/<?php echo $item['img']; ?>"
-                                                                 alt="Now UI Kit"
-                                                                 class="media-object view_img_achados_e_perdidos"/>
-                                                        <?php } else { ?>
-                                                            <img src="<?php echo BASEURL; ?>dist/img/semFoto.png?>"
-                                                                 alt="Now UI Kit"
-                                                                 class="media-object view_img_achados_e_perdidos"/>
-                                                        <?php } ?>
-                                                    </a>
-                                                </div>
-                                                <div class="media-body">
-                                                    <div class="clearfix">
-                                                        <p class="pull-right">
-                                                            <a href="view.php?id=<?php echo $item['id']; ?>"
-                                                               class="btn btn-sm btn-success" title="Visualizar item">
-                                                                <i class="fa fa-eye"></i></a>
-                                                        </p>
-                                                        <h4 style="margin-top: 0"><strong><?php echo $item['nome']; ?>
-                                                                - <?php echo status($item['status']); ?></strong></h4>
+                        <div class="col-xs-12">
+                            <?php if ($itens) : ?>
+                                <?php foreach ($itens as $item) : ?>
+                                    <div class="col-sm-12 col-md-6">
+                                        <div class="panel panel-default">
+                                            <div class="box-body">
+                                                <div class="media">
+                                                    <div class="media-left">
+                                                        <a href="view.php?id=<?php echo $item['id']; ?>"
+                                                           class="ad-click-event">
+                                                            <?php if ($item['img'] != null) { ?>
+                                                                <img src="<?php echo BASEURL; ?>imagens/achados_e_perdidos/<?php echo $item['img']; ?>"
+                                                                     alt="Now UI Kit"
+                                                                     class="media-object view_img_achados_e_perdidos"/>
+                                                            <?php } else { ?>
+                                                                <img src="<?php echo BASEURL; ?>dist/img/semFoto.png?>"
+                                                                     alt="Now UI Kit"
+                                                                     class="media-object view_img_achados_e_perdidos"/>
+                                                            <?php } ?>
+                                                        </a>
                                                     </div>
-                                                    <div class="clearfix">
-                                                        <p class="pull-right">
-                                                            <a href="edit.php?id=<?php echo $item['id']; ?>"
-                                                               class="btn btn-sm btn-warning" title="Editar item">
-                                                                <i class="fa fa-pencil"></i></a>
-                                                        </p>
-                                                        <h4 style="margin-top: 0">Encontrado no dia:
-                                                            <strong><?php echo date('d/m/Y', strtotime($item['data_achado'])); ?>
-                                                        </h4>
-                                                    </div>
-                                                    <div class="clearfix">
-                                                        <p class="pull-right">
-                                                            <a href=# class="btn btn-sm btn-danger" data-toggle="modal"
-                                                               data-target="#delete-modal"
-                                                               data-customer="<?php echo $item['id']; ?>"
-                                                               title="Excluir item"><i class="fa fa-trash"></i></a>
-                                                        </p>
-                                                        <h5 style="margin-top: 0">Encontrado na(o)
-                                                            <?php if ($setores) : ?>
-                                                                <?php foreach ($setores as $setor) : ?>
-                                                                    <?php if ($setor['id'] == $item['id_setor']) : ?>
-                                                                        <strong><?php echo $setor['nome']; ?></strong>
-                                                                        da(o)
-                                                                        <strong><?php echo $nome_setor = (nome_setor_local($setor['local_id'])); ?></strong>
-                                                                    <?php endif; ?>
-                                                                <?php endforeach; ?>
-                                                            <?php endif; ?>
-                                                        </h5>
+                                                    <div class="media-body">
+                                                        <div class="clearfix">
+                                                            <p class="pull-right">
+                                                                <a href="view.php?id=<?php echo $item['id']; ?>"
+                                                                   class="btn btn-sm btn-success"
+                                                                   title="Visualizar item">
+                                                                    <i class="fa fa-eye"></i></a>
+                                                            </p>
+                                                            <h4 style="margin-top: 0">
+                                                                <strong><?php echo $item['nome']; ?>
+                                                                    - <?php echo status($item['status']); ?></strong>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="clearfix">
+                                                            <p class="pull-right">
+                                                                <a href="edit.php?id=<?php echo $item['id']; ?>"
+                                                                   class="btn btn-sm btn-warning" title="Editar item">
+                                                                    <i class="fa fa-pencil"></i></a>
+                                                            </p>
+                                                            <h4 style="margin-top: 0">Encontrado no dia:
+                                                                <strong><?php echo date('d/m/Y', strtotime($item['data_achado'])); ?>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="clearfix">
+                                                            <p class="pull-right">
+                                                                <a href=# class="btn btn-sm btn-danger"
+                                                                   data-toggle="modal"
+                                                                   data-target="#delete-modal"
+                                                                   data-customer="<?php echo $item['id']; ?>"
+                                                                   title="Excluir item"><i class="fa fa-trash"></i></a>
+                                                            </p>
+                                                            <h5 style="margin-top: 0">Encontrado na(o)
+                                                                <?php if ($setores) : ?>
+                                                                    <?php foreach ($setores as $setor) : ?>
+                                                                        <?php if ($setor['id'] == $item['id_setor']) : ?>
+                                                                            <strong><?php echo $setor['nome']; ?></strong>
+                                                                            da(o)
+                                                                            <strong><?php echo $nome_setor = (nome_setor_local($setor['local_id'])); ?></strong>
+                                                                        <?php endif; ?>
+                                                                    <?php endforeach; ?>
+                                                                <?php endif; ?>
+                                                            </h5>
 
-                                                        <h5 style="margin-top: 0">Código:
-                                                            <strong><?php echo($item['id']); ?>
-                                                        </h5>
+                                                            <h5 style="margin-top: 0">Código:
+                                                                <strong><?php echo($item['id']); ?>
+                                                            </h5>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                <?php endforeach; ?>
+                            <?php else : ?>
+                                <div class="col-md-3 col-sm-6 col-xs-12">
+                                    <strong>Nenhum item encontrado</strong>
                                 </div>
-                            <?php endforeach; ?>
-                        <?php else : ?>
-                            <div class="col-md-3 col-sm-6 col-xs-12">
-                                <strong>Nenhum item encontrado</strong>
-                            </div>
 
-                        <?php endif; ?>
-                        <!-- /.col -->
+                            <?php endif; ?>
+                            <!-- /.col -->
+                        </div>
                     </div>
                 </div>
             </div>

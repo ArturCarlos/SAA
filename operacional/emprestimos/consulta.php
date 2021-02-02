@@ -50,11 +50,12 @@ $result = filtro();
     <div class="row">
         <div class="col-xs-12">
             <div class="box">
-                <div class="box-header text-center">
-                    <h3>Preencha os campos para a busca</h3>
-                    <hr/>
-                </div>
-                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="box-header text-center">
+                        <h3>Preencha os campos para a busca</h3>
+                        <hr/>
+                    </div>
+                    <!-- /.box-header -->
 
                     <form class="form-horizontal" method="get" action="consulta.php">
                         <div class="form-group">
@@ -78,7 +79,8 @@ $result = filtro();
                                     <?php if ($setores) : ?>
                                         <?php foreach ($setores as $setor) : ?>
                                             <?php if ($setor['id']): ?>
-                                                <option value="<?php echo $setor['id']; ?>"><?php echo $setor['nome'];?> - <?php echo (nome_setor_local($setor['local_id'])); ?></option>
+                                                <option value="<?php echo $setor['id']; ?>"><?php echo $setor['nome']; ?>
+                                                    - <?php echo(nome_setor_local($setor['local_id'])); ?></option>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
                                     <?php endif; ?>
@@ -100,90 +102,92 @@ $result = filtro();
                     </form>
 
 
-                <?php if ($result): ?>
-
-                    <div class="box-body">
+                    <?php if ($result): ?>
 
                         <div class="box-body">
 
-                            <table id="example1" class="table table-bordered table-hover">
-                                <thead>
-                                <tr>
-                                    <th title="Ordenar Tabela">Nome</th>
-                                    <th title="Ordenar Tabela">Tombo</th>
-                                    <th title="Ordenar Tabela">Especificação</th>
-                                    <th title="Ordenar Tabela">Setor</th>
-                                    <th title="Ordenar Tabela">Local</th>
-                                    <th title="Ordenar Tabela">Status</th>
-                                    <th>Visualizar</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <?php if ($itens_emprestimos) : ?>
-                                <?php foreach ($itens_emprestimos as $patrimonio) : ?>
+                            <div class="box-body">
+
+                                <table id="example1" class="table table-bordered table-hover">
+                                    <thead>
                                     <tr>
-                                        <td><?php echo $patrimonio['nome']; ?></td>
-                                        <td><?php echo $patrimonio['tombo']; ?></td>
-                                        <td><?php echo substr($patrimonio['especificacao'], 0, 30);
-                                            if(strlen($patrimonio['especificacao']) > 50):?>
-                                                <a href="viewconsulta.php?id=<?php echo $patrimonio['id']; ?>">[...]</a>
-                                            <?php endif;?>
-                                        </td>
-
-                                        <td>
-                                            <?php if ($setores) : ?>
-                                                <?php foreach ($setores as $setor) : ?>
-                                                    <?php if ($setor['id'] == $patrimonio['setor_id']) : ?>
-                                                        <dd><?php echo $setor['nome']; ?></dd>
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-                                            <?php endif; ?>
-                                        </td>
-                                        <td>
-                                            <?php if ($locais) : ?>
-                                                <?php foreach ($locais as $local) : ?>
-                                                    <?php if ($local['id'] == $setor['local_id']) : ?>
-                                                        <dd><?php echo $local['nome']; ?></dd>
-                                                    <?php endif; ?>
-                                                <?php endforeach; ?>
-
-                                            <?php endif; ?>
-                                        </td>
-
-                                        <td><?php if ($patrimonio['status'] == 'indisponivel'): echo "Indisponível para empréstimo";
-                                                else: echo "Disponivel para empréstimo";
-                                            endif; ?>
-                                        </td>
-
-                                        <td><a href="viewconsulta.php?id=<?php echo $patrimonio['id']; ?>"
-                                               class="btn btn-sm btn-success"><i class="fa fa-eye"></i> Visualizar</a>
-                                        </td>
+                                        <th title="Ordenar Tabela">Nome</th>
+                                        <th title="Ordenar Tabela">Tombo</th>
+                                        <th title="Ordenar Tabela">Especificação</th>
+                                        <th title="Ordenar Tabela">Setor</th>
+                                        <th title="Ordenar Tabela">Local</th>
+                                        <th title="Ordenar Tabela">Status</th>
+                                        <th>Visualizar</th>
                                     </tr>
-                                    <?php endforeach; ?>
+                                    </thead>
+                                    <tbody>
+                                    <?php if ($itens_emprestimos) : ?>
+                                        <?php foreach ($itens_emprestimos as $patrimonio) : ?>
+                                            <tr>
+                                                <td><?php echo $patrimonio['nome']; ?></td>
+                                                <td><?php echo $patrimonio['tombo']; ?></td>
+                                                <td><?php echo substr($patrimonio['especificacao'], 0, 30);
+                                                    if (strlen($patrimonio['especificacao']) > 50):?>
+                                                        <a href="viewconsulta.php?id=<?php echo $patrimonio['id']; ?>">[...]</a>
+                                                    <?php endif; ?>
+                                                </td>
+
+                                                <td>
+                                                    <?php if ($setores) : ?>
+                                                        <?php foreach ($setores as $setor) : ?>
+                                                            <?php if ($setor['id'] == $patrimonio['setor_id']) : ?>
+                                                                <dd><?php echo $setor['nome']; ?></dd>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td>
+                                                    <?php if ($locais) : ?>
+                                                        <?php foreach ($locais as $local) : ?>
+                                                            <?php if ($local['id'] == $setor['local_id']) : ?>
+                                                                <dd><?php echo $local['nome']; ?></dd>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; ?>
+
+                                                    <?php endif; ?>
+                                                </td>
+
+                                                <td><?php if ($patrimonio['status'] == 'indisponivel'): echo "Indisponível para empréstimo";
+                                                    else: echo "Disponivel para empréstimo";
+                                                    endif; ?>
+                                                </td>
+
+                                                <td><a href="viewconsulta.php?id=<?php echo $patrimonio['id']; ?>"
+                                                       class="btn btn-sm btn-success"><i class="fa fa-eye"></i>
+                                                        Visualizar</a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
 
 
-                                <?php else : ?>
+                                    <?php else : ?>
+                                        <tr>
+                                            <td colspan="6">Nenhum registro encontrado.</td>
+                                        </tr>
+                                    <?php endif; ?>
+                                    </tbody>
+
+                                    <tfoot>
                                     <tr>
-                                        <td colspan="6">Nenhum registro encontrado.</td>
+                                        <th>Nome</th>
+                                        <th>Tombo</th>
+                                        <th>Especificação</th>
+                                        <th>Setor</th>
+                                        <th>Local</th>
+                                        <th>Status</th>
+                                        <th>Visualizar</th>
                                     </tr>
-                                <?php endif; ?>
-                                </tbody>
-
-                                <tfoot>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Tombo</th>
-                                    <th>Especificação</th>
-                                    <th>Setor</th>
-                                    <th>Local</th>
-                                    <th>Status</th>
-                                    <th>Visualizar</th>
-                                </tr>
-                                </tfoot>
-                            </table>
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                <?php endif; ?>
+                    <?php endif; ?>
+                </div>
             </div>
         </div>
     </div>

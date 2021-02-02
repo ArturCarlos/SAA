@@ -58,8 +58,6 @@
 $url = $_SERVER['REQUEST_URI'];
 $url = (explode('/', $url));
 $url =  ($url[2]);
-print_r($url);
-//var_dump(parse_url($url));
 
 ?>
 
