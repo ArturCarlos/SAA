@@ -91,7 +91,7 @@ $url =  ($url[2]);
 
             for (var [key, value] of Object.entries(frase)) {
                 valor += '<li>' +
-                    '<a href="" class="col-md-2 text-center" title="Marca como lida"' +
+                    '<a href="" class="col-xs-2 text-center" title="Marca como lida"' +
                     'data-toggle="modal"' +
                     'data-target="#msgLida-modal"' +
                     'data-customer="' + value.id_destino + '&id=' + value.chamado_id + '">' +
