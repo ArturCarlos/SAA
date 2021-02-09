@@ -60,8 +60,8 @@ $url = (explode('/', $url));
 $url =  ($url[2]);
 
 ?>
-
-<!--Inicio das notificacoes-->
+<!--Libera o acesso ao chamado
+--><!--Inicio das notificacoes-->
 
 <script>
     // Função responsável por atualizar as notificacões
@@ -150,6 +150,7 @@ $url =  ($url[2]);
 </script>
 
 <!--FIM  das notificacoes-->
+
 
 <!-- Tempo de sessão -->
 <?php if (isset($_SESSION['id'])): ?>

@@ -1,5 +1,4 @@
 <?php
-require_once('../../config.php');
 require_once(DBAPI);
 
 $chamados = null;
@@ -87,6 +86,28 @@ function index_acesso_chamado()
     global $acesso_chamado;
     $acesso_chamado = find_all_user_setor('acesso_chamado');
 }
+
+function libera_acesso()
+{
+
+    $result = find_all_user_setor('acesso_chamado');
+    $id_user = $_SESSION['id'];
+
+    foreach ($result as $id):
+
+        $setor = (find_chamado_setor('user_setor', $id['setor_id']));
+
+        foreach ($setor as $user)
+            if ($user['user_id'] == $id_user)
+                return true;
+
+    endforeach;
+
+    return false;
+
+
+}
+
 
 function index_tag_chamado($id = null)
 {
@@ -270,6 +291,7 @@ function index_historico_setor()
     }
 
 }
+
 /** *  Listagem de chamados fechados do setor*/
 function index_historico_setor_origem()
 {
