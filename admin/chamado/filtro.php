@@ -10,7 +10,7 @@ require_once CHAMADO;
 index_acesso_chamado();
 indextag();
 
-$result = filtro();
+$result = filtro_chamado();
 
 ?>
 <?php

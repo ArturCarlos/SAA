@@ -111,9 +111,13 @@ notificacao_lida();
                                         Abrir </a>
                                 <?php endif; ?>
 
-                                <a href=# class="btn btn-xs btn-danger" data-toggle="modal"
-                                   data-target="#delete-modal" data-customer="<?php echo $chamado['id']; ?>">
-                                    <i class="fa fa-trash"></i> Excluir </a>
+                                <?php if ($_SESSION['id'] == $chamado['user_id']): ?>
+
+                                    <a href=# class="btn btn-xs btn-danger" data-toggle="modal"
+                                       data-target="#delete-modal" data-customer="<?php echo $chamado['id']; ?>">
+                                        <i class="fa fa-trash"></i> Excluir </a>
+                                <?php endif; ?>
+
                             </div>
                         </div>
                     </li>

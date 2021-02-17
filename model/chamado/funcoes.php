@@ -464,7 +464,8 @@ function edit_resp_chamado()
     }
 }
 
-function filtro()
+
+function filtro_chamado()
 {
     global $chamados;
 
