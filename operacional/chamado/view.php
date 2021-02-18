@@ -48,8 +48,8 @@ notificacao_lida();
                   <span class="bg-blue">
                     <?php echo formata_data_hora($chamado['date'], 'data') ?>
                   </span>
-                        <a class="btn" href="./tag_chamado.php?id=<?php echo $chamado['id'] ?>" data-placement="left"
-                           title="Adicionar/Remover Tags">
+                        <a class="btn" href="#" data-placement="left"
+                           title="Tags">
                             <?php if ($tags_chamado):
                                 foreach ($tags_chamado as $tag_chamado):?>
                                     <i class="fa fa-tag"></i>
@@ -144,17 +144,7 @@ notificacao_lida();
                                                target="_blank"
                                                class="btn btn-default btn-xs" download="anexo"> <b>Baixar Anexo</b></a>
                                         <?php endif; ?>
-                                        <?php if ($resp['user_id'] == $_SESSION['id'] & $chamado['status'] == 1): ?>
-                                            <a href="edit_resp.php?id=<?php echo $resp['id']; ?>"
-                                               class="btn bg-orange btn-xs" data-toggle="tooltip"
-                                               data-placement="left" title="Editar">Editar</a>
 
-                                            <a href=# class="btn btn-xs btn-danger" data-toggle="modal"
-                                               data-target="#delete-resp-modal"
-                                               data-customer="<?php echo $resp['id']; ?>">
-                                                <i class="fa fa-trash"></i> Excluir
-                                            </a>
-                                        <?php endif; ?>
 
                                     </div>
                                 </div>
@@ -171,7 +161,7 @@ notificacao_lida();
                         </li>
                     <?php else: ?>
                         <li>
-                            <em class="fa fa-clock-o"></em>
+                            <em class="fa fa-reply"></em>
                         </li>
                     <?php endif; ?>
                 </ul>

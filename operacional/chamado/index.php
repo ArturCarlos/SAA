@@ -139,10 +139,7 @@ notificacao_lida();
                                                    class="btn btn-sm btn-success" data-toggle="tooltip"
                                                    data-placement="left" title="Visualizar"><i class="fa fa-eye"></i>
                                                 </a>
-                                                <a href="edit.php?id=<?php echo $chamado['id']; ?>"
-                                                   class="btn btn-sm btn-warning" data-toggle="tooltip"
-                                                   data-placement="left" title="Editar"><i class="fa fa-pencil"></i>
-                                                </a>
+
 
                                             </td>
                                         </tr>
