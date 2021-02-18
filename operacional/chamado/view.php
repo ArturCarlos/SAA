@@ -100,22 +100,15 @@ notificacao_lida();
                                        data-toggle="tooltip"
                                        data-placement="top" title="Adicionar uma resposta" class="btn bg-purple btn-xs">Responder</a>
 
-                                    <a href=# class="btn bg-navy btn-xs" data-toggle="modal"
-                                       data-target="#fechar-modal"
-                                       data-customer="<?php echo $chamado['id']; ?>">
-                                        Fechar </a>
-                                <?php else: ?>
-                                    <a href=# class="btn bg-navy btn-xs" data-toggle="modal"
-                                       data-target="#abrir-modal"
-                                       data-customer="<?php echo $chamado['id']; ?>">
-                                        Abrir </a>
-                                <?php endif; ?>
+                                    <?php if ((user_fecha_chamado($chamado['setor_destino']))): ?>
 
-                                <?php if ($_SESSION['id'] == $chamado['user_id']): ?>
 
-                                    <a href=# class="btn btn-xs btn-danger" data-toggle="modal"
-                                       data-target="#delete-modal" data-customer="<?php echo $chamado['id']; ?>">
-                                        <i class="fa fa-trash"></i> Excluir </a>
+                                        <a href=# class="btn bg-navy btn-xs" data-toggle="modal"
+                                           data-target="#fechar-modal"
+                                           data-customer="<?php echo $chamado['id']; ?>">
+                                            Fechar </a>
+
+                                    <?php endif; ?>
                                 <?php endif; ?>
 
                             </div>
@@ -172,7 +165,7 @@ notificacao_lida();
                     endif; ?>
                     <?php if ($chamado['status'] == 1): ?>
                         <li>
-                            <a href=resp_chamado.php?id=<?php echo $chamado['id']; ?> class="fa fa-clock-o bg-purple"
+                            <a href=resp_chamado.php?id=<?php echo $chamado['id']; ?> class="fa fa-reply bg-purple"
                                data-toggle="tooltip"
                                data-placement="top" title="Adicionar uma resposta"></a>
                         </li>

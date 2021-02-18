@@ -105,7 +105,21 @@ function libera_acesso()
 
     return false;
 
+}
 
+/*verifica se o usuario pode fechar o chamado*/
+function user_fecha_chamado($id)
+{
+    $table = 'user_setor';
+    $resp = find_chamado_setor($table, $id);
+    foreach ($resp as $user) {
+        if ($user['user_id'] == $_SESSION['id']) {
+            return true;
+
+        }
+
+    }
+    return false;
 }
 
 
