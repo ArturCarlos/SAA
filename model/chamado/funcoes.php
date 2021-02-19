@@ -356,6 +356,9 @@ function viewchamado($id = null)
     $chamado = find_chamado('chamado', $id);
     if ($chamado) {
         $chamado = $chamado[0];
+    }else{
+        header('location: 404.php');
+
     }
 }
 

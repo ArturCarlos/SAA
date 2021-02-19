@@ -3,6 +3,12 @@
 <?php
 require_once LOGIN2;
 verificaLoginOperador();
+
+/*Destroi a sessão ao acessar a pagina*/
+
+header('location: 404.php');
+
+
 ?>
 <?php require_once SETOR;
 ?>
