@@ -111,7 +111,7 @@ add_chamado();
 
                             <div class="col-md-6 ">
                                 <div class="form-group">
-                                    <label for="mensagem">Descriação Chamado </label>
+                                    <label for="mensagem">Descrição Chamado </label>
                                     <textarea class="form-control" id="mensagem"
                                               placeholder="Descriação Chamado"
                                               rows="6" name="chamado['mensagem']" required="true"
