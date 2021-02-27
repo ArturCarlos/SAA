@@ -1411,9 +1411,11 @@ function destino_notificacao()
     $chamado = find_chamado('chamado', $chamado_id);
 
     $setor_destino = find_chamado_setor('user_setor', $chamado[0]['setor_destino']);
-    print_r($setor_destino);
+    //print_r($setor_destino);
+
+    //envia a resposta para o usurio que criou o chamado
     $setor_origem['user_id'] = $chamado[0]['user_id'];
-    print_r($setor_origem);
+    //print_r($setor_origem);
 
     $user_setor = array_merge($setor_destino, $setor_origem);
 
