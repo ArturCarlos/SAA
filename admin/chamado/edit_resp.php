@@ -3,6 +3,11 @@
 <?php
 require_once LOGIN2;
 verificaLoginAdmin();
+
+/*Destroi a sessão ao acessar a pagina*/
+
+header('location: 404.php');
+
 ?>
 <?php require_once SETOR;
 ?>
